@@ -8,11 +8,11 @@ public class Activite extends Etape {
         super(nom);
     }
 
-    public Activite(String nom, int t, int e){
+    public Activite(String nom, int t, int e) {
         super(nom);
     }
 
-    public boolean estUneActivite(){
+    public boolean estUneActivite() {
         return true;
     }
 

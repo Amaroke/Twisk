@@ -2,18 +2,22 @@ package twisk.monde;
 
 import java.util.Iterator;
 
-public abstract class Etape implements Iterable{
+public abstract class Etape implements Iterable {
     public String nom;
+    public GestionnaireSuccesseurs gestionnaireSuccesseurs;
 
-    public Etape(String nom){ }
+    public Etape(String nom) {
+        this.nom = nom;
+    }
 
-    void ajouterSuccesseur(Etape... e){ }
+    void ajouterSuccesseur(Etape... e) {
+    }
 
-    boolean estUneActive(){
+    boolean estUneActivite() {
         return true;
     }
 
-    boolean estUnGuichet(){
+    boolean estUnGuichet() {
         return true;
     }
 

@@ -4,6 +4,10 @@ import java.util.Iterator;
 
 public class Monde implements Iterable {
 
+    public GestionnaireEtapes gestionnaireEtapes;
+    public SasEntree sasEntree;
+    public SasSortie sasSortie;
+
     public Monde(){
 
     }
