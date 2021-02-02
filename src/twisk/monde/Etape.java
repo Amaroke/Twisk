@@ -37,4 +37,5 @@ public abstract class Etape implements Iterable<Etape> {
     public String toString() {
         return "Activité : " + nom + " - ";
     }
+
 }
