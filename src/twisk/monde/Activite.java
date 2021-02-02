@@ -1,6 +1,7 @@
 package twisk.monde;
 
 public class Activite extends Etape {
+
     public int temps;
     int ecartTemps;
 
@@ -10,8 +11,11 @@ public class Activite extends Etape {
 
     public Activite(String nom, int t, int e) {
         super(nom);
+        this.temps = t;
+        this.ecartTemps = e;
     }
 
+    @Override
     public boolean estUneActivite() {
         return true;
     }

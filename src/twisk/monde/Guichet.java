@@ -1,6 +1,7 @@
 package twisk.monde;
 
 public class Guichet extends Etape {
+
     int nbJetons;
 
     public Guichet(String nom) {
@@ -9,8 +10,10 @@ public class Guichet extends Etape {
 
     public Guichet(String nom, int nb){
         super(nom);
+        this.nbJetons = nb;
     }
 
+    @Override
     public boolean estUnGuichet(){
         return true;
     }

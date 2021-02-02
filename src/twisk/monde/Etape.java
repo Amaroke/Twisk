@@ -3,6 +3,7 @@ package twisk.monde;
 import java.util.Iterator;
 
 public abstract class Etape implements Iterable {
+
     public String nom;
     public GestionnaireSuccesseurs gestionnaireSuccesseurs;
 
@@ -11,6 +12,7 @@ public abstract class Etape implements Iterable {
     }
 
     void ajouterSuccesseur(Etape... e) {
+        gestionnaireSuccesseurs.ajouter(e);
     }
 
     boolean estUneActivite() {
@@ -25,4 +27,10 @@ public abstract class Etape implements Iterable {
     public Iterator iterator() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "Activité : " + nom + " - ";
+    }
+
 }
