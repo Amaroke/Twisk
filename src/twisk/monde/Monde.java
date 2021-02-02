@@ -36,5 +36,4 @@ public class Monde implements Iterable<Etape> {
     public Iterator<Etape> iterator() {
         return gestionnaireEtapes.iterator();
     }
-
 }
