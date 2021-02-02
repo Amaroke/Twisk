@@ -2,7 +2,7 @@ package twisk.monde;
 
 import java.util.Iterator;
 
-public class Monde implements Iterable {
+public class Monde implements Iterable<Etape> {
 
     public GestionnaireEtapes gestionnaireEtapes;
     public SasEntree sasEntree;
@@ -33,7 +33,7 @@ public class Monde implements Iterable {
     }
 
     @Override
-    public Iterator iterator() {
-        return null;
+    public Iterator<Etape> iterator() {
+        return gestionnaireEtapes.iterator();
     }
 }
