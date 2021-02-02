@@ -9,7 +9,9 @@ public class Monde implements Iterable<Etape> {
     public SasSortie sasSortie;
 
     public Monde(){
-
+        sasEntree = new SasEntree();
+        sasSortie = new SasSortie();
+        gestionnaireEtapes = new GestionnaireEtapes();
     }
 
     void aCommeEntree(Etape... etapes){
@@ -21,15 +23,21 @@ public class Monde implements Iterable<Etape> {
     }
 
     void ajouter(Etape... etapes){
-
+        gestionnaireEtapes.ajouter(etapes);
     }
 
     int nbEtapes(){
-        return 0;
+        return gestionnaireEtapes.nbEtapes();
     }
 
     int nbGuichets(){
-        return 0;
+        int guichet = 0;
+        for (Etape etape : this) {
+            if (etape.estUnGuichet()) {
+                guichet++;
+            }
+        }
+        return guichet;
     }
 
     @Override
