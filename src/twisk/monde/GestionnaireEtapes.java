@@ -24,4 +24,5 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     public Iterator<Etape> iterator() {
         return etapes.iterator();
     }
+
 }

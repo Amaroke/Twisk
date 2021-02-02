@@ -17,4 +17,5 @@ public class Guichet extends Etape {
     public boolean estUnGuichet(){
         return true;
     }
+
 }

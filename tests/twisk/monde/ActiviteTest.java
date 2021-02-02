@@ -1,25 +1,9 @@
 package twisk.monde;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
+class ActiviteTest extends EtapeTest {
 
-import static org.junit.jupiter.api.Assertions.*;
+    // Ici on test les fonctions exclusives à Activite.
 
-class ActiviteTest extends EtapeTest{
-    Activite a1; // Constructeur d'activité
-    Activite a2; // Constructeur d'activité avec t et e en param
-
-    @BeforeEach
-    void setUp() {
-        a1 = new Activite("Activite");
-        a2 = new Activite("Activite", 5 , 5);
-    }
-
-    @Test
-    public void estUneActivite() {
-        assertTrue(a1.estUneActivite());
-        assertTrue(a2.estUneActivite());
-    }
 }
