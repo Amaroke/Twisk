@@ -24,7 +24,7 @@ public abstract class Etape implements Iterable<Etape> {
         return false;
     }
 
-    public int nbSuccesseurs(){
+    public int nbSuccesseurs() {
         return gestionnaireSuccesseurs.nbEtapes();
     }
 
@@ -36,6 +36,10 @@ public abstract class Etape implements Iterable<Etape> {
     @Override
     public String toString() {
         return "Activité : " + nom + " - ";
+    }
+
+    public String getNom() {
+        return nom;
     }
 
 }

@@ -15,11 +15,13 @@ public class Monde implements Iterable<Etape> {
     }
 
     void aCommeEntree(Etape... etapes){
-
+        sasEntree.ajouterSuccesseur(etapes);
     }
 
     void aCommeSortie(Etape... etapes){
-
+        for (Etape etape: etapes) {
+           etape.ajouterSuccesseur(sasSortie);
+        }
     }
 
     void ajouter(Etape... etapes){
@@ -43,6 +45,10 @@ public class Monde implements Iterable<Etape> {
     @Override
     public Iterator<Etape> iterator() {
         return gestionnaireEtapes.iterator();
+    }
+
+    public Etape getEtape(int i){
+        return gestionnaireEtapes.etapes.get(i);
     }
 
 }

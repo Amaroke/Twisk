@@ -30,7 +30,7 @@ class EtapeTest {
     }
 
     @Test
-    void testAjouterSuccesseur() {
+    void ajouterSuccesseur() {
         assertEquals(0, ar1.nbSuccesseurs());
         ar1.ajouterSuccesseur(new Activite("etape1"));
         assertEquals(1, ar1.nbSuccesseurs());
@@ -82,7 +82,7 @@ class EtapeTest {
     }
 
     @Test
-    void testEstUneActivite() {
+    void estUneActivite() {
         assertTrue(ar1.estUneActivite());
         assertTrue(ar2.estUneActivite());
         assertTrue(a1.estUneActivite());
@@ -94,7 +94,7 @@ class EtapeTest {
     }
 
     @Test
-    void testEstUnGuichet() {
+    void estUnGuichet() {
         assertFalse(ar1.estUnGuichet());
         assertFalse(ar2.estUnGuichet());
         assertFalse(a1.estUnGuichet());
