@@ -35,11 +35,15 @@ public abstract class Etape implements Iterable<Etape> {
 
     @Override
     public String toString() {
-        return "Activité : " + nom + " - ";
+        return nom ;
     }
 
     public String getNom() {
         return nom;
+    }
+
+    public String getSuccesseurs(){
+        return gestionnaireSuccesseurs.toString();
     }
 
 }

@@ -14,25 +14,25 @@ public class Monde implements Iterable<Etape> {
         gestionnaireEtapes = new GestionnaireEtapes();
     }
 
-    void aCommeEntree(Etape... etapes){
+    public void aCommeEntree(Etape... etapes){
         sasEntree.ajouterSuccesseur(etapes);
     }
 
-    void aCommeSortie(Etape... etapes){
+    public void aCommeSortie(Etape... etapes){
         for (Etape etape: etapes) {
            etape.ajouterSuccesseur(sasSortie);
         }
     }
 
-    void ajouter(Etape... etapes){
+    public void ajouter(Etape... etapes){
         gestionnaireEtapes.ajouter(etapes);
     }
 
-    int nbEtapes(){
+    public int nbEtapes(){
         return gestionnaireEtapes.nbEtapes();
     }
 
-    int nbGuichets(){
+    public int nbGuichets(){
         int guichet = 0;
         for (Etape etape : this) {
             if (etape.estUnGuichet()) {
@@ -51,4 +51,10 @@ public class Monde implements Iterable<Etape> {
         return gestionnaireEtapes.etapes.get(i);
     }
 
+    @Override
+    public String toString() {
+        return "entrée : " + sasEntree.nbSuccesseurs() + " successeurs - " + sasEntree.getSuccesseurs() + "\n" +
+                "sortie : " + sasSortie.nbSuccesseurs() + " successeurs - " + sasSortie.getSuccesseurs() + "\n" +
+                gestionnaireEtapes.toString();
+    }
 }
