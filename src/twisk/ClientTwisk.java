@@ -11,14 +11,14 @@ public class ClientTwisk {
         Monde m = new Monde();
         Simulation s = new Simulation();
 
+        Activite parking = new Activite("parking");
         Guichet gp = new Guichet("guichet", 2500);
         Activite baladezoo = new Activite("balade au zoo");
-        Activite parking = new Activite("parking");
         Guichet gt = new Guichet("guichet", 2);
         Activite tobbogan = new Activite("toboggan");
 
-        m.ajouter(parking,gp,baladezoo,gt,tobbogan);
-        m.aCommeEntree(gp,baladezoo);
+        m.ajouter(parking, gp, baladezoo, gt, tobbogan);
+        m.aCommeEntree(gp, baladezoo);
         gp.ajouterSuccesseur(parking);
         parking.ajouterSuccesseur(baladezoo);
         baladezoo.ajouterSuccesseur(gt);

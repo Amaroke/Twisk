@@ -29,7 +29,7 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     public String toString() {
         StringBuilder s = new StringBuilder();
         for (Etape etape: etapes){
-            s.append(etape.getNom()).append(" : ").append(etape.nbSuccesseurs()).append(" successeur - ").append(etape.getSuccesseurs()).append("\n");
+            s.append(etape.num).append(" ").append(etape.getNom()).append(" : ").append(etape.nbSuccesseurs()).append(" successeur - ").append(etape.getSuccesseurs()).append("\n");
         }
         return s.toString();
     }
