@@ -20,4 +20,9 @@ public class Activite extends Etape {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Étape N°" + getNum() + " " + getNom();
+    }
+
 }

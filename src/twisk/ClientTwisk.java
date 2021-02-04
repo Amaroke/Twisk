@@ -8,14 +8,15 @@ import twisk.simulation.Simulation;
 public class ClientTwisk {
 
     public static void main(String[] args) {
+
         Monde m = new Monde();
         Simulation s = new Simulation();
 
-        Activite parking = new Activite("parking");
-        Guichet gp = new Guichet("guichet", 2500);
-        Activite baladezoo = new Activite("balade au zoo");
-        Guichet gt = new Guichet("guichet", 2);
-        Activite tobbogan = new Activite("toboggan");
+        Activite parking = new Activite("Parking");
+        Guichet gp = new Guichet("Guichet", 2500);
+        Activite baladezoo = new Activite("Balade au zoo");
+        Guichet gt = new Guichet("Guichet", 2);
+        Activite tobbogan = new Activite("Toboggan");
 
         m.ajouter(parking, gp, baladezoo, gt, tobbogan);
         m.aCommeEntree(gp, baladezoo);

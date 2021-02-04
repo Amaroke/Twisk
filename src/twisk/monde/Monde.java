@@ -53,8 +53,8 @@ public class Monde implements Iterable<Etape> {
 
     @Override
     public String toString() {
-        return sasEntree.getNum() + " entrée : " + sasEntree.nbSuccesseurs() + " successeurs - " + sasEntree.getSuccesseurs() + "\n" +
-                sasSortie.getNum() + " sortie : " + sasSortie.nbSuccesseurs() + " successeurs - " + sasSortie.getSuccesseurs() + "\n" +
+        return sasEntree.toString() + " " + sasEntree.nbSuccesseurs() + " successeur(s) - " + sasEntree.getSuccesseurs() + "\n" +
+                sasSortie.toString() + " " + sasSortie.nbSuccesseurs() + " successeur(s) - " + sasSortie.getSuccesseurs() + "\n" +
                 gestionnaireEtapes.toString();
     }
 }

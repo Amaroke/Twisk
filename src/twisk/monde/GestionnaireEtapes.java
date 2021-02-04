@@ -1,22 +1,22 @@
 package twisk.monde;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Collections;
+import java.util.Iterator;
 
 public class GestionnaireEtapes implements Iterable<Etape> {
 
     ArrayList<Etape> etapes;
 
-    public GestionnaireEtapes(){
+    public GestionnaireEtapes() {
         etapes = new ArrayList<>();
     }
 
-    void ajouter(Etape... etapes){
-        Collections.addAll(this.etapes,etapes);
+    void ajouter(Etape... etapes) {
+        Collections.addAll(this.etapes, etapes);
     }
 
-    int nbEtapes(){
+    int nbEtapes() {
         return etapes.size();
     }
 
@@ -28,8 +28,8 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (Etape etape: etapes){
-                s.append(etape.num).append(" ").append(etape.getNom()).append(" : ").append(etape.nbSuccesseurs()).append(" successeur - ").append(etape.getSuccesseurs()).append("\n");
+        for (Etape etape : etapes) {
+            s.append(etape).append(" : ").append(etape.nbSuccesseurs()).append(" successeur(s) - ").append(etape.getSuccesseurs()).append("\n");
         }
         return s.toString();
     }

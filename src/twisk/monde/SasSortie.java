@@ -1,8 +1,8 @@
 package twisk.monde;
 
-public class SasSortie extends Activite{
+public class SasSortie extends Activite {
 
-    public SasSortie(){
+    public SasSortie() {
         super("SasSortie");
     }
 

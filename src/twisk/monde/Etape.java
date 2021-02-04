@@ -40,7 +40,7 @@ public abstract class Etape implements Iterable<Etape> {
 
     @Override
     public String toString() {
-        return nom ;
+        return "N° : " + getNum() + getNom();
     }
 
     public String getNom() {
@@ -51,7 +51,7 @@ public abstract class Etape implements Iterable<Etape> {
         return num;
     }
 
-    public String getSuccesseurs(){
+    public String getSuccesseurs() {
         return gestionnaireSuccesseurs.toString();
     }
 

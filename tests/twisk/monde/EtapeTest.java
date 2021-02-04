@@ -2,6 +2,7 @@ package twisk.monde;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import twisk.outils.FabriqueNumero;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,12 +19,14 @@ class EtapeTest {
 
     @BeforeEach
     void setUp() {
+        FabriqueNumero singleton = FabriqueNumero.getInstance();
+        singleton.reset();
         ar1 = new ActiviteRestreinte("ar1");
         ar2 = new ActiviteRestreinte("ar2", 5, 5);
         a1 = new Activite("a1");
         a2 = new Activite("a2", 5, 5);
-        g1 = new Guichet ("Guichet");
-        g2 = new Guichet ("Guichet", 5);
+        g1 = new Guichet("Guichet");
+        g2 = new Guichet("Guichet", 5);
         se = new SasEntree();
         ss = new SasSortie();
 
@@ -105,4 +108,16 @@ class EtapeTest {
         assertFalse(ss.estUnGuichet());
     }
 
+    @Test
+    void getNum() {
+        System.out.println(ar1.getNum());
+        assertEquals(ar1.getNum(), 0);
+        assertEquals(ar2.getNum(), 1);
+        assertEquals(a1.getNum(), 2);
+        assertEquals(a2.getNum(), 3);
+        assertEquals(g1.getNum(), 4);
+        assertEquals(g2.getNum(), 5);
+        assertEquals(se.getNum(), 6);
+        assertEquals(ss.getNum(), 7);
+    }
 }

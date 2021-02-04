@@ -8,15 +8,15 @@ public class GestionnaireSuccesseurs implements Iterable<Etape> {
 
     ArrayList<Etape> etapes;
 
-    public GestionnaireSuccesseurs(){
-        etapes  = new ArrayList<>();
+    public GestionnaireSuccesseurs() {
+        etapes = new ArrayList<>();
     }
 
-    public void ajouter(Etape... etapes){
+    public void ajouter(Etape... etapes) {
         Collections.addAll(this.etapes, etapes);
     }
 
-    int nbEtapes(){
+    int nbEtapes() {
         return etapes.size();
     }
 
@@ -25,12 +25,11 @@ public class GestionnaireSuccesseurs implements Iterable<Etape> {
         return etapes.iterator();
     }
 
-
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for(Etape etape: etapes){
-            s.append(etape.getNom()).append(" ");
+        for (Etape etape : etapes) {
+            s.append(etape).append(" ");
         }
         return s.toString();
     }

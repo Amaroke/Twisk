@@ -17,15 +17,15 @@ public class FabriqueNumero {
 
     public int getNumeroEtape() {
         cptEtape++;
-        return cptEtape-1;
+        return cptEtape - 1;
     }
 
     public int getNumeroSemaphore() {
         cptSemaphore++;
-        return cptSemaphore-1;
+        return cptSemaphore - 1;
     }
 
-    void reset() {
+    public void reset() {
         cptEtape = 0;
     }
 }
