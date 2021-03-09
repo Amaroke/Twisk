@@ -23,14 +23,10 @@ class MondeTest {
         m2.ajouter(new Guichet("Guichet1"), new Guichet("Guichet2"));
 
         m3 = new Monde();
-        SasEntree entre = new SasEntree();
-        SasSortie sortie = new SasSortie();
         Activite a = new Activite("Activite");
-        entre.ajouterSuccesseur(a);
-        a.ajouterSuccesseur(sortie);
         m3.ajouter(a);
-        m3.aCommeEntree(entre);
-        m3.aCommeSortie(sortie);
+        m3.aCommeEntree(a);
+        m3.aCommeSortie(a);
     }
 
     @Test
@@ -74,6 +70,16 @@ class MondeTest {
 
     @Test
     void toC(){
-        System.out.println(m3.toC());
+        assertEquals(m3.toC().toString(), "#include <stdlib.h>\n" +
+                "#include <stdio.h>\n" +
+                "#include \"def.h\" \n" +
+                " \n" +
+                "void simulation(int ids){ \n" +
+                "entrer(12); \n" +
+                "delai(0,0); \n" +
+                "transfert(12,14);\n" +
+                "delai(0,0);\n" +
+                "transfert(14,13);\n" +
+                "}");
     }
 }

@@ -30,9 +30,9 @@ public class Guichet extends Etape {
 
     @Override
     public String toC(){
-        return "    P("+semaphore+","+nbJetons+"); \n" +
-                "   transfert("+num+","+ getGestionnaireSuccesseurs().getEtapes().get(0).getNum()+"); \n" +
-                "   V("+semaphore+","+nbJetons+");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
+        return "P("+semaphore+","+nbJetons+"); \n" +
+                "transfert("+num+","+ getGestionnaireSuccesseurs().getEtapes().get(0).getNum()+"); \n" +
+                "V("+semaphore+","+nbJetons+");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
     }
 
     public int getSemaphore() {

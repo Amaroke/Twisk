@@ -7,6 +7,8 @@ public class SasEntree extends Activite {
     }
 
     public String toC(){
-        return "    entrer(" + getNum() + "); \n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
+        return "entrer(" + getNum() + "); \n" +
+                "delai("+temps+","+ecartTemps+"); \n" +
+                "transfert("+ getNum() +","+ getGestionnaireSuccesseurs().getEtapes().get(0).getNum() +");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
     }
 }
