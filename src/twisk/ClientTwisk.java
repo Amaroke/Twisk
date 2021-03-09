@@ -27,6 +27,5 @@ public class ClientTwisk {
         m.aCommeSortie(tobbogan);
 
         s.simuler(m);
-
     }
 }
