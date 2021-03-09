@@ -28,6 +28,13 @@ public class Guichet extends Etape {
         return "Étape N°" + getNum() + " " + getNom() + " (" + getNbJetons() + " jetons et Semaphore n°" + getSemaphore() + ")";
     }
 
+    @Override
+    public String toC(){
+        return "    P("+semaphore+","+nbJetons+"); \n" +
+                "   transfert("+num+","+ getGestionnaireSuccesseurs().getEtapes().get(0).getNum()+"); \n" +
+                "   V("+semaphore+","+nbJetons+");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
+    }
+
     public int getSemaphore() {
         return semaphore;
     }

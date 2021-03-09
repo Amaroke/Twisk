@@ -120,4 +120,17 @@ class EtapeTest {
         assertEquals(se.getNum(), 6);
         assertEquals(ss.getNum(), 7);
     }
+
+    @Test
+    void toC() {
+        se.ajouterSuccesseur(ar1);
+        ar1.ajouterSuccesseur(ar2);
+        ar2.ajouterSuccesseur(a1);
+        a1.ajouterSuccesseur(a2);
+        a2.ajouterSuccesseur(g1);
+        g1.ajouterSuccesseur(g2);
+        g2.ajouterSuccesseur(ss);
+        ar2.ajouterSuccesseur(ss);
+        System.out.println(se.toC());
+    }
 }

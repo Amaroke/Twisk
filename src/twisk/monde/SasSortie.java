@@ -6,4 +6,8 @@ public class SasSortie extends Activite {
         super("SasSortie");
     }
 
+    public String toC(){
+        return "";
+    }
+
 }

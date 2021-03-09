@@ -20,6 +20,10 @@ public class GestionnaireSuccesseurs implements Iterable<Etape> {
         return etapes.size();
     }
 
+    public ArrayList<Etape> getEtapes() {
+        return etapes;
+    }
+
     @Override
     public Iterator<Etape> iterator() {
         return etapes.iterator();

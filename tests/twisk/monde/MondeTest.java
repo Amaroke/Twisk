@@ -3,6 +3,8 @@ package twisk.monde;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MondeTest {
@@ -10,6 +12,7 @@ class MondeTest {
     Monde m;
     Monde m1;
     Monde m2;
+    Monde m3;
 
     @BeforeEach
     void setUp() {
@@ -18,6 +21,16 @@ class MondeTest {
         m1.ajouter(new Activite("etape2"), new ActiviteRestreinte("etape3"), new Guichet("etape4"), new ActiviteRestreinte("etape5"));
         m2 = new Monde();
         m2.ajouter(new Guichet("Guichet1"), new Guichet("Guichet2"));
+
+        m3 = new Monde();
+        SasEntree entre = new SasEntree();
+        SasSortie sortie = new SasSortie();
+        Activite a = new Activite("Activite");
+        entre.ajouterSuccesseur(a);
+        a.ajouterSuccesseur(sortie);
+        m3.ajouter(a);
+        m3.aCommeEntree(entre);
+        m3.aCommeSortie(sortie);
     }
 
     @Test
@@ -57,5 +70,10 @@ class MondeTest {
         assertEquals(0, m.nbGuichets());
         assertEquals(1, m1.nbGuichets());
         assertEquals(2, m2.nbGuichets());
+    }
+
+    @Test
+    void toC(){
+        System.out.println(m3.toC());
     }
 }

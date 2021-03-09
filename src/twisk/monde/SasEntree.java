@@ -6,4 +6,7 @@ public class SasEntree extends Activite {
         super("SasEntree");
     }
 
+    public String toC(){
+        return "    entrer(" + getNum() + "); \n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
+    }
 }

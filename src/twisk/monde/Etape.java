@@ -47,12 +47,21 @@ public abstract class Etape implements Iterable<Etape> {
         return nom;
     }
 
+    public GestionnaireSuccesseurs getGestionnaireSuccesseurs() {
+        return gestionnaireSuccesseurs;
+    }
+
+    public String toC(){
+        return "";
+    }
+
     public int getNum() {
         return num;
     }
 
-    public String getSuccesseurs() {
+    public String getSuccesseursString() {
         return gestionnaireSuccesseurs.toString();
     }
+
 
 }

@@ -42,6 +42,17 @@ public class Monde implements Iterable<Etape> {
         return guichet;
     }
 
+    public StringBuilder toC(){
+        StringBuilder s = new StringBuilder();
+        s.append("#include <stdlib.h>\n" +
+                "#include <stdio.h>\n" +
+                "#include \"def.h\" \n \n" + "void simulation(int ids)" +
+                "{ \n");
+        s.append(sasEntree.toC());
+        s.append("}");
+        return s;
+    }
+
     @Override
     public Iterator<Etape> iterator() {
         return gestionnaireEtapes.iterator();
@@ -53,8 +64,8 @@ public class Monde implements Iterable<Etape> {
 
     @Override
     public String toString() {
-        return sasEntree.toString() + " " + sasEntree.nbSuccesseurs() + " successeur(s) - " + sasEntree.getSuccesseurs() + "\n" +
-                sasSortie.toString() + " " + sasSortie.nbSuccesseurs() + " successeur(s) - " + sasSortie.getSuccesseurs() + "\n" +
+        return sasEntree.toString() + " " + sasEntree.nbSuccesseurs() + " successeur(s) - " + sasEntree.getSuccesseursString() + "\n" +
+                sasSortie.toString() + " " + sasSortie.nbSuccesseurs() + " successeur(s) - " + sasSortie.getSuccesseursString() + "\n" +
                 gestionnaireEtapes.toString();
     }
 }

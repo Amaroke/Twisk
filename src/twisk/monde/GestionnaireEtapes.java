@@ -8,6 +8,7 @@ public class GestionnaireEtapes implements Iterable<Etape> {
 
     ArrayList<Etape> etapes;
 
+
     public GestionnaireEtapes() {
         etapes = new ArrayList<>();
     }
@@ -29,7 +30,7 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     public String toString() {
         StringBuilder s = new StringBuilder();
         for (Etape etape : etapes) {
-            s.append(etape).append(" : ").append(etape.nbSuccesseurs()).append(" successeur(s) - ").append(etape.getSuccesseurs()).append("\n");
+            s.append(etape).append(" : ").append(etape.nbSuccesseurs()).append(" successeur(s) - ").append(etape.getSuccesseursString()).append("\n");
         }
         return s.toString();
     }
