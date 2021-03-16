@@ -22,5 +22,6 @@ public class Simulation {
         environnement.creerFichier(monde.toC().toString());
         environnement.compiler();
         environnement.construireLaLibrairie();
+        System.load("/tmp/twisk/libTwisk.so") ;
     }
 }
