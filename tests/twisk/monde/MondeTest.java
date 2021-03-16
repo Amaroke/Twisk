@@ -3,8 +3,6 @@ package twisk.monde;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MondeTest {
@@ -69,17 +67,7 @@ class MondeTest {
     }
 
     @Test
-    void toC(){
-        assertEquals(m3.toC().toString(), "#include <stdlib.h>\n" +
-                "#include <stdio.h>\n" +
-                "#include \"def.h\" \n" +
-                " \n" +
-                "void simulation(int ids){ \n" +
-                "entrer(12); \n" +
-                "delai(0,0); \n" +
-                "transfert(12,14);\n" +
-                "delai(0,0);\n" +
-                "transfert(14,13);\n" +
-                "}");
+    void toC() {
+        assertEquals(m3.toC().toString(), "#include <stdlib.h>\n#include <stdio.h>\n#include \"def.h\" \n \nvoid simulation(int ids){ \nentrer(70); \ndelai(0,0); \ntransfert(70,72);\ndelai(0,0);\ntransfert(72,71);\n}");
     }
 }

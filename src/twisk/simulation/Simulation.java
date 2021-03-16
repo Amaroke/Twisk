@@ -12,7 +12,8 @@ public class Simulation {
     }
 
     public void simuler(Monde monde) {
-        System.out.println(monde.toString());
-        monde.toC();
+        environnement.creerFichier(monde.toC().toString());
+        environnement.compiler();
+        environnement.construireLaLibrairie();
     }
 }

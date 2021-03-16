@@ -6,7 +6,7 @@ public class SasSortie extends Activite {
         super("SasSortie");
     }
 
-    public String toC(){
+    public String toC() {
         return "";
     }
 

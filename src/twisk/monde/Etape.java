@@ -51,7 +51,7 @@ public abstract class Etape implements Iterable<Etape> {
         return gestionnaireSuccesseurs;
     }
 
-    public String toC(){
+    public String toC() {
         return "";
     }
 

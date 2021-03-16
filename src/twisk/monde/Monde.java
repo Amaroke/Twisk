@@ -42,7 +42,7 @@ public class Monde implements Iterable<Etape> {
         return guichet;
     }
 
-    public StringBuilder toC(){
+    public StringBuilder toC() {
         StringBuilder s = new StringBuilder();
         s.append("#include <stdlib.h>\n" +
                 "#include <stdio.h>\n" +

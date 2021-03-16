@@ -21,9 +21,9 @@ public class Activite extends Etape {
     }
 
     @Override
-    public String toC(){
-        return "delai("+temps+","+ecartTemps+");\n" +
-                "transfert("+ getNum() +","+ getGestionnaireSuccesseurs().getEtapes().get(0).getNum() +");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
+    public String toC() {
+        return "delai(" + temps + "," + ecartTemps + ");\n" +
+                "transfert(" + getNum() + "," + getGestionnaireSuccesseurs().getEtapes().get(0).getNum() + ");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
     }
 
     @Override

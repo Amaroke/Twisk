@@ -131,22 +131,6 @@ class EtapeTest {
         g1.ajouterSuccesseur(g2);
         g2.ajouterSuccesseur(ss);
         ar2.ajouterSuccesseur(ss);
-        assertEquals(se.toC(), "entrer(6); \n" +
-                "delai(0,0); \n" +
-                "transfert(6,0);\n" +
-                "delai(0,0);\n" +
-                "transfert(0,1);\n" +
-                "delai(5,5);\n" +
-                "transfert(1,2);\n" +
-                "delai(0,0);\n" +
-                "transfert(2,3);\n" +
-                "delai(5,5);\n" +
-                "transfert(3,4);\n" +
-                "P(0,0); \n" +
-                "transfert(4,5); \n" +
-                "V(0,0);\n" +
-                "P(1,5); \n" +
-                "transfert(5,7); \n" +
-                "V(1,5);\n");
+        assertEquals(se.toC(), "entrer(6); \ndelai(0,0); \ntransfert(6,0);\ndelai(0,0);\ntransfert(0,1);\ndelai(5,5);\ntransfert(1,2);\ndelai(0,0);\ntransfert(2,3);\ndelai(5,5);\ntransfert(3,4);\nP(0,0); \ntransfert(4,5); \nV(0,0);\nP(1,5); \ntransfert(5,7); \nV(1,5);\n");
     }
 }
