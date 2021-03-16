@@ -12,9 +12,9 @@ public class Simulation {
     }
 
 
-    public native int[] start_simulation();
+    public native int[] start_simulation(int nbEtapes, int nbServices, int nbClients, int [] tabJetonsServices);
 
-    public native int[] ou_sont_les_clients();
+    public native int[] ou_sont_les_clients(int nbEtapes, int nbClients);
 
     public native void nettoyage();
 

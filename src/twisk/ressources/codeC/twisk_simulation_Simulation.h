@@ -10,18 +10,18 @@ extern "C" {
 /*
  * Class:     twisk_simulation_Simulation
  * Method:    start_simulation
- * Signature: ()[I
+ * Signature: (III[I)[I
  */
 JNIEXPORT jintArray JNICALL Java_twisk_simulation_Simulation_start_1simulation
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jint, jint, jint, jintArray);
 
 /*
  * Class:     twisk_simulation_Simulation
  * Method:    ou_sont_les_clients
- * Signature: ()[I
+ * Signature: (II)[I
  */
 JNIEXPORT jintArray JNICALL Java_twisk_simulation_Simulation_ou_1sont_1les_1clients
-  (JNIEnv *, jobject);
+  (JNIEnv *, jobject, jint, jint);
 
 /*
  * Class:     twisk_simulation_Simulation
