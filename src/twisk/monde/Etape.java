@@ -18,7 +18,7 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     public void ajouterSuccesseur(Etape... e) {
-        gestionnaireSuccesseurs.ajouter(e);
+        getGestionnaireSuccesseurs().ajouter(e);
     }
 
     public boolean estUneActivite() {
@@ -30,25 +30,17 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     public int nbSuccesseurs() {
-        return gestionnaireSuccesseurs.nbEtapes();
+        return getGestionnaireSuccesseurs().nbEtapes();
     }
 
     @Override
     public Iterator<Etape> iterator() {
-        return gestionnaireSuccesseurs.iterator();
+        return getGestionnaireSuccesseurs().iterator();
     }
 
     @Override
     public String toString() {
         return "N° : " + getNum() + getNom();
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public GestionnaireSuccesseurs getGestionnaireSuccesseurs() {
-        return gestionnaireSuccesseurs;
     }
 
     public String toC() {
@@ -59,8 +51,16 @@ public abstract class Etape implements Iterable<Etape> {
         return num;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
+    public GestionnaireSuccesseurs getGestionnaireSuccesseurs() {
+        return gestionnaireSuccesseurs;
+    }
+
     public String getSuccesseursString() {
-        return gestionnaireSuccesseurs.toString();
+        return getGestionnaireSuccesseurs().toString();
     }
 
     public Etape getSuivant() {

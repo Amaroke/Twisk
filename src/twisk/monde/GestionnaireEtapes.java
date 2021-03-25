@@ -13,24 +13,28 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     }
 
     void ajouter(Etape... etapes) {
-        Collections.addAll(this.etapes, etapes);
+        Collections.addAll(this.getEtapes(), etapes);
     }
 
     int nbEtapes() {
-        return etapes.size();
+        return getEtapes().size();
     }
 
     @Override
     public Iterator<Etape> iterator() {
-        return etapes.iterator();
+        return getEtapes().iterator();
     }
 
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (Etape etape : etapes) {
+        for (Etape etape : getEtapes()) {
             s.append(etape).append(" : ").append(etape.nbSuccesseurs()).append(" successeur(s) - ").append(etape.getSuccesseursString()).append("\n");
         }
         return s.toString();
+    }
+
+    public ArrayList<Etape> getEtapes() {
+        return etapes;
     }
 }

@@ -14,14 +14,6 @@ public class Simulation {
         environnement = new KitC();
     }
 
-    public int getNbClients() {
-        return nbClients;
-    }
-
-    public void setNbClients(int nbClients) {
-        this.nbClients = nbClients;
-    }
-
     public native int[] start_simulation(int nbEtapes, int nbServices, int nbClients, int[] tabJetonsServices);
 
     public native int[] ou_sont_les_clients(int nbEtapes, int nbClients);
@@ -29,9 +21,9 @@ public class Simulation {
     public native void nettoyage();
 
     public void simuler(Monde monde){
-        environnement.creerFichier(monde.toC().toString());
-        environnement.compiler();
-        environnement.construireLaLibrairie();
+        getEnvironnement().creerFichier(monde.toC().toString());
+        getEnvironnement().compiler();
+        getEnvironnement().construireLaLibrairie();
         System.load("/tmp/twisk/libTwisk.so");
 
         // On mets les jetons dans un tableau
@@ -39,7 +31,7 @@ public class Simulation {
         for (Etape etape : monde) {
             if (etape.estUnGuichet()) {
                 Guichet guichet = (Guichet) etape;
-                tabJetonsGuichet[guichet.getSemaphore()-1] = guichet.getNbJetons();
+                tabJetonsGuichet[guichet.getSemaphore() - 1] = guichet.getNbJetons();
             }
         }
 
@@ -65,13 +57,27 @@ public class Simulation {
 
             // On parcourt les étapes.
             for (int j = 0; j < monde.nbEtapes(); ++j) {
-                System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + clients[(j * (getNbClients() + 1))] + " client(s) ➡ ");
-                for (int i = 0; i < clients[(j * (getNbClients() + 1))]; ++i) {
-                    System.out.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
+                int decalage = clients[(j * (getNbClients() + 1))];
+                System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
+                for (int i = 0; i < decalage; ++i) {
+                    System.out.print(decalage + 1 + i + " ");
                 }
                 System.out.print("\n");
             }
         }
         nettoyage();
     }
+
+    public KitC getEnvironnement() {
+        return environnement;
+    }
+
+    public int getNbClients() {
+        return nbClients;
+    }
+
+    public void setNbClients(int nbClients) {
+        this.nbClients = nbClients;
+    }
+
 }

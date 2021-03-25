@@ -12,25 +12,25 @@ public class Monde implements Iterable<Etape> {
         sasEntree = new SasEntree();
         sasSortie = new SasSortie();
         gestionnaireEtapes = new GestionnaireEtapes();
-        this.ajouter(sasEntree, sasSortie);
+        this.ajouter(getSasEntree(), getSasSortie());
     }
 
     public void aCommeEntree(Etape... etapes) {
-        sasEntree.ajouterSuccesseur(etapes);
+        getSasSortie().ajouterSuccesseur(etapes);
     }
 
     public void aCommeSortie(Etape... etapes) {
         for (Etape etape : etapes) {
-            etape.ajouterSuccesseur(sasSortie);
+            etape.ajouterSuccesseur(getSasSortie());
         }
     }
 
     public void ajouter(Etape... etapes) {
-        gestionnaireEtapes.ajouter(etapes);
+        getGestionnaireEtapes().ajouter(etapes);
     }
 
     public int nbEtapes() {
-        return gestionnaireEtapes.nbEtapes();
+        return getGestionnaireEtapes().nbEtapes();
     }
 
     public int nbGuichets() {
@@ -49,21 +49,21 @@ public class Monde implements Iterable<Etape> {
                 "#include <stdio.h>\n" +
                 "#include \"def.h\" \n \n" + "void simulation(int ids)" +
                 "{ \n");
-        s.append(sasEntree.toC());
+        s.append(getSasEntree().toC());
         s.append("}");
         return s;
     }
 
     @Override
     public Iterator<Etape> iterator() {
-        return gestionnaireEtapes.iterator();
+        return getGestionnaireEtapes().iterator();
     }
 
     public Etape getEtape(int i) {
         Etape etape = null;
-        for (int p = 0; p < gestionnaireEtapes.nbEtapes();p++) {
-            if(gestionnaireEtapes.etapes.get(p).getNum() == i){
-                etape = gestionnaireEtapes.etapes.get(p);
+        for (int p = 0; p < getGestionnaireEtapes().nbEtapes(); p++) {
+            if (getGestionnaireEtapes().getEtapes().get(p).getNum() == i) {
+                etape = getGestionnaireEtapes().getEtapes().get(p);
             }
         }
         return etape;
@@ -71,6 +71,18 @@ public class Monde implements Iterable<Etape> {
 
     @Override
     public String toString() {
-        return gestionnaireEtapes.toString();
+        return getGestionnaireEtapes().toString();
+    }
+
+    public GestionnaireEtapes getGestionnaireEtapes() {
+        return gestionnaireEtapes;
+    }
+
+    public SasEntree getSasEntree() {
+        return sasEntree;
+    }
+
+    public SasSortie getSasSortie() {
+        return sasSortie;
     }
 }
