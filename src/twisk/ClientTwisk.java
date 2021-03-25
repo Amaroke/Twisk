@@ -11,9 +11,9 @@ public class ClientTwisk {
     public static void main(String[] args) throws InterruptedException {
         Monde monde = new Monde();
 
-        Activite zoo = new Activite("balade au zoo", 5, 1);
+        Activite zoo = new Activite("balade au zoo", 4, 1);
         Guichet guichet = new Guichet("accès au toboggan", 2);
-        Activite tob = new ActiviteRestreinte("toboggan", 5, 1);
+        Activite tob = new ActiviteRestreinte("toboggan", 4, 1);
 
         zoo.ajouterSuccesseur(guichet);
         guichet.ajouterSuccesseur(tob);
@@ -23,6 +23,7 @@ public class ClientTwisk {
         monde.aCommeEntree(zoo);
         monde.aCommeSortie(tob);
 
+        System.out.println(monde.toString());
         Simulation s = new Simulation();
         s.setNbClients(5);
         s.simuler(monde);

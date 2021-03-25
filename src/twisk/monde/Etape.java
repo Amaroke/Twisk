@@ -63,8 +63,6 @@ public abstract class Etape implements Iterable<Etape> {
         return gestionnaireSuccesseurs.toString();
     }
 
-    public abstract int getNbJetons();
-
     public Etape getSuivant() {
         return getGestionnaireSuccesseurs().getEtapes().get(0);
     }

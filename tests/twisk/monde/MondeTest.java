@@ -39,24 +39,24 @@ class MondeTest {
 
     @Test
     void ajouter() {
-        assertEquals(0, m.nbEtapes());
+        assertEquals(2, m.nbEtapes());
         m.ajouter(new Activite("etape1"));
-        assertEquals(1, m.nbEtapes());
-        m.ajouter(new Guichet("etape2"), new ActiviteRestreinte("etape3"));
         assertEquals(3, m.nbEtapes());
+        m.ajouter(new Guichet("etape2"), new ActiviteRestreinte("etape3"));
+        assertEquals(5, m.nbEtapes());
 
         m1.ajouter(new Activite("etape1"));
-        assertEquals(5, m1.nbEtapes());
+        assertEquals(7, m1.nbEtapes());
 
         m2.ajouter(new Guichet("guichet3"));
-        assertEquals(3, m2.nbEtapes());
+        assertEquals(5, m2.nbEtapes());
     }
 
     @Test
     void nbEtapes() {
-        assertEquals(0, m.nbEtapes());
-        assertEquals(4, m1.nbEtapes());
-        assertEquals(2, m2.nbEtapes());
+        assertEquals(2, m.nbEtapes());
+        assertEquals(6, m1.nbEtapes());
+        assertEquals(4, m2.nbEtapes());
     }
 
     @Test

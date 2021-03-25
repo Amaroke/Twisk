@@ -4,8 +4,8 @@ import twisk.outils.FabriqueNumero;
 
 public class Guichet extends Etape {
 
-    int nbJetons;
-    int semaphore;
+    private int nbJetons;
+    private int semaphore;
 
     public Guichet(String nom) {
         super(nom);
@@ -30,11 +30,9 @@ public class Guichet extends Etape {
 
     @Override
     public String toC() {
-        int sem = getSemaphore();
-        int nbj = getNbJetons();
-        return "P(" + sem + "," + nbj + "); \n" +
+        return "P(" + "ids" + "," + getSemaphore() + "); \n" +
                 "transfert(" + getNum() + "," + getSuivant().getNum() + "); \n" + "delai(" + getSuivant().getTemps() + "," + getSuivant().getEcartTemps() + ");\n" +
-                "V(" + sem + "," + nbj + ");\n" + getSuivant().toC();
+                "V(" + "ids" + "," + getSemaphore() + ");\n" + getSuivant().toC();
     }
 
     public int getSemaphore() {

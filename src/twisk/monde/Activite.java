@@ -26,7 +26,6 @@ public class Activite extends Etape {
                 "transfert(" + getNum() + "," + getGestionnaireSuccesseurs().getEtapes().get(0).getNum() + ");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
     }
 
-    @Override
     public int getNbJetons() {
         return 0;
     }
