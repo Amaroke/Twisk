@@ -5,21 +5,51 @@ import twisk.monde.Guichet;
 import twisk.monde.Monde;
 import twisk.outils.KitC;
 
+/**
+ * Classe Simulation
+ * @author Mathieu Steinbach Hugo & Lambert Calvin
+ * @version 1.0
+ */
+
 public class Simulation {
 
     KitC environnement;
     int nbClients;
 
+    /**
+     * Constructeur de Simulation
+     */
     public Simulation() {
         environnement = new KitC();
     }
 
+    /**
+     * Fonction de lancement de la simulation
+     * @param nbEtapes Nombre d'étape dans la simulation
+     * @param nbServices Nombre de guichet dans le monde
+     * @param nbClients Nombre de client dans le monde
+     * @param tabJetonsServices Tableau des jetons dans le monde
+     * @return Un tableau de INT
+     */
     public native int[] start_simulation(int nbEtapes, int nbServices, int nbClients, int[] tabJetonsServices);
 
+    /**
+     * Fonction de repérage des clients
+     * @param nbEtapes Nombre d'étape dans
+     * @param nbClients Nombre de client dans le monde
+     * @return Un tableau de int
+     */
     public native int[] ou_sont_les_clients(int nbEtapes, int nbClients);
 
+    /**
+     * Permet de nettoyer le code
+     */
     public native void nettoyage();
 
+    /**
+     * Fonction de simulation regroupant les fonctions précédente
+     * @param monde Le monde dans lequel la simulation doit s'executer
+     */
     public void simuler(Monde monde){
         getEnvironnement().creerFichier(monde.toC().toString());
         getEnvironnement().compiler();
@@ -68,14 +98,26 @@ public class Simulation {
         nettoyage();
     }
 
+    /**
+     * Getter de l'environnement
+     * @return L'environnement soit un KitC
+     */
     public KitC getEnvironnement() {
         return environnement;
     }
 
+    /**
+     * Getter du nombre de client
+     * @return Le nombre de client en int
+     */
     public int getNbClients() {
         return nbClients;
     }
 
+    /**
+     * Setter du nombre de client
+     * @param nbClients Nombre de client à mettre dans le monde
+     */
     public void setNbClients(int nbClients) {
         this.nbClients = nbClients;
     }

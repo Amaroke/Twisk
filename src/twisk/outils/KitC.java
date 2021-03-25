@@ -7,12 +7,24 @@ import java.nio.file.Paths;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
+/**
+ * Classe KitC
+ * @author Mathieu Steinbach Hugo & Lambert Calvin
+ * @version 1.0
+ */
+
 public class KitC {
 
+    /**
+     * Constructeur du KitC
+     */
     public KitC() {
         this.creerEnvironnement();
     }
 
+    /**
+     * Fonction de création de l'environnement
+     */
     public void creerEnvironnement() {
         try {
             // Création du répertoire twisk sous /tmp. Ne déclenche pas d’erreur si le répertoire existe déjà.
@@ -20,15 +32,41 @@ public class KitC {
             // Copie des deux fichiers programmeC.o et def.h depuis le projet sous /tmp/twisk.
             String[] liste = {"programmeC.o", "def.h", "codeNatif.o"};
             for (String nom : liste) {
-                Path source = Paths.get(getClass().getResource("/codeC/" + nom).getPath());
-                Path newdir = Paths.get("/tmp/twisk/");
-                Files.copy(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
+                InputStream source = getClass().getResource("/codeC/" + nom).openStream() ;
+                File destination = new File("/tmp/twisk/" + nom) ;
+                copier(source, destination);
+//                Path source = Paths.get(getClass().getResource("/codeC/" + nom).getPath());
+//                Path newdir = Paths.get("/tmp/twisk/");
+//                Files.copy(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Permet de copier les fichier de ressouces/codeC
+     * @param source Fichier source
+     * @param dest Fichier destination
+     * @throws IOException en cas de probleme
+     */
+    private void copier(InputStream source, File dest) throws IOException {
+        InputStream sourceFile = source;
+        OutputStream destinationFile = new FileOutputStream(dest) ;
+        // Lecture par segment de 0.5Mo
+        byte buffer[] = new byte[512 * 1024];
+        int nbLecture;
+        while ((nbLecture = sourceFile.read(buffer)) != -1){
+            destinationFile.write(buffer, 0, nbLecture);
+        }
+        destinationFile.close();
+        sourceFile.close();
+    }
+
+    /**
+     * Permet de creer les fichier dans tmp/twisk
+     * @param codeC String du code du monde
+     */
     public void creerFichier(String codeC) {
         try {
             // Création du fichier client.c sous /tmp/twisk. Ne déclenche pas d’erreur si le fichier existe déjà.
@@ -41,6 +79,9 @@ public class KitC {
         }
     }
 
+    /**
+     * Permet de compiler le code C généré
+     */
     public void compiler() {
         try {
             Runtime runtime = Runtime.getRuntime();
@@ -61,6 +102,9 @@ public class KitC {
         }
     }
 
+    /**
+     * Execution de la commande pour construire la librairie
+     */
     public void construireLaLibrairie() {
         try {
             Runtime runtime = Runtime.getRuntime();
