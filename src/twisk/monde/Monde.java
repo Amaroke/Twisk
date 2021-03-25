@@ -60,7 +60,13 @@ public class Monde implements Iterable<Etape> {
     }
 
     public Etape getEtape(int i) {
-        return gestionnaireEtapes.etapes.get(i);
+        Etape etape = null;
+        for (int p = 0; p < gestionnaireEtapes.nbEtapes();p++) {
+            if(gestionnaireEtapes.etapes.get(p).getNum() == i){
+                etape = gestionnaireEtapes.etapes.get(p);
+            }
+        }
+        return etape;
     }
 
     @Override

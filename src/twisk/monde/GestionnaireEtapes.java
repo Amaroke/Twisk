@@ -8,7 +8,6 @@ public class GestionnaireEtapes implements Iterable<Etape> {
 
     ArrayList<Etape> etapes;
 
-
     public GestionnaireEtapes() {
         etapes = new ArrayList<>();
     }

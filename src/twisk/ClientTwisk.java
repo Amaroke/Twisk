@@ -8,22 +8,21 @@ import twisk.simulation.Simulation;
 
 public class ClientTwisk {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Monde monde = new Monde();
 
-        Activite zoo = new Activite("balade au zoo", 4, 1);
+        Activite zoo = new Activite("balade au zoo", 3, 1);
         Guichet guichet = new Guichet("accès au toboggan", 2);
-        Activite tob = new ActiviteRestreinte("toboggan", 4, 1);
+        Activite tob = new ActiviteRestreinte("toboggan", 2, 1);
 
         zoo.ajouterSuccesseur(guichet);
         guichet.ajouterSuccesseur(tob);
 
-        monde.ajouter(zoo, tob, guichet);
+        monde.ajouter(zoo, guichet, tob);
 
         monde.aCommeEntree(zoo);
         monde.aCommeSortie(tob);
 
-        System.out.println(monde.toString());
         Simulation s = new Simulation();
         s.setNbClients(5);
         s.simuler(monde);

@@ -28,7 +28,7 @@ public class Simulation {
 
     public native void nettoyage();
 
-    public void simuler(Monde monde) throws InterruptedException {
+    public void simuler(Monde monde){
         environnement.creerFichier(monde.toC().toString());
         environnement.compiler();
         environnement.construireLaLibrairie();
@@ -41,10 +41,6 @@ public class Simulation {
                 Guichet guichet = (Guichet) etape;
                 tabJetonsGuichet[guichet.getSemaphore()-1] = guichet.getNbJetons();
             }
-        }
-
-        for (int value : tabJetonsGuichet) {
-            System.out.println(value);
         }
 
         // On lance la simulation.
@@ -61,7 +57,11 @@ public class Simulation {
 
             System.out.print("\n");
             clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
-            Thread.sleep(1000);
+            try{
+                Thread.sleep(500);
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            }
 
             // On parcourt les étapes.
             for (int j = 0; j < monde.nbEtapes(); ++j) {
