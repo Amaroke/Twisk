@@ -2,8 +2,8 @@ package twisk.monde;
 
 public class Activite extends Etape {
 
-    public int temps;
-    int ecartTemps;
+    public int temps = 1;
+    int ecartTemps = 1;
 
     public Activite(String nom) {
         super(nom);
@@ -24,6 +24,11 @@ public class Activite extends Etape {
     public String toC() {
         return "delai(" + temps + "," + ecartTemps + ");\n" +
                 "transfert(" + getNum() + "," + getGestionnaireSuccesseurs().getEtapes().get(0).getNum() + ");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
+    }
+
+    @Override
+    public int getNbJetons() {
+        return 0;
     }
 
     @Override

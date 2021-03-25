@@ -1,31 +1,30 @@
 package twisk;
 
 import twisk.monde.Activite;
+import twisk.monde.ActiviteRestreinte;
 import twisk.monde.Guichet;
 import twisk.monde.Monde;
 import twisk.simulation.Simulation;
 
 public class ClientTwisk {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        Monde monde = new Monde();
 
-        Monde m = new Monde();
+        Activite zoo = new Activite("balade au zoo", 5, 1);
+        Guichet guichet = new Guichet("accès au toboggan", 2);
+        Activite tob = new ActiviteRestreinte("toboggan", 5, 1);
+
+        zoo.ajouterSuccesseur(guichet);
+        guichet.ajouterSuccesseur(tob);
+
+        monde.ajouter(zoo, tob, guichet);
+
+        monde.aCommeEntree(zoo);
+        monde.aCommeSortie(tob);
+
         Simulation s = new Simulation();
-
-        Activite parking = new Activite("Parking");
-        Guichet gp = new Guichet("Guichet", 2500);
-        Activite baladezoo = new Activite("Balade au zoo");
-        Guichet gt = new Guichet("Guichet", 2);
-        Activite tobbogan = new Activite("Toboggan");
-
-        m.ajouter(parking, gp, baladezoo, gt, tobbogan);
-        m.aCommeEntree(gp, baladezoo);
-        gp.ajouterSuccesseur(parking);
-        parking.ajouterSuccesseur(baladezoo);
-        baladezoo.ajouterSuccesseur(gt);
-        gt.ajouterSuccesseur(tobbogan);
-        m.aCommeSortie(tobbogan);
-
-        s.simuler(m);
+        s.setNbClients(5);
+        s.simuler(monde);
     }
 }

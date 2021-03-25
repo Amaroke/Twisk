@@ -12,7 +12,14 @@ public class ActiviteRestreinte extends Activite {
 
     @Override
     public String toC() {
-        return "delai(" + temps + "," + ecartTemps + ");\n" +
-                "transfert(" + getNum() + "," + getGestionnaireSuccesseurs().getEtapes().get(0).getNum() + ");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
+        return "transfert(" + getNum() + "," + getGestionnaireSuccesseurs().getEtapes().get(0).getNum() + ");\n" + getGestionnaireSuccesseurs().getEtapes().get(0).toC();
+    }
+
+    public int getTemps() {
+        return temps;
+    }
+
+    public int getEcartTemps() {
+        return ecartTemps;
     }
 }
