@@ -6,6 +6,13 @@ import twisk.monde.Guichet;
 import twisk.monde.Monde;
 import twisk.simulation.Simulation;
 
+/**
+ * Classe ClientTwisk
+ *
+ * @author Mathieu Steinbach Hugo & Lambert Calvin
+ * @version 1.0
+ */
+
 public class ClientTwisk {
 
     public static void main(String[] args) {

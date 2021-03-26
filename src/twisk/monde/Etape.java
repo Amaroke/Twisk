@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 /**
  * Classe Etape
+ *
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
@@ -17,7 +18,8 @@ public abstract class Etape implements Iterable<Etape> {
     public int num;
 
     /**
-     * Constructeur Etape avec nom
+     * Constructeur Etape avec nom.
+     *
      * @param nom Nom de l'étape
      */
     public Etape(String nom) {
@@ -28,7 +30,8 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Ajout de successeurs à l'étape
+     * Ajout de successeurs à l'étape.
+     *
      * @param e Ajout d'un successeur à l'étape actuelle
      */
     public void ajouterSuccesseur(Etape... e) {
@@ -36,15 +39,17 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Getter estUneActivite
-     * @return Vrai si c'est une activitée sinon faux
+     * Getter estUneActivite.
+     *
+     * @return Vrai si c'est une activité sinon faux
      */
     public boolean estUneActivite() {
         return false;
     }
 
     /**
-     * Getter estUnGuichet
+     * Getter estUnGuichet.
+     *
      * @return Vrai si c'est un guichet sinon faux
      */
     public boolean estUnGuichet() {
@@ -52,7 +57,8 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Getter nombre de successeurs
+     * Getter nombre de successeurs.
+     *
      * @return Retourne le nombre de successeurs à l'étape
      */
     public int nbSuccesseurs() {
@@ -60,7 +66,8 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Fonction itérateur d'étape
+     * Fonction itérateur d'étape.
+     *
      * @return L'itérateur d'étape
      */
     @Override
@@ -69,7 +76,8 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Fonction de mise en string de étape
+     * Fonction de mise en string de l'étape.
+     *
      * @return Un string de l'étape contenant son numéro et son nom
      */
     @Override
@@ -78,7 +86,8 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Fonction de mise en code c de étape
+     * Fonction de mise en code c de étape.
+     *
      * @return Un string contenant le code C de l'étape
      */
     public String toC() {
@@ -86,7 +95,8 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Getter de numéro de l'étape
+     * Getter de numéro de l'étape.
+     *
      * @return Le numéro de l'étape
      */
     public int getNum() {
@@ -94,7 +104,8 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Getter du nom de l'étape
+     * Getter du nom de l'étape.
+     *
      * @return Le nom de l'étape
      */
     public String getNom() {
@@ -102,7 +113,8 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Getter du gestionnaire de successeurs
+     * Getter du gestionnaire de successeurs.
+     *
      * @return Le gestionnaire de successeurs de l'étape
      */
     public GestionnaireSuccesseurs getGestionnaireSuccesseurs() {
@@ -110,15 +122,15 @@ public abstract class Etape implements Iterable<Etape> {
     }
 
     /**
-     * Getter du gestionnaire de successeurs en format string
-     * @return Un string du gestionnaire de successeurs
+     * Getter du gestionnaire de successeurs en format string.
      */
     public String getSuccesseursString() {
         return getGestionnaireSuccesseurs().toString();
     }
 
     /**
-     * Getter de l'étape suivante
+     * Getter de l'étape suivante.
+     *
      * @return L'étape suivante
      */
     public Etape getSuivant() {

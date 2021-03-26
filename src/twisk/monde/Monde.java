@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 /**
  * Classe Monde
+ *
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
@@ -15,7 +16,7 @@ public class Monde implements Iterable<Etape> {
     public SasSortie sasSortie;
 
     /**
-     * Constructeur du Monde
+     * Constructeur du Monde.
      */
     public Monde() {
         sasEntree = new SasEntree();
@@ -25,15 +26,17 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Setter des entrées du monde
+     * Setter des entrées du monde.
+     *
      * @param etapes Collection d'étapes servant d'entrée
      */
     public void aCommeEntree(Etape... etapes) {
-        getSasSortie().ajouterSuccesseur(etapes);
+        getSasEntree().ajouterSuccesseur(etapes);
     }
 
     /**
-     * Setter des sortis du monde
+     * Setter des sortis du monde.
+     *
      * @param etapes Collection d'étapes servant de sortie au monde
      */
     public void aCommeSortie(Etape... etapes) {
@@ -43,7 +46,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Ajout d'étape dans le monde
+     * Ajout d'étapes dans le monde.
+     *
      * @param etapes Collection d'étape
      */
     public void ajouter(Etape... etapes) {
@@ -51,7 +55,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Getter nombre d'étapes
+     * Getter nombre d'étapes.
+     *
      * @return Le nombre d'étapes
      */
     public int nbEtapes() {
@@ -59,7 +64,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Getter du nombre de guichet dans le monde
+     * Getter du nombre de guichet dans le monde.
+     *
      * @return Un int du nombre de guichet présent dans le monde
      */
     public int nbGuichets() {
@@ -73,7 +79,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Permet de construit le code C du monde
+     * Permet de construit le code C du monde.
+     *
      * @return Un string contenant le code C du monde
      */
     public StringBuilder toC() {
@@ -88,7 +95,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Iterateur d'etape
+     * Iterateur d'etape.
+     *
      * @return L'itérateur d'étape
      */
     @Override
@@ -97,7 +105,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Getter d'étape
+     * Getter d'étape.
+     *
      * @param i Numéro de l'étape à récuperer
      * @return Un étape demandé
      */
@@ -112,7 +121,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Fonction de mise en string du monde
+     * Fonction de mise en string du monde.
+     *
      * @return Un string du monde
      */
     @Override
@@ -121,7 +131,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Getter de gestionnaire d'étapes
+     * Getter de gestionnaire d'étapes.
+     *
      * @return Le gestionnaire d'étape du monde
      */
     public GestionnaireEtapes getGestionnaireEtapes() {
@@ -129,7 +140,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Getter du sasEntre
+     * Getter du sasEntre.
+     *
      * @return sasEntre
      */
     public SasEntree getSasEntree() {
@@ -137,7 +149,8 @@ public class Monde implements Iterable<Etape> {
     }
 
     /**
-     * Getter du sasSortie
+     * Getter du sasSortie.
+     *
      * @return sasSortie
      */
     public SasSortie getSasSortie() {

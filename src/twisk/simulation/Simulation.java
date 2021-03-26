@@ -7,6 +7,7 @@ import twisk.outils.KitC;
 
 /**
  * Classe Simulation
+ *
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
@@ -17,40 +18,44 @@ public class Simulation {
     int nbClients;
 
     /**
-     * Constructeur de Simulation
+     * Constructeur de Simulation.
      */
     public Simulation() {
         environnement = new KitC();
     }
 
     /**
-     * Fonction de lancement de la simulation
-     * @param nbEtapes Nombre d'étape dans la simulation
-     * @param nbServices Nombre de guichet dans le monde
-     * @param nbClients Nombre de client dans le monde
+     * Fonction de lancement de la simulation.
+     *
+     * @param nbEtapes          Nombre d'étape dans la simulation
+     * @param nbServices        Nombre de guichet dans le monde
+     * @param nbClients         Nombre de client dans le monde
      * @param tabJetonsServices Tableau des jetons dans le monde
      * @return Un tableau de INT
      */
     public native int[] start_simulation(int nbEtapes, int nbServices, int nbClients, int[] tabJetonsServices);
 
     /**
-     * Fonction de repérage des clients
-     * @param nbEtapes Nombre d'étape dans
+     * Fonction de repérage des clients.
+     *
+     * @param nbEtapes  Nombre d'étape dans
      * @param nbClients Nombre de client dans le monde
      * @return Un tableau de int
      */
     public native int[] ou_sont_les_clients(int nbEtapes, int nbClients);
 
     /**
-     * Permet de nettoyer le code
+     * Permet de nettoyer le code.
      */
     public native void nettoyage();
 
     /**
-     * Fonction de simulation regroupant les fonctions précédente
+     * Fonction de simulation regroupant les fonctions précédente.
+     *
      * @param monde Le monde dans lequel la simulation doit s'executer
      */
-    public void simuler(Monde monde){
+    public void simuler(Monde monde) {
+
         getEnvironnement().creerFichier(monde.toC().toString());
         getEnvironnement().compiler();
         getEnvironnement().construireLaLibrairie();
@@ -79,9 +84,9 @@ public class Simulation {
 
             System.out.print("\n");
             clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
-            try{
+            try {
                 Thread.sleep(500);
-            } catch(InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
@@ -90,7 +95,7 @@ public class Simulation {
                 int decalage = clients[(j * (getNbClients() + 1))];
                 System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
                 for (int i = 0; i < decalage; ++i) {
-                    System.out.print(decalage + 1 + i + " ");
+                    System.out.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
                 }
                 System.out.print("\n");
             }
@@ -99,7 +104,8 @@ public class Simulation {
     }
 
     /**
-     * Getter de l'environnement
+     * Getter de l'environnement.
+     *
      * @return L'environnement soit un KitC
      */
     public KitC getEnvironnement() {
@@ -107,7 +113,8 @@ public class Simulation {
     }
 
     /**
-     * Getter du nombre de client
+     * Getter du nombre de client.
+     *
      * @return Le nombre de client en int
      */
     public int getNbClients() {
@@ -115,7 +122,8 @@ public class Simulation {
     }
 
     /**
-     * Setter du nombre de client
+     * Setter du nombre de client.
+     *
      * @param nbClients Nombre de client à mettre dans le monde
      */
     public void setNbClients(int nbClients) {

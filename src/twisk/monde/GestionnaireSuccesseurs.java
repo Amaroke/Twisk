@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 /**
  * Classe GestionnaireSuccesseurs
+ *
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
@@ -15,14 +16,15 @@ public class GestionnaireSuccesseurs implements Iterable<Etape> {
     ArrayList<Etape> etapes;
 
     /**
-     * Constructeur de GestionnaireSuccesseurs
+     * Constructeur de GestionnaireSuccesseurs.
      */
     public GestionnaireSuccesseurs() {
         etapes = new ArrayList<>();
     }
 
     /**
-     * Ajout de successeurs
+     * Ajout de successeurs.
+     *
      * @param etapes Collection d'étape
      */
     public void ajouter(Etape... etapes) {
@@ -30,7 +32,8 @@ public class GestionnaireSuccesseurs implements Iterable<Etape> {
     }
 
     /**
-     * Getter du nombre d'étapes
+     * Getter du nombre d'étapes.
+     *
      * @return Le nombre d'étape dans le gestionnaireSuccesseurs
      */
     int nbEtapes() {
@@ -38,7 +41,8 @@ public class GestionnaireSuccesseurs implements Iterable<Etape> {
     }
 
     /**
-     * Iterateur d'étape
+     * Iterateur d'étape.
+     *
      * @return Un itérateur d'étape
      */
     @Override
@@ -47,7 +51,8 @@ public class GestionnaireSuccesseurs implements Iterable<Etape> {
     }
 
     /**
-     * Fonction mise en string
+     * Fonction mise en string.
+     *
      * @return Un string de GestionnaireSuccesseurs
      */
     @Override
@@ -60,7 +65,8 @@ public class GestionnaireSuccesseurs implements Iterable<Etape> {
     }
 
     /**
-     * Getter des étapes
+     * Getter des étapes.
+     *
      * @return L'arraylist d'étapes
      */
     public ArrayList<Etape> getEtapes() {

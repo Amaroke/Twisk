@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 /**
  * Classe GestionnaireEtapes
+ *
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
@@ -15,14 +16,15 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     ArrayList<Etape> etapes;
 
     /**
-     * Constructeur du gestionnaire d'étape
+     * Constructeur du gestionnaire d'étape.
      */
     public GestionnaireEtapes() {
         etapes = new ArrayList<>();
     }
 
     /**
-     * Ajoute la collection d'étape
+     * Ajoute la collection d'étapes.
+     *
      * @param etapes Liste d'etape
      */
     void ajouter(Etape... etapes) {
@@ -30,7 +32,8 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     }
 
     /**
-     * Getteur du nombre d'étape
+     * Getteur du nombre d'étapes.
+     *
      * @return Le nombre d'étape
      */
     int nbEtapes() {
@@ -38,7 +41,8 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     }
 
     /**
-     * Iterator d'étape
+     * Iterator d'étape.
+     *
      * @return L'itérateur d'étape
      */
     @Override
@@ -47,8 +51,9 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     }
 
     /**
-     * Fonction toString
-     * @return Un chaine de caractère contenant le nombre de successeurs et les successeurs
+     * Fonction toString.
+     *
+     * @return Un chaîne de caractère contenant le nombre de successeurs et les successeurs
      */
     @Override
     public String toString() {
@@ -60,10 +65,11 @@ public class GestionnaireEtapes implements Iterable<Etape> {
     }
 
     /**
-     * Getter d'étape
+     * Getter d'étape.
+     *
      * @return L'arrayList d'étapes
      */
-     public ArrayList<Etape> getEtapes() {
+    public ArrayList<Etape> getEtapes() {
         return etapes;
     }
 }

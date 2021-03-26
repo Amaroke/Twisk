@@ -2,6 +2,7 @@ package twisk.outils;
 
 /**
  * Classe FabriqueNumero
+ *
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
@@ -13,7 +14,7 @@ public class FabriqueNumero {
     int cptSemaphore;
 
     /**
-     * Constructeur de FabriqueNumero
+     * Constructeur de FabriqueNumero.
      */
     private FabriqueNumero() {
         cptEtape = 0;
@@ -21,7 +22,8 @@ public class FabriqueNumero {
     }
 
     /**
-     * Getter de l'instance de FabriqueNumero
+     * Getter de l'instance de FabriqueNumero.
+     *
      * @return L'instance de FabriqueNumero
      */
     public static FabriqueNumero getInstance() {
@@ -29,7 +31,8 @@ public class FabriqueNumero {
     }
 
     /**
-     * Getter du numero d'étape
+     * Getter du numero d'étapes.
+     *
      * @return Le numéro de l'étape actuelle
      */
     public int getNumeroEtape() {
@@ -38,7 +41,8 @@ public class FabriqueNumero {
     }
 
     /**
-     * Getter sémaphore
+     * Getter sémaphore.
+     *
      * @return Le numéro du guichet actuelle
      */
     public int getNumeroSemaphore() {
@@ -47,7 +51,7 @@ public class FabriqueNumero {
     }
 
     /**
-     * Reset de du nombre d'étape et de sémaphore
+     * Reset de du nombre d'étapes et de sémaphore.
      */
     public void reset() {
         cptEtape = 0;

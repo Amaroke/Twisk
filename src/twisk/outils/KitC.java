@@ -5,10 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
-
 /**
  * Classe KitC
+ *
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
@@ -16,14 +15,14 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 public class KitC {
 
     /**
-     * Constructeur du KitC
+     * Constructeur du KitC.
      */
     public KitC() {
         this.creerEnvironnement();
     }
 
     /**
-     * Fonction de création de l'environnement
+     * Fonction de création de l'environnement.
      */
     public void creerEnvironnement() {
         try {
@@ -32,12 +31,9 @@ public class KitC {
             // Copie des deux fichiers programmeC.o et def.h depuis le projet sous /tmp/twisk.
             String[] liste = {"programmeC.o", "def.h", "codeNatif.o"};
             for (String nom : liste) {
-                InputStream source = getClass().getResource("/codeC/" + nom).openStream() ;
-                File destination = new File("/tmp/twisk/" + nom) ;
+                InputStream source = getClass().getResource("/codeC/" + nom).openStream();
+                File destination = new File("/tmp/twisk/" + nom);
                 copier(source, destination);
-//                Path source = Paths.get(getClass().getResource("/codeC/" + nom).getPath());
-//                Path newdir = Paths.get("/tmp/twisk/");
-//                Files.copy(source, newdir.resolve(source.getFileName()), REPLACE_EXISTING);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,26 +41,27 @@ public class KitC {
     }
 
     /**
-     * Permet de copier les fichier de ressouces/codeC
+     * Permet de copier les fichier de ressouces/codeC.
+     *
      * @param source Fichier source
-     * @param dest Fichier destination
+     * @param dest   Fichier destination
      * @throws IOException en cas de probleme
      */
     private void copier(InputStream source, File dest) throws IOException {
-        InputStream sourceFile = source;
-        OutputStream destinationFile = new FileOutputStream(dest) ;
+        OutputStream destinationFile = new FileOutputStream(dest);
         // Lecture par segment de 0.5Mo
-        byte buffer[] = new byte[512 * 1024];
+        byte[] buffer = new byte[512 * 1024];
         int nbLecture;
-        while ((nbLecture = sourceFile.read(buffer)) != -1){
+        while ((nbLecture = source.read(buffer)) != -1) {
             destinationFile.write(buffer, 0, nbLecture);
         }
         destinationFile.close();
-        sourceFile.close();
+        source.close();
     }
 
     /**
-     * Permet de creer les fichier dans tmp/twisk
+     * Permet de creer les fichier dans tmp/twisk.
+     *
      * @param codeC String du code du monde
      */
     public void creerFichier(String codeC) {
@@ -80,7 +77,7 @@ public class KitC {
     }
 
     /**
-     * Permet de compiler le code C généré
+     * Permet de compiler le code C généré.
      */
     public void compiler() {
         try {
@@ -103,7 +100,7 @@ public class KitC {
     }
 
     /**
-     * Execution de la commande pour construire la librairie
+     * Execution de la commande pour construire la librairie.
      */
     public void construireLaLibrairie() {
         try {
