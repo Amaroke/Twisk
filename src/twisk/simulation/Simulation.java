@@ -5,6 +5,8 @@ import twisk.monde.Guichet;
 import twisk.monde.Monde;
 import twisk.outils.KitC;
 
+import java.util.Iterator;
+
 /**
  * Classe Simulation
  *
@@ -12,8 +14,9 @@ import twisk.outils.KitC;
  * @version 1.0
  */
 
-public class Simulation {
+public class Simulation implements Iterable<Client> {
 
+    GestionnaireClients gestionnaireClients;
     KitC environnement;
     int nbClients;
 
@@ -93,6 +96,9 @@ public class Simulation {
             // On parcourt les étapes.
             for (int j = 0; j < monde.nbEtapes(); ++j) {
                 int decalage = clients[(j * (getNbClients() + 1))];
+                for(int l = 0; l < decalage; ++l){
+                    gestionnaireClients.allerA(clients[decalage+1+l], monde.getEtape(j),l);
+                }
                 System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
                 for (int i = 0; i < decalage; ++i) {
                     System.out.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
@@ -128,6 +134,15 @@ public class Simulation {
      */
     public void setNbClients(int nbClients) {
         this.nbClients = nbClients;
+        gestionnaireClients = new GestionnaireClients(this.nbClients);
     }
 
+    /**
+     * Fonction iterator simulation.
+     * @return Iterator<Client>
+     */
+    @Override
+    public Iterator<Client> iterator() {
+        return gestionnaireClients.iterator();
+    }
 }
