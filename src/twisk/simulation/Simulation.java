@@ -17,7 +17,7 @@ import java.util.Iterator;
 public class Simulation implements Iterable<Client> {
 
     private GestionnaireClients gestionnaireClients;
-    private KitC environnement;
+    private final KitC environnement;
     private int nbClients;
 
     /**
@@ -83,12 +83,14 @@ public class Simulation implements Iterable<Client> {
         }
 
         int[] clients;
-        for (int k = 0; k < 20; k++) {
+        clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
+        // On regarde si tous les clients sont dans le sasSortie.
+        while (clients[((getNbClients() + 1))] != getNbClients()) {
 
             System.out.print("\n");
             clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
             try {
-                Thread.sleep(500);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
