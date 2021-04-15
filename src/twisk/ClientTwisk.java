@@ -36,8 +36,6 @@ public class ClientTwisk {
         monde.aCommeEntree(zoo);
         monde.aCommeSortie(tob);
 
-
-
         ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
         Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
         Object oSim = classSim.newInstance();
@@ -66,7 +64,12 @@ public class ClientTwisk {
         monde2.aCommeEntree(zoo2);
         monde2.aCommeSortie(parachute);
 
-        msetNbClients.invoke(oSim, 5);
-        msimuler.invoke(oSim, monde2);
+        ClassLoaderPerso ClassLoaderBis = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
+        Class<?> classSimBis = ClassLoaderBis.loadClass("twisk.simulation.Simulation");
+        Object oSimBis = classSimBis.newInstance();
+        Method msetNbClientsBis = classSimBis.getDeclaredMethod("setNbClients", int.class);
+        Method msimulerBis = classSimBis.getDeclaredMethod("simuler", twisk.monde.Monde.class);
+        msetNbClientsBis.invoke(oSimBis, 5);
+        msimulerBis.invoke(oSimBis, monde2);
     }
 }

@@ -12,6 +12,7 @@ public class FabriqueNumero {
     private static final FabriqueNumero instance = new FabriqueNumero();
     private int cptEtape;
     private int cptSemaphore;
+    private int numlib;
 
     /**
      * Constructeur de FabriqueNumero.
@@ -19,6 +20,7 @@ public class FabriqueNumero {
     public FabriqueNumero() {
         cptEtape = 0;
         cptSemaphore = 1;
+        numlib = 0;
     }
 
     /**
@@ -38,6 +40,11 @@ public class FabriqueNumero {
     public int getNumeroEtape() {
         cptEtape++;
         return cptEtape - 1;
+    }
+
+    public int getNumlib(){
+        numlib++;
+        return numlib - 1;
     }
 
     /**

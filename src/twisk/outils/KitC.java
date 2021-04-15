@@ -14,6 +14,10 @@ import java.nio.file.Paths;
 
 public class KitC {
 
+    private FabriqueNumero f = FabriqueNumero.getInstance();
+    private final int num_lib = f.getNumlib();
+
+
     /**
      * Constructeur du KitC.
      */
@@ -105,7 +109,7 @@ public class KitC {
     public void construireLaLibrairie() {
         try {
             Runtime runtime = Runtime.getRuntime();
-            Process p = runtime.exec("gcc -shared /tmp/twisk/programmeC.o /tmp/twisk/codeNatif.o /tmp/twisk/client.o -o /tmp/twisk/libTwisk.so");
+            Process p = runtime.exec("gcc -shared /tmp/twisk/programmeC.o /tmp/twisk/codeNatif.o /tmp/twisk/client.o -o /tmp/twisk/libTwisk" + num_lib + ".so");
             BufferedReader output = new BufferedReader(new InputStreamReader(p.getInputStream()));
             BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
             String ligne;
@@ -119,5 +123,9 @@ public class KitC {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getNumLib(){
+        return num_lib;
     }
 }

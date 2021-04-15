@@ -62,7 +62,7 @@ public class Simulation implements Iterable<Client> {
         getEnvironnement().creerFichier(monde.toC().toString());
         getEnvironnement().compiler();
         getEnvironnement().construireLaLibrairie();
-        System.load("/tmp/twisk/libTwisk.so");
+        System.load("/tmp/twisk/libTwisk"+ environnement.getNumLib() +".so");
 
         // On mets les jetons dans un tableau
         int[] tabJetonsGuichet = new int[monde.nbGuichets()];
