@@ -5,7 +5,6 @@ import twisk.monde.ActiviteRestreinte;
 import twisk.monde.Guichet;
 import twisk.monde.Monde;
 import twisk.outils.ClassLoaderPerso;
-import twisk.simulation.Simulation;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,7 +18,7 @@ import java.lang.reflect.Method;
 
 public class ClientTwisk {
 
-    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+    public static void main(String[] args) {
 
         // Premier Monde
         Monde monde = new Monde();
@@ -36,13 +35,17 @@ public class ClientTwisk {
         monde.aCommeEntree(zoo);
         monde.aCommeSortie(tob);
 
-        ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
-        Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
-        Object oSim = classSim.newInstance();
-        Method msetNbClients = classSim.getDeclaredMethod("setNbClients", int.class);
-        Method msimuler = classSim.getDeclaredMethod("simuler", twisk.monde.Monde.class);
-        msetNbClients.invoke(oSim, 5);
-        msimuler.invoke(oSim, monde);
+        try {
+            ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
+            Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
+            Object oSim = classSim.newInstance();
+            Method msetNbClients = classSim.getDeclaredMethod("setNbClients", int.class);
+            Method msimuler = classSim.getDeclaredMethod("simuler", twisk.monde.Monde.class);
+            msetNbClients.invoke(oSim, 5);
+            msimuler.invoke(oSim, monde);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
 
 
         // Deuxième monde
@@ -64,12 +67,16 @@ public class ClientTwisk {
         monde2.aCommeEntree(zoo2);
         monde2.aCommeSortie(parachute);
 
-        ClassLoaderPerso ClassLoaderBis = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
-        Class<?> classSimBis = ClassLoaderBis.loadClass("twisk.simulation.Simulation");
-        Object oSimBis = classSimBis.newInstance();
-        Method msetNbClientsBis = classSimBis.getDeclaredMethod("setNbClients", int.class);
-        Method msimulerBis = classSimBis.getDeclaredMethod("simuler", twisk.monde.Monde.class);
-        msetNbClientsBis.invoke(oSimBis, 5);
-        msimulerBis.invoke(oSimBis, monde2);
+        try {
+            ClassLoaderPerso ClassLoaderBis = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
+            Class<?> classSimBis = ClassLoaderBis.loadClass("twisk.simulation.Simulation");
+            Object oSimBis = classSimBis.newInstance();
+            Method msetNbClientsBis = classSimBis.getDeclaredMethod("setNbClients", int.class);
+            Method msimulerBis = classSimBis.getDeclaredMethod("simuler", twisk.monde.Monde.class);
+            msetNbClientsBis.invoke(oSimBis, 5);
+            msimulerBis.invoke(oSimBis, monde2);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 }
