@@ -4,7 +4,11 @@ import twisk.monde.Activite;
 import twisk.monde.ActiviteRestreinte;
 import twisk.monde.Guichet;
 import twisk.monde.Monde;
+import twisk.outils.ClassLoaderPerso;
 import twisk.simulation.Simulation;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Classe ClientTwisk
@@ -15,7 +19,7 @@ import twisk.simulation.Simulation;
 
 public class ClientTwisk {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 
         // Premier Monde
         Monde monde = new Monde();
@@ -32,9 +36,16 @@ public class ClientTwisk {
         monde.aCommeEntree(zoo);
         monde.aCommeSortie(tob);
 
-        Simulation s = new Simulation();
-        s.setNbClients(5);
-        s.simuler(monde);
+
+
+        ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
+        Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
+        Object oSim = classSim.newInstance();
+        Method msetNbClients = classSim.getDeclaredMethod("setNbClients", int.class);
+        Method msimuler = classSim.getDeclaredMethod("simuler", twisk.monde.Monde.class);
+        msetNbClients.invoke(oSim, 5);
+        msimuler.invoke(oSim, monde);
+
 
         // Deuxième monde
         Monde monde2 = new Monde();
