@@ -66,8 +66,7 @@ public class ClientTwisk {
         monde2.aCommeEntree(zoo2);
         monde2.aCommeSortie(parachute);
 
-        Simulation s2 = new Simulation();
-        s2.setNbClients(5);
-        s2.simuler(monde2);
+        msetNbClients.invoke(oSim, 5);
+        msimuler.invoke(oSim, monde2);
     }
 }
