@@ -16,7 +16,7 @@ public class FabriqueNumero {
     /**
      * Constructeur de FabriqueNumero.
      */
-    private FabriqueNumero() {
+    public FabriqueNumero() {
         cptEtape = 0;
         cptSemaphore = 1;
     }
@@ -47,6 +47,7 @@ public class FabriqueNumero {
      */
     public int getNumeroSemaphore() {
         cptSemaphore++;
+        System.out.println("fdp de merde" + (cptSemaphore-1));
         return cptSemaphore - 1;
     }
 
