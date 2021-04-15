@@ -10,8 +10,8 @@ package twisk.outils;
 public class FabriqueNumero {
 
     private static final FabriqueNumero instance = new FabriqueNumero();
-    int cptEtape;
-    int cptSemaphore;
+    private int cptEtape;
+    private int cptSemaphore;
 
     /**
      * Constructeur de FabriqueNumero.

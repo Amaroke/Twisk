@@ -11,9 +11,9 @@ import twisk.monde.Etape;
 
 
 public class Client {
-    int numeroClient;
-    int rang;
-    Etape etape;
+    private int numeroClient;
+    private int rang;
+    private Etape etape;
 
 
     /**

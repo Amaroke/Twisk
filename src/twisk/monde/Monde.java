@@ -11,9 +11,9 @@ import java.util.Iterator;
 
 public class Monde implements Iterable<Etape> {
 
-    public GestionnaireEtapes gestionnaireEtapes;
-    public SasEntree sasEntree;
-    public SasSortie sasSortie;
+    private GestionnaireEtapes gestionnaireEtapes;
+    private SasEntree sasEntree;
+    private SasSortie sasSortie;
 
     /**
      * Constructeur du Monde.

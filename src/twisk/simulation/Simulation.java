@@ -16,9 +16,9 @@ import java.util.Iterator;
 
 public class Simulation implements Iterable<Client> {
 
-    GestionnaireClients gestionnaireClients;
-    KitC environnement;
-    int nbClients;
+    private GestionnaireClients gestionnaireClients;
+    private KitC environnement;
+    private int nbClients;
 
     /**
      * Constructeur de Simulation.

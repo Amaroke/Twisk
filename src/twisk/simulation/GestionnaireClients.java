@@ -14,7 +14,7 @@ import java.util.Iterator;
 
 
 public class GestionnaireClients implements Iterable<Client> {
-    ArrayList<Client> listeclient;
+    private ArrayList<Client> listeclient;
 
     /**
      * Constructeur GestionnaireClients

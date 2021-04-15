@@ -34,22 +34,4 @@ public class ActiviteRestreinte extends Activite {
     public String toC() {
         return "transfert(" + getNum() + "," + getSuivant().getNum() + ");\n" + getSuivant().toC();
     }
-
-    /**
-     * Getter du temps.
-     *
-     * @return Le temps de l'activité restreinte
-     */
-    public int getTemps() {
-        return temps;
-    }
-
-    /**
-     * Getter de l'écart temps.
-     *
-     * @return L'écart temps de l'activité restreinte
-     */
-    public int getEcartTemps() {
-        return ecartTemps;
-    }
 }

@@ -13,9 +13,9 @@ import java.util.Iterator;
 
 public abstract class Etape implements Iterable<Etape> {
 
-    public String nom;
-    public GestionnaireSuccesseurs gestionnaireSuccesseurs;
-    public int num;
+    private String nom;
+    private GestionnaireSuccesseurs gestionnaireSuccesseurs;
+    private int num;
 
     /**
      * Constructeur Etape avec nom.

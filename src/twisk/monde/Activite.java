@@ -9,8 +9,8 @@ package twisk.monde;
 
 public class Activite extends Etape {
 
-    public int temps = 1;
-    int ecartTemps = 1;
+    private int temps = 1;
+    private int ecartTemps = 1;
 
     /**
      * Constructeur d'activite avec son nom.

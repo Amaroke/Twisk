@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 public class GestionnaireSuccesseurs implements Iterable<Etape> {
 
-    ArrayList<Etape> etapes;
+    private ArrayList<Etape> etapes;
 
     /**
      * Constructeur de GestionnaireSuccesseurs.
