@@ -10,25 +10,25 @@ import twisk.vues.VueMondeIG;
 /**
  * Classe EcouteurDragDropped.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurDragDropped implements EventHandler<DragEvent> {
+
     private final MondeIG monde;
     private final VueMondeIG vueMondeIG;
 
     /**
      * Constructeur EcouteurDragDropped.
      *
-     * @param m MondeIG
-     * @param v VueMondeIG
+     * @param monde MondeIG
+     * @param vue   VueMondeIG
      */
-    public EcouteurDragDropped(MondeIG m, VueMondeIG v) {
-        this.monde = m;
-        this.vueMondeIG = v;
+    public EcouteurDragDropped(MondeIG monde, VueMondeIG vue) {
+        this.monde = monde;
+        this.vueMondeIG = vue;
     }
-
 
     /**
      * Fonction handle.
@@ -41,12 +41,12 @@ public class EcouteurDragDropped implements EventHandler<DragEvent> {
         boolean success = false;
         if (db.hasString()) {
             String nodeId = db.getString();
-            VueEtapeIG vueetape = (VueEtapeIG) vueMondeIG.lookup("#" + nodeId);
-            if (vueetape != null) {
-                vueetape.getEtape().setPosX((int) dragEvent.getX());
-                vueetape.getEtape().setPosY((int) dragEvent.getY());
-                vueetape.getEtape().setPDC();
-                vueetape.relocate((int) dragEvent.getX(), (int) dragEvent.getY());
+            VueEtapeIG vueEtape = (VueEtapeIG) vueMondeIG.lookup("#" + nodeId);
+            if (vueEtape != null) {
+                vueEtape.getEtape().setPosX((int) dragEvent.getX());
+                vueEtape.getEtape().setPosY((int) dragEvent.getY());
+                vueEtape.getEtape().setPDC();
+                vueEtape.relocate((int) dragEvent.getX(), (int) dragEvent.getY());
                 success = true;
             }
         }

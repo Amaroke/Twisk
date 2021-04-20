@@ -14,6 +14,7 @@ public class ClassLoaderPerso extends ClassLoader {
     /**
      * Chargement dans le classLoader de la classe, si c'est la classe Simulation qui est demandée, alors on va directement lire cette classe
      * à partir du fichier .class et on la conserve dans le ClassLoader personnel
+     *
      * @param name nom complétement spécifié de la classe à charger
      * @return la classe chargée
      * @throws ClassNotFoundException
@@ -28,6 +29,7 @@ public class ClassLoaderPerso extends ClassLoader {
 
     /**
      * Chargement de la classe à partir du fichier .class
+     *
      * @param name nom du fichier .class
      * @return la classe chargée
      * @throws ClassNotFoundException
@@ -52,6 +54,7 @@ public class ClassLoaderPerso extends ClassLoader {
 
     /**
      * Chargement du fichier .class converti en tableau de bytes.
+     *
      * @param name nom du fichier .class
      * @return tableau de bytes
      * @throws IOException
@@ -59,7 +62,7 @@ public class ClassLoaderPerso extends ClassLoader {
     private byte[] loadClassData(String name) throws IOException {
         InputStream stream = getClass().getClassLoader().getResourceAsStream(name);
         int size = stream.available();
-        byte buff[] = new byte[size];
+        byte[] buff = new byte[size];
         DataInputStream in = new DataInputStream(stream);
 
         // lecture des données binaires

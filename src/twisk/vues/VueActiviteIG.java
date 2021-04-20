@@ -7,7 +7,7 @@ import twisk.mondeIG.MondeIG;
 /**
  * Classe VueActiviteIG.
  *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
 
@@ -36,6 +36,5 @@ public class VueActiviteIG extends VueEtapeIG implements Observateur {
 
     @Override
     public void reagir() {
-
     }
 }

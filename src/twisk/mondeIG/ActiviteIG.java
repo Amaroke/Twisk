@@ -3,8 +3,8 @@ package twisk.mondeIG;
 /**
  * Classe EcouteurDeselection.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class ActiviteIG extends EtapeIG {

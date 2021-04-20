@@ -12,11 +12,12 @@ import twisk.vues.VueEtapeIG;
 /**
  * Classe EcouteurDetected.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurDragDetected implements EventHandler<MouseEvent> {
+
     private final VueEtapeIG Vetape;
 
     /**

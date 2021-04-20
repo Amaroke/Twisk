@@ -13,14 +13,14 @@ import twisk.mondeIG.PointDeControleIG;
 /**
  * Classe EcouteurPointDeControle.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurPointDeControle implements EventHandler<MouseEvent> {
-    private final PointDeControleIG p;
-    private final MondeIG m;
 
+    private final PointDeControleIG pointDeControle;
+    private final MondeIG monde;
 
     /**
      * Constructeur EcouteurPointDeControle.
@@ -29,10 +29,9 @@ public class EcouteurPointDeControle implements EventHandler<MouseEvent> {
      * @param monde MondeIG
      */
     public EcouteurPointDeControle(PointDeControleIG point, MondeIG monde) {
-        m = monde;
-        p = point;
+        this.monde = monde;
+        this.pointDeControle = point;
     }
-
 
     /**
      * Fonction handle.
@@ -42,10 +41,10 @@ public class EcouteurPointDeControle implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent mouseEvent) {
         try {
-            m.creerArc(p);
+            monde.creerArc(pointDeControle);
         } catch (SamePointException | AlreadyExistException e) {
             Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("Error");
+            a.setTitle("Erreur");
             a.setContentText(e.getMessage());
             a.show();
             PauseTransition p = new PauseTransition(Duration.seconds(4));

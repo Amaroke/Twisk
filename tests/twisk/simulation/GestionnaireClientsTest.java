@@ -26,17 +26,17 @@ class GestionnaireClientsTest {
         Etape parc = new Activite("Parc");
         Etape manege = new Activite("Manege");
         gc.allerA(1,manege,1);
-        assertEquals(gc.getListeclient().get(0).getEtape(), manege);
-        assertEquals(gc.getListeclient().get(0).getRang(), 1);
+        assertEquals(gc.getListeClient().get(0).getEtape(), manege);
+        assertEquals(gc.getListeClient().get(0).getRang(), 1);
         gc.allerA(1,parc,5);
-        assertEquals(gc.getListeclient().get(0).getEtape(), parc);
-        assertEquals(gc.getListeclient().get(0).getRang(), 5);
+        assertEquals(gc.getListeClient().get(0).getEtape(), parc);
+        assertEquals(gc.getListeClient().get(0).getRang(), 5);
 
     }
 
     @Test
     void reset() {
         gc.reset();
-        assertEquals(gc.getListeclient().size(), 0);
+        assertEquals(gc.getListeClient().size(), 0);
     }
 }

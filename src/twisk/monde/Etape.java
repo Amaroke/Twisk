@@ -10,12 +10,11 @@ import java.util.Iterator;
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
-
 public abstract class Etape implements Iterable<Etape> {
 
-    private String nom;
-    private GestionnaireSuccesseurs gestionnaireSuccesseurs;
-    private int num;
+    private final String nom;
+    private final GestionnaireSuccesseurs gestionnaireSuccesseurs;
+    private final int num;
 
     /**
      * Constructeur Etape avec nom.
@@ -32,10 +31,10 @@ public abstract class Etape implements Iterable<Etape> {
     /**
      * Ajout de successeurs à l'étape.
      *
-     * @param e Ajout d'un successeur à l'étape actuelle
+     * @param etapes Ajout d'un successeur à l'étape actuelle
      */
-    public void ajouterSuccesseur(Etape... e) {
-        getGestionnaireSuccesseurs().ajouter(e);
+    public void ajouterSuccesseur(Etape... etapes) {
+        getGestionnaireSuccesseurs().ajouter(etapes);
     }
 
     /**

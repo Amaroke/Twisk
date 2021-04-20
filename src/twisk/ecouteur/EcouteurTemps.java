@@ -15,8 +15,8 @@ import java.util.Optional;
 /**
  * Classe EcouteurTemps.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurTemps implements EventHandler<ActionEvent> {
@@ -26,10 +26,10 @@ public class EcouteurTemps implements EventHandler<ActionEvent> {
     /**
      * Constructeur EcouteurTemps.
      *
-     * @param m MondeIG
+     * @param monde MondeIG
      */
-    public EcouteurTemps(MondeIG m) {
-        this.monde = m;
+    public EcouteurTemps(MondeIG monde) {
+        this.monde = monde;
     }
 
     /**
@@ -41,15 +41,17 @@ public class EcouteurTemps implements EventHandler<ActionEvent> {
     public void handle(ActionEvent actionEvent) {
         TextInputDialog dialog = new TextInputDialog("2");
         dialog.setTitle("Temps");
-        dialog.setHeaderText("Donnez le temps de votre activitée");
+        dialog.setHeaderText("Donnez le temps de votre activité");
         dialog.setContentText("Temps :");
         Optional<String> result = dialog.showAndWait();
 
         try {
-            monde.modiftemps(Integer.valueOf(result.get()),monde.getSelectedEtape().get(0));
+            if (result.isPresent()) {
+                monde.modiftemps(Integer.valueOf(result.get()), monde.getSelectedEtape().get(0));
+            }
         } catch (NoSuchElementException | NumberFormatException | TempsIncorrectException e) {
             Alert a = new Alert(Alert.AlertType.ERROR);
-            a.setTitle("Error");
+            a.setTitle("Erreur");
             a.setContentText(e.getMessage());
             a.show();
             PauseTransition p = new PauseTransition(Duration.seconds(4));

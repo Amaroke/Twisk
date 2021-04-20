@@ -10,8 +10,7 @@ import twisk.mondeIG.MondeIG;
 
 /**
  * Classe VueMenu.
- *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
 
@@ -47,7 +46,7 @@ public class VueMenu extends MenuBar implements Observateur {
         quitter.setOnAction(e -> Platform.exit());
         fichier.getItems().add(quitter);
         Menu editions = new Menu("Edition");
-        renameselec.setOnAction(new EcouteurRenomer(monde));
+        renameselec.setOnAction(new EcouteurRenommer(monde));
         renameselec.setDisable(true);
         MenuItem edtGuichetnom = new MenuItem("Modifier le nom du guichet");
         MenuItem suprselec = new MenuItem("Supprimer la sélection");

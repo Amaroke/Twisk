@@ -9,7 +9,7 @@ import twisk.mondeIG.MondeIG;
 /**
  * Classe VueMondeIG.
  *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
 
@@ -31,6 +31,7 @@ public class VueMondeIG extends Pane implements Observateur {
         }
         this.setOnDragOver(new EcouteurDragOver());
         this.setOnDragDropped(new EcouteurDragDropped(m, this));
+        reagir();
     }
 
 
@@ -44,12 +45,11 @@ public class VueMondeIG extends Pane implements Observateur {
             VueArcIG a = new VueArcIG(m.getArc().get(i), m);
             this.getChildren().add(a);
         }
-
         for (EtapeIG e : m) {
             VueEtapeIG vue = new VueActiviteIG(m, e);
             this.getChildren().add(vue);
             for (int j = 0; j < 4; j++) {
-                VuePointDeControleIG pdc = new VuePointDeControleIG(m, e, e.getPdc(j));
+                VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
                 this.getChildren().add(pdc);
             }
         }

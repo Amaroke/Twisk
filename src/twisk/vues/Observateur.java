@@ -3,7 +3,7 @@ package twisk.vues;
 /**
  * Interface Observateur.
  *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
 

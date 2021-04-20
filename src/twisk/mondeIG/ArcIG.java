@@ -3,7 +3,7 @@ package twisk.mondeIG;
 /**
  * Classe ArcIG.
  *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach
  * @version 1.0
  */
 
@@ -20,7 +20,6 @@ public class ArcIG {
      */
     public ArcIG(PointDeControleIG p1, PointDeControleIG p2) {
         pos[0] = p1;
-
         pos[1] = p2;
         selectionne = false;
     }

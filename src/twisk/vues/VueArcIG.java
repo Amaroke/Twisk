@@ -12,13 +12,11 @@ import twisk.mondeIG.MondeIG;
 /**
  * Classe VueArcIG.
  *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
 
 public class VueArcIG extends Pane implements Observateur {
-    private final ArcIG arc;
-    private final MondeIG monde;
 
     /**
      * Constructeur VueArcIG.
@@ -27,8 +25,6 @@ public class VueArcIG extends Pane implements Observateur {
      * @param m   MondeIG
      */
     public VueArcIG(ArcIG arc, MondeIG m) {
-        this.monde = m;
-        this.arc = arc;
         Line l = new Line();
         l.setStrokeWidth(2);
         l.setOnMouseClicked(new EcouteurArc(m, arc));

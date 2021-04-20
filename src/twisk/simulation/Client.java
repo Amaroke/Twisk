@@ -9,12 +9,11 @@ import twisk.monde.Etape;
  * @version 1.0
  */
 
-
 public class Client {
-    private int numeroClient;
+
+    private final int numeroClient;
     private int rang;
     private Etape etape;
-
 
     /**
      * Constructeur Client
@@ -36,7 +35,6 @@ public class Client {
         this.rang = rang;
     }
 
-
     /**
      * Getter Numero Client
      * @return numeroClient
@@ -44,7 +42,6 @@ public class Client {
     public int getNumeroClient() {
         return numeroClient;
     }
-
 
     /**
      * Getter Rang

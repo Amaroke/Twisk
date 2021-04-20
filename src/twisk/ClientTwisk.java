@@ -23,9 +23,9 @@ public class ClientTwisk {
         // Premier Monde
         Monde monde = new Monde();
 
-        Activite zoo = new Activite("balade au zoo", 3, 1);
-        Guichet guichet = new Guichet("accès au toboggan", 2);
-        Activite tob = new ActiviteRestreinte("toboggan", 2, 1);
+        Activite zoo = new Activite("balade au zoo");
+        Guichet guichet = new Guichet("accès au toboggan");
+        Activite tob = new ActiviteRestreinte("toboggan");
 
         zoo.ajouterSuccesseur(guichet);
         guichet.ajouterSuccesseur(tob);

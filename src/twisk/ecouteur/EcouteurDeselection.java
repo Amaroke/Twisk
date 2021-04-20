@@ -7,11 +7,12 @@ import twisk.mondeIG.MondeIG;
 /**
  * Classe EcouteurDeselection.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurDeselection implements EventHandler<ActionEvent> {
+
     private final MondeIG monde;
 
     /**

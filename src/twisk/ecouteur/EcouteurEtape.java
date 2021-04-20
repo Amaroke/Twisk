@@ -8,23 +8,24 @@ import twisk.mondeIG.MondeIG;
 /**
  * Classe EcouteurEtape.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurEtape implements EventHandler<MouseEvent> {
+
     private final MondeIG monde;
     private final EtapeIG etape;
 
     /**
      * Constructeur EcouteurEtape.
      *
-     * @param e EtapeIG
-     * @param m MondeIG
+     * @param etape EtapeIG
+     * @param monde MondeIG
      */
-    public EcouteurEtape(EtapeIG e, MondeIG m) {
-        etape = e;
-        monde = m;
+    public EcouteurEtape(EtapeIG etape, MondeIG monde) {
+        this.etape = etape;
+        this.monde = monde;
     }
 
     /**

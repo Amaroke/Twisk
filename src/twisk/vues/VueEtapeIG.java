@@ -1,5 +1,6 @@
 package twisk.vues;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,10 +12,12 @@ import twisk.ecouteur.EcouteurEtape;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
+import java.util.Objects;
+
 /**
  * Classe FabriqueIdentifiant.
  *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
 
@@ -30,6 +33,7 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
      * @param etape EtapeIG
      */
     public VueEtapeIG(MondeIG monde, EtapeIG etape) {
+        setPadding(new Insets(3, 3, 3, 3));
         this.setPrefWidth(etape.getLargeur());
         this.setPrefHeight(etape.getHauteur());
         m = monde;
@@ -55,12 +59,12 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
         HBox entre_sortie = new HBox();
         if (this.getEtape().getEstUneEntre()) {
             Label open = new Label("");
-            open.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/twisk/ressources/images/enter.png"))));
+            open.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/enter.png")))));
             entre_sortie.getChildren().add(open);
         }
         if (this.getEtape().getEstUneSortie()) {
             Label close = new Label("");
-            close.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/twisk/ressources/images/exit.png"))));
+            close.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/exit.png")))));
             entre_sortie.getChildren().add(close);
         }
         entre_sortie.setAlignment(Pos.CENTER);

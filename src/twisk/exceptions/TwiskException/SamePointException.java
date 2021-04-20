@@ -3,8 +3,8 @@ package twisk.exceptions.TwiskException;
 /**
  * Exception SamePointException.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class SamePointException extends TwiskException {
@@ -13,6 +13,6 @@ public class SamePointException extends TwiskException {
      * Constucteur SamePointException
      */
     public SamePointException() {
-        super("Désolé mais vous ne pouvez pas creer une arc sur le même points/étape");
+        super("Impossible de lier deux points d'une même étape, ou deux points identiques.");
     }
 }

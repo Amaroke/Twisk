@@ -19,19 +19,21 @@ public class Activite extends Etape {
      */
     public Activite(String nom) {
         super(nom);
+        this.temps = 3; // Temps par défaut de 3.
+        this.ecartTemps = 1; // Ecart temps par défaut de 1.
     }
 
     /**
      * Constructeur d'activite avec son nom temps et écart temps.
      *
      * @param nom Nom de l'activité
-     * @param t   Temps d'attente dans l'activité
-     * @param e   EcartTemps de l'activité
+     * @param temps   Temps d'attente dans l'activité
+     * @param ecartTemps   EcartTemps de l'activité
      */
-    public Activite(String nom, int t, int e) {
+    public Activite(String nom, int temps, int ecartTemps) {
         super(nom);
-        this.temps = t;
-        this.ecartTemps = e;
+        this.temps = temps;
+        this.ecartTemps = ecartTemps;
     }
 
     /**

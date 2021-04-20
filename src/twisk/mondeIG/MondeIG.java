@@ -14,7 +14,7 @@ import java.util.Iterator;
 /**
  * Classe MondeIG.
  *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
 
@@ -27,14 +27,14 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     private final HashMap<String, EtapeIG> etape = new HashMap<>();
     private final ArrayList<EtapeIG> etapeEntre = new ArrayList<>(5);
     private final ArrayList<EtapeIG> etapeSortie = new ArrayList<>(5);
-    private final FabriqueIdentifiant fabriqueid = FabriqueIdentifiant.getInstance();
+    private final FabriqueIdentifiant fabriqueID = FabriqueIdentifiant.getInstance();
     private final TailleComposants composants = TailleComposants.getInstance();
 
     /**
      * Constructeur MondeIG.
      */
     public MondeIG() {
-        ActiviteIG activite = new ActiviteIG("Activite : " + 0, fabriqueid.getIdentifiantEtape(), composants.getVBoxLong(), composants.getVboxLarg());
+        ActiviteIG activite = new ActiviteIG("Activite : " + 0, fabriqueID.getIdentifiantEtape(), composants.getVBoxLong(), composants.getVBoxLarg());
         etape.put(activite.getIdentifiant(), activite);
     }
 
@@ -45,11 +45,14 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      */
     public void ajouter(String type) {
         if (type.equals("Activite")) {
-            String idf = fabriqueid.getIdentifiantEtape();
-            ActiviteIG a = new ActiviteIG("Activite : " + idf, idf, composants.getVBoxLong(), composants.getVboxLarg());
+            String idf = fabriqueID.getIdentifiantEtape();
+            ActiviteIG a = new ActiviteIG("Activite : " + idf, idf, composants.getVBoxLong(), composants.getVBoxLarg());
             etape.put(idf, a);
-        } else if(type.equals("Guichet")){
-
+        } else if (type.equals("Guichet")) {
+            // À REMPLACER PAR UN GUICHET
+            String idf = fabriqueID.getIdentifiantEtape();
+            ActiviteIG a = new ActiviteIG("Activite : " + idf, idf, composants.getVBoxLong(), composants.getVBoxLarg());
+            etape.put(idf, a);
         }
         notifierObservateur();
     }
@@ -115,14 +118,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
                 isIn = true;
             }
         }
-
         if (!isIn) {
             getSelectedArc().add(arcparam);
-            arcparam.setSelectionne();
         } else {
             getSelectedArc().remove(arcparam);
-            arcparam.setSelectionne();
         }
+        arcparam.setSelectionne();
         notifierObservateur();
     }
 
@@ -134,7 +135,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
             e.setSelectionne();
         }
         getSelectedEtape().clear();
-
         for (ArcIG arc : getSelectedArc()) {
             arc.setSelectionne();
         }
@@ -154,14 +154,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
                 isIn = true;
             }
         }
-
         if (!isIn) {
             getSelectedEtape().add(etapeparam);
-            etapeparam.setSelectionne();
         } else {
             getSelectedEtape().remove(etapeparam);
-            etapeparam.setSelectionne();
         }
+        etapeparam.setSelectionne();
         notifierObservateur();
     }
 
@@ -171,7 +169,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     public void gestionSuppresion() {
         Iterator<EtapeIG> ite = iterator();
         Iterator<ArcIG> iteArc = iterateurArc();
-
         while (ite.hasNext()) {
             EtapeIG etape = ite.next();
             if (etape.getSelectionne()) {
@@ -179,14 +176,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
                 ite.remove();
             }
         }
-
         while (iteArc.hasNext()) {
             ArcIG arc = iteArc.next();
             if (arc.getPoint(0).getEtape().getSelectionne() || arc.getPoint(1).getEtape().getSelectionne()) {
                 iteArc.remove();
             }
         }
-
         getSelectedEtape().clear();
         notifierObservateur();
     }
@@ -196,7 +191,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      */
     public void gestionSuppressionArc() {
         Iterator<ArcIG> iteArc = iterateurArc();
-
         while (iteArc.hasNext()) {
             ArcIG arc = iteArc.next();
             if (arc.getSelectionne()) {
@@ -331,30 +325,29 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      * Fonction modification du temps des etapes.
      *
      * @param temps Integer
-     * @param e EtapeIG
+     * @param etape EtapeIG
      * @throws TempsIncorrectException TempsIncorrectException
      */
-    public void modiftemps(Integer temps, EtapeIG e) throws TempsIncorrectException {
+    public void modiftemps(Integer temps, EtapeIG etape) throws TempsIncorrectException {
         if (temps <= 0) {
             throw new TempsIncorrectException();
         } else {
-            e.setTemps(temps);
+            etape.setTemps(temps);
         }
-
     }
 
     /**
      * Fonction modification de l'ecarttemps des etapes.
      *
      * @param etemps Integer
-     * @param e EtapeIG
+     * @param etape  EtapeIG
      * @throws EcartTempsException EcartTempsIncorrectException
      */
-    public void modifecarttemps(Integer etemps, EtapeIG e) throws EcartTempsException {
-        if (etemps <= 0 || etemps >= e.getTemps()) {
+    public void modifecarttemps(Integer etemps, EtapeIG etape) throws EcartTempsException {
+        if (etemps <= 0 || etemps >= etape.getTemps()) {
             throw new EcartTempsException();
         } else {
-            e.setEcarttemps(etemps);
+            etape.setEcartTemps(etemps);
         }
     }
 }

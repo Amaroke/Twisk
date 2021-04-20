@@ -5,7 +5,7 @@ import java.util.Iterator;
 /**
  * Classe abstraite EtapeIG.
  *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
 
@@ -17,10 +17,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     private boolean selectionne;
     private int posX;
     private int posY;
-    private boolean entre;
+    private boolean entree;
     private boolean sortie;
     private int temps;
-    private int ecarttemps;
+    private int ecartTemps;
     private PointDeControleIG[] pdc = new PointDeControleIG[4];
 
     /**
@@ -44,7 +44,6 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         pdc[2] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY() + getHauteur(), getIdentifiant() + "s", this);
         pdc[3] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2), getIdentifiant() + "e", this);
     }
-
 
 
     /**
@@ -77,10 +76,18 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
      *
      * @return int
      */
-    public int getTemps(){
+    public int getTemps() {
         return this.temps;
     }
 
+    /**
+     * Setter Temps.
+     *
+     * @param temps int
+     */
+    public void setTemps(int temps) {
+        this.temps = temps;
+    }
 
     /**
      * Getter Identifiant.
@@ -103,10 +110,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     /**
      * Setter Nom.
      *
-     * @param nnom String
+     * @param nom String
      */
-    public void setNom(String nnom) {
-        this.nom = nnom;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     /**
@@ -128,6 +135,15 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     }
 
     /**
+     * Setter PosX.
+     *
+     * @param posX int
+     */
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    /**
      * Getter largeur.
      *
      * @return int
@@ -136,35 +152,13 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         return largeur;
     }
 
-    /*
-    Partie Setter
-     */
-
-    /**
-     * Setter Temps.
-     *
-     * @param temps int
-     */
-    public void setTemps(int temps){
-        this.temps = temps;
-    }
-
     /**
      * Setter ecartemps.
      *
-     * @param etemps int
+     * @param ecartTemps int
      */
-    public void setEcarttemps(int etemps){
-        this.ecarttemps = etemps;
-    }
-
-    /**
-     * Setter PosX.
-     *
-     * @param posX int
-     */
-    public void setPosX(int posX) {
-        this.posX = posX;
+    public void setEcartTemps(int ecartTemps) {
+        this.ecartTemps = ecartTemps;
     }
 
     /**
@@ -189,7 +183,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
      * Setter entre.
      */
     public void setEstEntre() {
-        entre = !entre;
+        entree = !entree;
     }
 
     /**
@@ -219,12 +213,12 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     }
 
     /**
-     * Getter entre
+     * Getter entree
      *
      * @return boolean
      */
     public boolean getEstUneEntre() {
-        return this.entre;
+        return this.entree;
     }
 
     /**

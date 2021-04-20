@@ -7,14 +7,11 @@ import javafx.scene.input.TransferMode;
 /**
  * Classe EcouteurDragOver.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurDragOver implements EventHandler<DragEvent> {
-
-    public EcouteurDragOver() {
-    }
 
     /**
      * Fonction handle.

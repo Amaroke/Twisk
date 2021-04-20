@@ -2,8 +2,8 @@ package twisk.outils;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 /**
  * Classe KitC
@@ -14,8 +14,8 @@ import java.nio.file.Paths;
 
 public class KitC {
 
-    private FabriqueNumero f = FabriqueNumero.getInstance();
-    private final int num_lib = f.getNumlib();
+    private final FabriqueNumero f = FabriqueNumero.getInstance();
+    private final int num_lib = f.getNumLib();
 
 
     /**
@@ -31,11 +31,11 @@ public class KitC {
     public void creerEnvironnement() {
         try {
             // Création du répertoire twisk sous /tmp. Ne déclenche pas d’erreur si le répertoire existe déjà.
-            Path directories = Files.createDirectories(Paths.get("/tmp/twisk"));
+            Files.createDirectories(Paths.get("/tmp/twisk"));
             // Copie des deux fichiers programmeC.o et def.h depuis le projet sous /tmp/twisk.
             String[] liste = {"programmeC.o", "def.h", "codeNatif.o"};
             for (String nom : liste) {
-                InputStream source = getClass().getResource("/codeC/" + nom).openStream();
+                InputStream source = Objects.requireNonNull(getClass().getResource("/codeC/" + nom)).openStream();
                 File destination = new File("/tmp/twisk/" + nom);
                 copier(source, destination);
             }
@@ -71,7 +71,7 @@ public class KitC {
     public void creerFichier(String codeC) {
         try {
             // Création du fichier client.c sous /tmp/twisk. Ne déclenche pas d’erreur si le fichier existe déjà.
-            File chemin = new File("/tmp/twisk/client.c");
+            new File("/tmp/twisk/client.c");
             FileWriter flotFiltre = new FileWriter("/tmp/twisk/client.c");
             flotFiltre.write(codeC);
             flotFiltre.close();
@@ -125,7 +125,7 @@ public class KitC {
         }
     }
 
-    public int getNumLib(){
+    public int getNumLib() {
         return num_lib;
     }
 }

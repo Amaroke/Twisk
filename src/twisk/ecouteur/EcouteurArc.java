@@ -8,12 +8,12 @@ import twisk.mondeIG.MondeIG;
 /**
  * Classe EcouteurArc.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
-
 public class EcouteurArc implements EventHandler<MouseEvent> {
+
     private final MondeIG monde;
     private final ArcIG arc;
 
@@ -27,7 +27,6 @@ public class EcouteurArc implements EventHandler<MouseEvent> {
         this.monde = m;
         this.arc = arc;
     }
-
 
     /**
      * Fonction handle ecouteur.

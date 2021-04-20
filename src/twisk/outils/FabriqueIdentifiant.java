@@ -3,11 +3,12 @@ package twisk.outils;
 /**
  * Classe FabriqueIdentifiant.
  *
- * @author Lambert Calvin
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
 
 public class FabriqueIdentifiant {
+
     private static final FabriqueIdentifiant instance = new FabriqueIdentifiant();
     private int noEtape;
 
@@ -36,5 +37,4 @@ public class FabriqueIdentifiant {
         noEtape++;
         return String.valueOf(noEtape - 1);
     }
-
 }

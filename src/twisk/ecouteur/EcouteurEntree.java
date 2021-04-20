@@ -7,8 +7,8 @@ import twisk.mondeIG.MondeIG;
 /**
  * Classe EcouteurEntree.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurEntree implements EventHandler<ActionEvent> {
@@ -18,12 +18,11 @@ public class EcouteurEntree implements EventHandler<ActionEvent> {
     /**
      * Constructeur EcouteurEntre
      *
-     * @param m MondeIG
+     * @param monde MondeIG
      */
-    public EcouteurEntree(MondeIG m) {
-        this.monde = m;
+    public EcouteurEntree(MondeIG monde) {
+        this.monde = monde;
     }
-
 
     /**
      * Fonction handle

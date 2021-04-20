@@ -42,7 +42,7 @@ public class FabriqueNumero {
         return cptEtape - 1;
     }
 
-    public int getNumlib(){
+    public int getNumLib() {
         numlib++;
         return numlib - 1;
     }
@@ -54,7 +54,6 @@ public class FabriqueNumero {
      */
     public int getNumeroSemaphore() {
         cptSemaphore++;
-        System.out.println("fdp de merde" + (cptSemaphore-1));
         return cptSemaphore - 1;
     }
 

@@ -7,20 +7,21 @@ import twisk.mondeIG.MondeIG;
 /**
  * Classe EcouteurSupprimer.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurSupprimer implements EventHandler<ActionEvent> {
+
     private final MondeIG monde;
 
     /**
      * Constructeur EcouteurSupprimer.
      *
-     * @param m MondeIG
+     * @param monde MondeIG
      */
-    public EcouteurSupprimer(MondeIG m) {
-        this.monde = m;
+    public EcouteurSupprimer(MondeIG monde) {
+        this.monde = monde;
     }
 
     /**

@@ -21,6 +21,9 @@ public class Guichet extends Etape {
      */
     public Guichet(String nom) {
         super(nom);
+        this.nbJetons = 5; // 5 jetons par défaut
+        FabriqueNumero singleton = FabriqueNumero.getInstance();
+        this.semaphore = singleton.getNumeroSemaphore();
     }
 
     /**

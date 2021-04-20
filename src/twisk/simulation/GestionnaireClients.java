@@ -12,9 +12,8 @@ import java.util.Iterator;
  * @version 1.0
  */
 
-
 public class GestionnaireClients implements Iterable<Client> {
-    private ArrayList<Client> listeclient;
+    private final ArrayList<Client> listeClient;
 
     /**
      * Constructeur GestionnaireClients
@@ -22,7 +21,7 @@ public class GestionnaireClients implements Iterable<Client> {
      * @param nbClients int
      */
     public GestionnaireClients(int nbClients){
-        listeclient = new ArrayList<>(nbClients);
+        listeClient = new ArrayList<>(nbClients);
     }
 
     /**
@@ -32,7 +31,7 @@ public class GestionnaireClients implements Iterable<Client> {
      */
     public void setClients(int ... tabClients){
         for(int client : tabClients){
-            listeclient.add(new Client(client));
+            listeClient.add(new Client(client));
         }
     }
 
@@ -44,7 +43,7 @@ public class GestionnaireClients implements Iterable<Client> {
      * @param rang int
      */
     public void allerA(int numeroClient, Etape etape, int rang){
-        for(Client client: listeclient){
+        for(Client client: listeClient){
             if(client.getNumeroClient() == numeroClient){
                 client.allerA(etape,rang);
             }
@@ -55,7 +54,7 @@ public class GestionnaireClients implements Iterable<Client> {
      * Fonction de reset.
      */
     void reset(){
-        listeclient.clear();
+        listeClient.clear();
     }
 
     /**
@@ -65,7 +64,7 @@ public class GestionnaireClients implements Iterable<Client> {
      */
     @Override
     public Iterator<Client> iterator() {
-        return listeclient.iterator();
+        return listeClient.iterator();
     }
 
     /**
@@ -73,7 +72,7 @@ public class GestionnaireClients implements Iterable<Client> {
      *
      * @return ArrayList<Client>
      */
-    public ArrayList<Client> getListeclient() {
-        return listeclient;
+    public ArrayList<Client> getListeClient() {
+        return listeClient;
     }
 }

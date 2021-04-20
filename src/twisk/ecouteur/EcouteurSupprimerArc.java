@@ -7,8 +7,8 @@ import twisk.mondeIG.MondeIG;
 /**
  * Classe EcouteurSupprimerArc.
  *
- * @author Lambert Calvin
- * @version 1.0
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.1
  */
 
 public class EcouteurSupprimerArc implements EventHandler<ActionEvent> {
@@ -17,12 +17,11 @@ public class EcouteurSupprimerArc implements EventHandler<ActionEvent> {
     /**
      * Constructeur EcouteurSupprimerArc.
      *
-     * @param m MondeIG
+     * @param monde MondeIG
      */
-    public EcouteurSupprimerArc(MondeIG m) {
-        this.monde = m;
+    public EcouteurSupprimerArc(MondeIG monde) {
+        this.monde = monde;
     }
-
 
     /**
      * Fonction handle.
