@@ -1,0 +1,37 @@
+.scene{
+    -fx-font-family: Poppins;
+    -font-color: #00B1C3;
+}
+
+#pdc {
+    -fx-fill: #00B1C3;
+}
+
+#pdc:hover {
+    -fx-fill: #D2141A;
+    -fx-scale-x: 1.4;
+    -fx-scale-y: 1.4;
+}
+
+#plusbutton {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.backetape {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, #00B1C3, 10,0,0,0);
+}
+
+#hbox {
+    -fx-border-color: #00B1C3;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+}
+
+.selected {
+    -fx-background-color: white;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, #d41717, 10,0,0,0);
+}
