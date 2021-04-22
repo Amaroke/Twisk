@@ -2,6 +2,8 @@ package twisk;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import twisk.mondeIG.MondeIG;
@@ -31,7 +33,7 @@ public class MainTwisk extends Application {
         root.getStylesheets().add(Objects.requireNonNull(getClass().getResource("style.css")).toString());
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
-        //primaryStage.getIcons().add(new Image("/ressources/images/twiskimg.png"));
+        primaryStage.getIcons().add(new Image("twisk/ressources/images/twiskimg.png"));
         primaryStage.setTitle("TwiskIG");
         primaryStage.show();
     }

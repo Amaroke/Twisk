@@ -48,6 +48,7 @@ public class EcouteurTemps implements EventHandler<ActionEvent> {
         try {
             if (result.isPresent()) {
                 monde.modiftemps(Integer.valueOf(result.get()), monde.getSelectedEtape().get(0));
+                monde.notifierObservateur();
             }
         } catch (NoSuchElementException | NumberFormatException | TempsIncorrectException e) {
             Alert a = new Alert(Alert.AlertType.ERROR);

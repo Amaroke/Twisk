@@ -31,14 +31,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     private final TailleComposants composants = TailleComposants.getInstance();
 
     /**
-     * Constructeur MondeIG.
-     */
-    public MondeIG() {
-        ActiviteIG activite = new ActiviteIG("Activite : " + 0, fabriqueID.getIdentifiantEtape(), composants.getVBoxLong(), composants.getVBoxLarg());
-        etape.put(activite.getIdentifiant(), activite);
-    }
-
-    /**
      * Fonction ajout d'activité.
      *
      * @param type String

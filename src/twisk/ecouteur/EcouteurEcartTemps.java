@@ -48,6 +48,7 @@ public class EcouteurEcartTemps implements EventHandler<ActionEvent> {
         try {
             if (result.isPresent()) {
                 monde.modifecarttemps(Integer.valueOf(result.get()), monde.getSelectedEtape().get(0));
+                monde.notifierObservateur();
             }
         } catch (NoSuchElementException | NumberFormatException | EcartTempsException e) {
             Alert a = new Alert(Alert.AlertType.ERROR);
