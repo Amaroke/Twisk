@@ -51,10 +51,10 @@ public class VueMondeIG extends Pane implements Observateur {
 
             //PROBABLEMENT DEGEULASSE
 
-            if (e instanceof ActiviteIG) {
+            if (e.estUneActivite()) {
                 VueActiviteIG vue = new VueActiviteIG(m, e);
                 this.getChildren().add(vue);
-            } else if (e instanceof GuichetIG) {
+            } else if (e.estUnGuichet()) {
                 VueGuichetIG vue = new VueGuichetIG(m, e);
                 this.getChildren().add(vue);
             }

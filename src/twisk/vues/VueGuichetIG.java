@@ -32,7 +32,7 @@ public class VueGuichetIG extends VueEtapeIG implements Observateur {
     public void construireFenetre() {
         HBox hbox = new HBox();
         hbox.setPrefSize(this.e.getLargeur(), this.e.getHauteur());
-        hbox.setId("hboxguichet"); //TRUC UN PEURANDOM
+        hbox.setId("hboxguichet");
         GuichetIG guichet = (GuichetIG) getEtape();
         l = new Label(guichet.getNom() + ", NbJetons : " + guichet.getNbJetons());
         this.getChildren().addAll(this.l, hbox);

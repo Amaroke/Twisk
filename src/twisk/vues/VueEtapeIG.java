@@ -39,9 +39,12 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
         m = monde;
         e = etape;
         this.setId(e.getIdentifiant());
-        if (!e.getSelectionne()) {
+        if (!e.getSelectionne() && e.estUneActivite()) {
             this.getStyleClass().add("backetape");
-        } else {
+        }else if (!e.getSelectionne() && e.estUnGuichet()){
+            this.getStyleClass().add("backguichet");
+        }
+        else {
             this.getStyleClass().add("selected");
         }
         constructionLogo();

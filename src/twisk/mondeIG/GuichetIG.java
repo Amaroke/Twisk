@@ -27,4 +27,10 @@ public class GuichetIG extends EtapeIG {
     public int getNbJetons() {
         return nbJetons;
     }
+
+
+    @Override
+    public boolean estUnGuichet() {
+        return true;
+    }
 }
