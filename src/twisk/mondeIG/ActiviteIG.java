@@ -9,6 +9,9 @@ package twisk.mondeIG;
 
 public class ActiviteIG extends EtapeIG {
 
+    private int temps;
+    private int ecartTemps;
+
     /**
      * Constructeur ActiviteIG.
      *
@@ -24,5 +27,40 @@ public class ActiviteIG extends EtapeIG {
     @Override
     public boolean estUneActivite() {
         return true;
+    }
+
+    /**
+     * Getter temps.
+     *
+     * @return int
+     */
+    public int getTemps() {
+        return this.temps;
+    }
+
+    /**
+     * Setter Temps.
+     *
+     * @param temps int
+     */
+    public void setTemps(int temps) {
+        this.temps = temps;
+    }
+
+    /**
+     * Getter ecart temps
+     * @return int
+     */
+    public int getEcartTemps() {
+        return ecartTemps;
+    }
+
+    /**
+     * Setter ecartemps.
+     *
+     * @param ecartTemps int
+     */
+    public void setEcartTemps(int ecartTemps) {
+        this.ecartTemps = ecartTemps;
     }
 }

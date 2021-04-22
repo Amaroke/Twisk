@@ -38,7 +38,7 @@ public class ClientTwisk {
         try {
             ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
             Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
-            Object oSim = classSim.newInstance();
+            Object oSim = classSim.getDeclaredConstructor().newInstance();
             Method msetNbClients = classSim.getDeclaredMethod("setNbClients", int.class);
             Method msimuler = classSim.getDeclaredMethod("simuler", twisk.monde.Monde.class);
             msetNbClients.invoke(oSim, 5);
@@ -70,7 +70,7 @@ public class ClientTwisk {
         try {
             ClassLoaderPerso ClassLoaderBis = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
             Class<?> classSimBis = ClassLoaderBis.loadClass("twisk.simulation.Simulation");
-            Object oSimBis = classSimBis.newInstance();
+            Object oSimBis = classSimBis.getDeclaredConstructor().newInstance();
             Method msetNbClientsBis = classSimBis.getDeclaredMethod("setNbClients", int.class);
             Method msimulerBis = classSimBis.getDeclaredMethod("simuler", twisk.monde.Monde.class);
             msetNbClientsBis.invoke(oSimBis, 5);

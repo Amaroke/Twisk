@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.util.Duration;
 import twisk.exceptions.TwiskException.TempsIncorrectException;
+import twisk.mondeIG.ActiviteIG;
 import twisk.mondeIG.MondeIG;
 
 import java.util.NoSuchElementException;
@@ -47,7 +48,7 @@ public class EcouteurTemps implements EventHandler<ActionEvent> {
 
         try {
             if (result.isPresent()) {
-                monde.modiftemps(Integer.valueOf(result.get()), monde.getSelectedEtape().get(0));
+                monde.modiftemps(Integer.valueOf(result.get()), (ActiviteIG) monde.getSelectedEtape().get(0));
                 monde.notifierObservateur();
             }
         } catch (NoSuchElementException | NumberFormatException | TempsIncorrectException e) {

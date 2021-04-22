@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import javafx.util.Duration;
 import twisk.exceptions.TwiskException.EcartTempsException;
+import twisk.mondeIG.ActiviteIG;
 import twisk.mondeIG.MondeIG;
 
 import java.util.NoSuchElementException;
@@ -47,7 +48,7 @@ public class EcouteurEcartTemps implements EventHandler<ActionEvent> {
 
         try {
             if (result.isPresent()) {
-                monde.modifecarttemps(Integer.valueOf(result.get()), monde.getSelectedEtape().get(0));
+                monde.modifecarttemps(Integer.valueOf(result.get()), (ActiviteIG) monde.getSelectedEtape().get(0));
                 monde.notifierObservateur();
             }
         } catch (NoSuchElementException | NumberFormatException | EcartTempsException e) {

@@ -5,6 +5,7 @@ import twisk.exceptions.TwiskException.AlreadyExistException;
 import twisk.exceptions.TwiskException.EcartTempsException;
 import twisk.exceptions.TwiskException.SamePointException;
 import twisk.exceptions.TwiskException.TempsIncorrectException;
+import twisk.monde.Activite;
 import twisk.outils.FabriqueIdentifiant;
 
 import java.util.ArrayList;
@@ -319,7 +320,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      * @param etape EtapeIG
      * @throws TempsIncorrectException TempsIncorrectException
      */
-    public void modiftemps(Integer temps, EtapeIG etape) throws TempsIncorrectException {
+    public void modiftemps(Integer temps, ActiviteIG etape) throws TempsIncorrectException {
         if (temps <= 0) {
             throw new TempsIncorrectException();
         } else {
@@ -334,7 +335,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      * @param etape  EtapeIG
      * @throws EcartTempsException EcartTempsIncorrectException
      */
-    public void modifecarttemps(Integer etemps, EtapeIG etape) throws EcartTempsException {
+    public void modifecarttemps(Integer etemps, ActiviteIG etape) throws EcartTempsException {
         if (etemps <= 0 || etemps >= etape.getTemps()) {
             throw new EcartTempsException();
         } else {

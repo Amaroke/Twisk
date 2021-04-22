@@ -19,8 +19,6 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     private int posY;
     private boolean entree;
     private boolean sortie;
-    private int temps;
-    private int ecartTemps;
     private PointDeControleIG[] pdc = new PointDeControleIG[4];
 
     /**
@@ -68,25 +66,6 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
 
         pdc[3].setPosX(getPosX() + getLargeur());
         pdc[3].setPosY(getPosY() + (getHauteur() / 2));
-    }
-
-
-    /**
-     * Getter temps.
-     *
-     * @return int
-     */
-    public int getTemps() {
-        return this.temps;
-    }
-
-    /**
-     * Setter Temps.
-     *
-     * @param temps int
-     */
-    public void setTemps(int temps) {
-        this.temps = temps;
     }
 
     /**
@@ -150,19 +129,6 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
      */
     public int getLargeur() {
         return largeur;
-    }
-
-    public int getEcartTemps() {
-        return ecartTemps;
-    }
-
-    /**
-     * Setter ecartemps.
-     *
-     * @param ecartTemps int
-     */
-    public void setEcartTemps(int ecartTemps) {
-        this.ecartTemps = ecartTemps;
     }
 
     /**
