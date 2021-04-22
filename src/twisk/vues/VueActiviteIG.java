@@ -34,7 +34,7 @@ public class VueActiviteIG extends VueEtapeIG implements Observateur {
         hbox.setPrefSize(this.e.getLargeur(), this.e.getHauteur());
         hbox.setId("hbox");
         ActiviteIG activite = (ActiviteIG) getEtape();
-        l = new Label(activite.getNom() + ", Temps : " + activite.getTemps() + " +/- " + activite.getEcartTemps());
+        l = new Label(activite.getNom() + ", Temps : " + activite.getTemps() + "±" + activite.getEcartTemps());
         this.getChildren().addAll(this.l, hbox);
     }
 

@@ -104,10 +104,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      */
     public void gestionArc(ArcIG arcparam) {
         boolean isIn = false;
-        for (ArcIG a : getSelectedArc()) {
-            if (a == arcparam) {
+        int i = 0;
+        while (i < getSelectedArc().size() && !isIn) {
+            if (getSelectedArc().get(i) == arcparam) {
                 isIn = true;
             }
+            i++;
         }
         if (!isIn) {
             getSelectedArc().add(arcparam);
@@ -140,10 +142,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      */
     public void gestionEtape(EtapeIG etapeparam) {
         boolean isIn = false;
-        for (EtapeIG e : getSelectedEtape()) {
-            if (e.getIdentifiant().equals(etapeparam.getIdentifiant())) {
+        int i = 0;
+        while ( i < this.getSelectedEtape().size() && !isIn) {
+            if (getSelectedEtape().get(i).getIdentifiant().equals(etapeparam.getIdentifiant())) {
                 isIn = true;
             }
+            i++;
         }
         if (!isIn) {
             getSelectedEtape().add(etapeparam);
@@ -197,11 +201,13 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      */
     public void gestionEntre() {
         boolean flag = false;
+        int i = 0;
         for (EtapeIG e : getSelectedEtape()) {
-            for (EtapeIG entre : getEtapeEntre()) {
-                if (e == entre) {
+            while ( i < getEtapeEntre().size() && !flag) {
+                if (e == getEtape().get(String.valueOf(i))) {
                     flag = true;
                 }
+                i++;
             }
             if (flag) {
                 getEtapeEntre().remove(e);
@@ -221,11 +227,13 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      */
     public void gestionSortie() {
         boolean flag = false;
+        int i = 0;
         for (EtapeIG e : getSelectedEtape()) {
-            for (EtapeIG sortie : getEtapeSortie()) {
-                if (e == sortie) {
+            while (i < getEtapeSortie().size() && !flag) {
+                if (e == getEtapeSortie().get(i)) {
                     flag = true;
                 }
+                i++;
             }
             if (flag) {
                 getEtapeSortie().remove(e);
