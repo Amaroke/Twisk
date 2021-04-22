@@ -39,11 +39,14 @@ public class VueOutils extends TilePane implements Observateur {
         b.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/plus.png")), 50, 50, true, true)));
         b.setTooltip(tooltip);
         b.setOnAction(actionEvent -> m.ajouter("Activite"));
-        Tooltip tooltipb = new Tooltip("Permet d'ajouter un guichet dans le monde");
+
+        Tooltip tooltipGuichet = new Tooltip("Permet d'ajouter un guichet dans le monde");
         Button bguichet = new Button("");
         bguichet.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/guichet.png")), 50, 50, true, true)));
-        bguichet.setTooltip(tooltipb);
+        bguichet.setTooltip(tooltipGuichet);
         bguichet.setId("plusbutton");
+        bguichet.setOnAction(actionEvent -> m.ajouter("Guichet"));
+
         this.getChildren().addAll(b, bguichet);
     }
 

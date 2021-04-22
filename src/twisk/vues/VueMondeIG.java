@@ -3,7 +3,9 @@ package twisk.vues;
 import javafx.scene.layout.Pane;
 import twisk.ecouteur.EcouteurDragDropped;
 import twisk.ecouteur.EcouteurDragOver;
+import twisk.mondeIG.ActiviteIG;
 import twisk.mondeIG.EtapeIG;
+import twisk.mondeIG.GuichetIG;
 import twisk.mondeIG.MondeIG;
 
 /**
@@ -46,8 +48,17 @@ public class VueMondeIG extends Pane implements Observateur {
             this.getChildren().add(a);
         }
         for (EtapeIG e : m) {
-            VueEtapeIG vue = new VueActiviteIG(m, e);
-            this.getChildren().add(vue);
+
+            //PROBABLEMENT DEGEULASSE
+
+            if (e instanceof ActiviteIG) {
+                VueActiviteIG vue = new VueActiviteIG(m, e);
+                this.getChildren().add(vue);
+            } else if (e instanceof GuichetIG) {
+                VueGuichetIG vue = new VueGuichetIG(m, e);
+                this.getChildren().add(vue);
+            }
+
             for (int j = 0; j < 4; j++) {
                 VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
                 this.getChildren().add(pdc);

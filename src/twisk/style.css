@@ -30,6 +30,12 @@
     -fx-background-radius: 3px, 3px, 2px, 1px;
 }
 
+#hboxguichet {
+    -fx-border-color: #00FF00;
+    -fx-background-insets: 0 0 -1 0, 0, 1, 2;
+    -fx-background-radius: 3px, 3px, 2px, 1px;
+}
+
 .selected {
     -fx-background-color: white;
     -fx-background-radius: 6;

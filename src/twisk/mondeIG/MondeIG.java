@@ -46,12 +46,11 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     public void ajouter(String type) {
         if (type.equals("Activite")) {
             String idf = fabriqueID.getIdentifiantEtape();
-            ActiviteIG a = new ActiviteIG("Activite : " + idf, idf, composants.getVBoxLong(), composants.getVBoxLarg());
+            ActiviteIG a = new ActiviteIG(idf + " : Activite", idf, composants.getVBoxLong(), composants.getVBoxLarg());
             etape.put(idf, a);
         } else if (type.equals("Guichet")) {
-            // À REMPLACER PAR UN GUICHET
             String idf = fabriqueID.getIdentifiantEtape();
-            ActiviteIG a = new ActiviteIG("Activite : " + idf, idf, composants.getVBoxLong(), composants.getVBoxLarg());
+            GuichetIG a = new GuichetIG(idf + " : Guichet", idf, composants.getVBoxLong(), composants.getVBoxLarg(), 5);
             etape.put(idf, a);
         }
         notifierObservateur();

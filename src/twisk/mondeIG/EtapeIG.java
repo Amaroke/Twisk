@@ -152,6 +152,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         return largeur;
     }
 
+    public int getEcartTemps() {
+        return ecartTemps;
+    }
+
     /**
      * Setter ecartemps.
      *

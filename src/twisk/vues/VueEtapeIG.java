@@ -38,7 +38,6 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
         this.setPrefHeight(etape.getHauteur());
         m = monde;
         e = etape;
-        l = new Label(etape.getNom());
         this.setId(e.getIdentifiant());
         if (!e.getSelectionne()) {
             this.getStyleClass().add("backetape");
@@ -50,7 +49,6 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
         this.setOnMouseClicked(new EcouteurEtape(e, m));
         this.setOnDragDetected(new EcouteurDragDetected(this));
     }
-
 
     /**
      * Fonction construction graphique des entrés/sorties du monde
@@ -70,7 +68,6 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
         entre_sortie.setAlignment(Pos.CENTER);
         this.getChildren().add(entre_sortie);
     }
-
 
     /**
      * Getter etape.

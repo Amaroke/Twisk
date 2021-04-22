@@ -1,6 +1,8 @@
 package twisk.vues;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import twisk.mondeIG.ActiviteIG;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
@@ -31,6 +33,8 @@ public class VueActiviteIG extends VueEtapeIG implements Observateur {
         HBox hbox = new HBox();
         hbox.setPrefSize(this.e.getLargeur(), this.e.getHauteur());
         hbox.setId("hbox");
+        ActiviteIG activite = (ActiviteIG) getEtape();
+        l = new Label(activite.getNom() + ", Temps : " + activite.getTemps() + " +/- " + activite.getEcartTemps());
         this.getChildren().addAll(this.l, hbox);
     }
 
