@@ -37,10 +37,10 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         this.hauteur = haut;
         this.posX = (int) (Math.random() * (1000 - larg));
         this.posY = (int) (Math.random() * (700 - haut));
-        pdc[0] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY(), getIdentifiant() + "n", this);
-        pdc[1] = new PointDeControleIG(getPosX(), getPosY() + (getHauteur() / 2), getIdentifiant() + "o", this);
-        pdc[2] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY() + getHauteur(), getIdentifiant() + "s", this);
-        pdc[3] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2), getIdentifiant() + "e", this);
+        pdc[0] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY(), this);
+        pdc[1] = new PointDeControleIG(getPosX(), getPosY() + (getHauteur() / 2), this);
+        pdc[2] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY() + getHauteur(), this);
+        pdc[3] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2), this);
     }
 
 

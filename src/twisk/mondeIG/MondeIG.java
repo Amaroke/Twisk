@@ -5,7 +5,6 @@ import twisk.exceptions.TwiskException.AlreadyExistException;
 import twisk.exceptions.TwiskException.EcartTempsException;
 import twisk.exceptions.TwiskException.SamePointException;
 import twisk.exceptions.TwiskException.TempsIncorrectException;
-import twisk.monde.Activite;
 import twisk.outils.FabriqueIdentifiant;
 
 import java.util.ArrayList;
@@ -341,5 +340,9 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         } else {
             etape.setEcartTemps(etemps);
         }
+    }
+
+    public void modifNbJetons(Integer nb, GuichetIG etape) {
+        etape.setNbJetons(nb);
     }
 }

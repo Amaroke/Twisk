@@ -11,8 +11,8 @@ import twisk.outils.FabriqueNumero;
 
 public class Guichet extends Etape {
 
-    private int nbJetons;
-    private int semaphore;
+    private final int nbJetons;
+    private final int semaphore;
 
     /**
      * Constructeur de guichet.

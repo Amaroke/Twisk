@@ -9,7 +9,6 @@ package twisk.mondeIG;
 
 public class PointDeControleIG {
 
-    private final String identifiant;
     private final EtapeIG etape;
     private int posX;
     private int posY;
@@ -19,13 +18,11 @@ public class PointDeControleIG {
      *
      * @param posX int
      * @param posY int
-     * @param id   String
      * @param e    EtapeIG
      */
-    public PointDeControleIG(int posX, int posY, String id, EtapeIG e) {
+    public PointDeControleIG(int posX, int posY, EtapeIG e) {
         this.posX = posX;
         this.posY = posY;
-        identifiant = id;
         etape = e;
     }
 

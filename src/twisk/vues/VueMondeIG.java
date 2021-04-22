@@ -3,9 +3,7 @@ package twisk.vues;
 import javafx.scene.layout.Pane;
 import twisk.ecouteur.EcouteurDragDropped;
 import twisk.ecouteur.EcouteurDragOver;
-import twisk.mondeIG.ActiviteIG;
 import twisk.mondeIG.EtapeIG;
-import twisk.mondeIG.GuichetIG;
 import twisk.mondeIG.MondeIG;
 
 /**
