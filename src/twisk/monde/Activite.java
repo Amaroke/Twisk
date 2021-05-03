@@ -26,9 +26,9 @@ public class Activite extends Etape {
     /**
      * Constructeur d'activite avec son nom temps et écart temps.
      *
-     * @param nom Nom de l'activité
-     * @param temps   Temps d'attente dans l'activité
-     * @param ecartTemps   EcartTemps de l'activité
+     * @param nom        Nom de l'activité
+     * @param temps      Temps d'attente dans l'activité
+     * @param ecartTemps EcartTemps de l'activité
      */
     public Activite(String nom, int temps, int ecartTemps) {
         super(nom);
@@ -53,8 +53,13 @@ public class Activite extends Etape {
      */
     @Override
     public String toC() {
-        return "delai(" + getTemps() + "," + getEcartTemps() + ");\n" +
-                "transfert(" + getNum() + "," + getSuivant().getNum() + ");\n" + getSuivant().toC();
+        StringBuilder strC = new StringBuilder();
+        strC.append("delai(").append(getTemps()).append(",").append(getEcartTemps()).append(");\n").append("int nb = (int)((rand()/(float) RAND_MAX)*").append(getGestionnaireSuccesseurs().nbEtapes()).append(");\n").append("switch(nb){\n");
+                for(int i = 0; i < getGestionnaireSuccesseurs().nbEtapes(); ++i) {
+                    strC.append("case ").append(i).append(": {").append("transfert(").append(getNum()).append(",").append(getGestionnaireSuccesseurs().getEtapes().get(i).getNum()).append(");\n").append(getGestionnaireSuccesseurs().getEtapes().get(i).toC()).append("break;}");
+                }
+                strC.append("}");
+        return strC.toString();
     }
 
     /**

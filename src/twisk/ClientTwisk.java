@@ -24,16 +24,15 @@ public class ClientTwisk {
         Monde monde = new Monde();
 
         Activite zoo = new Activite("balade au zoo");
-        Guichet guichet = new Guichet("accès au toboggan");
-        Activite tob = new ActiviteRestreinte("toboggan");
+        Activite zoo3 = new Activite("balade au zoo3");
+        Activite zooLeRemake = new Activite("balade au zooLeRemake");
 
-        zoo.ajouterSuccesseur(guichet);
-        guichet.ajouterSuccesseur(tob);
+        zoo.ajouterSuccesseur(zoo3, zooLeRemake);
 
-        monde.ajouter(zoo, guichet, tob);
+        monde.ajouter(zoo, zoo3, zooLeRemake);
 
         monde.aCommeEntree(zoo);
-        monde.aCommeSortie(tob);
+        monde.aCommeSortie(zoo3, zooLeRemake);
 
         try {
             ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
@@ -46,7 +45,6 @@ public class ClientTwisk {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
-
 
         // Deuxième monde
         Monde monde2 = new Monde();
@@ -79,4 +77,5 @@ public class ClientTwisk {
             e.printStackTrace();
         }
     }
+
 }

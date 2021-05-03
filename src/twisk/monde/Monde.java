@@ -91,8 +91,10 @@ public class Monde implements Iterable<Etape> {
         StringBuilder s = new StringBuilder();
         s.append("#include <stdlib.h>\n" +
                 "#include <stdio.h>\n" +
-                "#include \"def.h\" \n \n" + "void simulation(int ids)" +
-                "{ \n");
+                "#include <time.h>\n" +
+                "#include \"def.h\" \n \n" +
+                "void simulation(int ids)" +
+                "{\n srand(time(NULL)  + getpid());\n");
         s.append(getSasEntree().toC());
         s.append("}");
         return s;

@@ -13,7 +13,7 @@ import java.util.Iterator;
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
-
+@SuppressWarnings({"BusyWait", "unused"})
 public class Simulation implements Iterable<Client> {
 
     private GestionnaireClients gestionnaireClients;

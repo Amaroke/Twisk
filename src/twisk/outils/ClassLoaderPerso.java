@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+@SuppressWarnings("deprecation")
 public class ClassLoaderPerso extends ClassLoader {
 
     public ClassLoaderPerso(ClassLoader parent) {
@@ -17,7 +18,6 @@ public class ClassLoaderPerso extends ClassLoader {
      *
      * @param name nom complétement spécifié de la classe à charger
      * @return la classe chargée
-     * @throws ClassNotFoundException
      */
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
@@ -32,12 +32,11 @@ public class ClassLoaderPerso extends ClassLoader {
      *
      * @param name nom du fichier .class
      * @return la classe chargée
-     * @throws ClassNotFoundException
      */
-    private Class<?> getClass(String name) throws ClassNotFoundException {
+    private Class<?> getClass(String name) {
         String file = name.replace('.', File.separatorChar) + ".class";
 
-        byte[] byteArr = null;
+        byte[] byteArr;
         try {
             // Chargement de byte code du fichier de la classe
             byteArr = loadClassData(file);
@@ -57,10 +56,10 @@ public class ClassLoaderPerso extends ClassLoader {
      *
      * @param name nom du fichier .class
      * @return tableau de bytes
-     * @throws IOException
      */
     private byte[] loadClassData(String name) throws IOException {
         InputStream stream = getClass().getClassLoader().getResourceAsStream(name);
+        assert stream != null;
         int size = stream.available();
         byte[] buff = new byte[size];
         DataInputStream in = new DataInputStream(stream);
