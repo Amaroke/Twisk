@@ -110,7 +110,6 @@ class EtapeTest {
 
     @Test
     void getNum() {
-        System.out.println(ar1.getNum());
         assertEquals(ar1.getNum(), 0);
         assertEquals(ar2.getNum(), 1);
         assertEquals(a1.getNum(), 2);
@@ -121,16 +120,4 @@ class EtapeTest {
         assertEquals(ss.getNum(), 7);
     }
 
-    @Test
-    void toC() {
-        se.ajouterSuccesseur(ar1);
-        ar1.ajouterSuccesseur(ar2);
-        ar2.ajouterSuccesseur(a1);
-        a1.ajouterSuccesseur(a2);
-        a2.ajouterSuccesseur(g1);
-        g1.ajouterSuccesseur(g2);
-        g2.ajouterSuccesseur(ss);
-        ar2.ajouterSuccesseur(ss);
-        assertEquals(se.toC(), "entrer(6); \ndelai(0,0); \ntransfert(6,0);\ndelai(0,0);\ntransfert(0,1);\ndelai(5,5);\ntransfert(1,2);\ndelai(0,0);\ntransfert(2,3);\ndelai(5,5);\ntransfert(3,4);\nP(0,0); \ntransfert(4,5); \nV(0,0);\nP(1,5); \ntransfert(5,7); \nV(1,5);\n");
-    }
 }

@@ -92,9 +92,13 @@ public class Monde implements Iterable<Etape> {
         s.append("#include <stdlib.h>\n" +
                 "#include <stdio.h>\n" +
                 "#include <time.h>\n" +
-                "#include \"def.h\" \n \n" +
-                "void simulation(int ids)" +
-                "{\n srand(time(NULL)  + getpid());\n");
+                "#include \"def.h\" \n \n");
+        for (Etape e : getGestionnaireEtapes()) {
+            s.append("#define ").append(e.getNom().replaceAll("\\s+", "")).append(" ").append(e.getNum()).append("\n");
+        }
+        s.append(
+                "\nvoid simulation(int ids) " +
+                        "{\nsrand(time(NULL)  + getpid());\n");
         s.append(getSasEntree().toC());
         s.append("}");
         return s;

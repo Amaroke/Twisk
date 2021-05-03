@@ -143,7 +143,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     public void gestionEtape(EtapeIG etapeparam) {
         boolean isIn = false;
         int i = 0;
-        while ( i < this.getSelectedEtape().size() && !isIn) {
+        while (i < this.getSelectedEtape().size() && !isIn) {
             if (getSelectedEtape().get(i).getIdentifiant().equals(etapeparam.getIdentifiant())) {
                 isIn = true;
             }
@@ -203,7 +203,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         boolean flag = false;
         int i = 0;
         for (EtapeIG e : getSelectedEtape()) {
-            while ( i < getEtapeEntre().size() && !flag) {
+            while (i < getEtapeEntre().size() && !flag) {
                 if (e == getEtape().get(String.valueOf(i))) {
                     flag = true;
                 }

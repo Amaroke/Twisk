@@ -50,7 +50,7 @@ public class ClientTwisk {
         Monde monde2 = new Monde();
 
         Activite zoo2 = new Activite("balade au zoo", 3, 1);
-        Guichet guichet2 = new Guichet("accès au toboggan", 2);
+        Guichet guichet2 = new Guichet("acces au toboggan", 2);
         Activite tob2 = new ActiviteRestreinte("toboggan", 2, 1);
         Activite tourniquet = new Activite("tourniquet", 3, 2);
         Activite parachute = new Activite("parachute", 4, 1);

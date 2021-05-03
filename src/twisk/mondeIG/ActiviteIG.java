@@ -49,6 +49,7 @@ public class ActiviteIG extends EtapeIG {
 
     /**
      * Getter ecart temps
+     *
      * @return int
      */
     public int getEcartTemps() {

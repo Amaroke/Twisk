@@ -66,8 +66,4 @@ class MondeTest {
         assertEquals(2, m2.nbGuichets());
     }
 
-    @Test
-    void toC() {
-        assertEquals(m3.toC().toString(), "#include <stdlib.h>\n#include <stdio.h>\n#include \"def.h\" \n \nvoid simulation(int ids){ \nentrer(70); \ndelai(0,0); \ntransfert(70,72);\ndelai(0,0);\ntransfert(72,71);\n}");
-    }
 }

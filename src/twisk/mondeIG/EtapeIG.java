@@ -231,7 +231,11 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     }
 
 
-    public boolean estUneActivite() { return false;}
+    public boolean estUneActivite() {
+        return false;
+    }
 
-    public boolean estUnGuichet() { return false; }
+    public boolean estUnGuichet() {
+        return false;
+    }
 }

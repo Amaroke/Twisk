@@ -31,6 +31,12 @@ public class ActiviteRestreinte extends Activite {
 
     @Override
     public String toC() {
-        return "transfert(" + getNum() + "," + getSuivant().getNum() + ");\n" + getSuivant().toC();
+        StringBuilder strC = new StringBuilder();
+        strC.append("delai(").append(getTemps()).append(",").append(getEcartTemps()).append(");\n").append("int nb = (int)((rand()/(float) RAND_MAX)*").append(getGestionnaireSuccesseurs().nbEtapes()).append(");\n").append("switch(nb) {\n");
+        for (int i = 0; i < getGestionnaireSuccesseurs().nbEtapes(); ++i) {
+            strC.append("case ").append(i).append(": {").append("transfert(").append(getNom().replaceAll("\\s+", "")).append(",").append(getGestionnaireSuccesseurs().getEtapes().get(i).getNom().replaceAll("\\s+", "")).append(");\n").append(getGestionnaireSuccesseurs().getEtapes().get(i).toC()).append("break;\n}\n");
+        }
+        strC.append("}");
+        return strC.toString();
     }
 }

@@ -77,7 +77,7 @@ public class Simulation implements Iterable<Client> {
         int[] processus = start_simulation(monde.nbEtapes(), monde.nbGuichets(), getNbClients(), tabJetonsGuichet);
 
         // On affiche les clients.
-        System.out.print("\nLes clients : ");
+        System.out.print("Les clients : ");
         for (int i = 0; i < getNbClients(); ++i) {
             System.out.print(processus[i] + " ");
         }

@@ -22,8 +22,8 @@ public class SasEntree extends Activite {
      * @return Un string du code C de sasEntree
      */
     public String toC() {
-        return "entrer(" + getNum() + "); \n" +
+        return "entrer(" + getNom().replaceAll("\\s+", "") + "); \n" +
                 "delai(" + 3 + "," + 1 + "); \n" +
-                "transfert(" + getNum() + "," + getSuivant().getNum() + ");\n" + getSuivant().toC();
+                "transfert(" + getNom().replaceAll("\\s+", "") + "," + getSuivant().getNom().replaceAll("\\s+", "") + ");\n" + getSuivant().toC();
     }
 }
