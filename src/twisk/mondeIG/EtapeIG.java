@@ -1,5 +1,6 @@
 package twisk.mondeIG;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -19,6 +20,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     private int posY;
     private boolean entree;
     private boolean sortie;
+    private ArrayList<EtapeIG> successeur;
     private PointDeControleIG[] pdc = new PointDeControleIG[4];
 
     /**
@@ -37,6 +39,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         this.hauteur = haut;
         this.posX = (int) (Math.random() * (1000 - larg));
         this.posY = (int) (Math.random() * (700 - haut));
+        this.successeur = new ArrayList<>(5);
         pdc[0] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY(), this);
         pdc[1] = new PointDeControleIG(getPosX(), getPosY() + (getHauteur() / 2), this);
         pdc[2] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY() + getHauteur(), this);
@@ -230,11 +233,29 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         };
     }
 
-
+    /**
+     * Fonction permettant de savoir si l'étape est une activité
+     *
+     * @return boolean
+     */
     public boolean estUneActivite() {
         return false;
     }
 
+    /**
+     * Fonction d'ajout de successeurs à l'étape.
+     *
+     * @param e EtapeIG
+     */
+    public void ajouterSuccesseur(EtapeIG e){
+        successeur.add(e);
+    }
+
+    /**
+     * Fonction permettant de savoir si l'étape est un guichet
+     *
+     * @return
+     */
     public boolean estUnGuichet() {
         return false;
     }

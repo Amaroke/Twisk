@@ -125,6 +125,10 @@ public class KitC {
         }
     }
 
+    /**
+     * Getter du numéro de la lib.
+     * @return int
+     */
     public int getNumLib() {
         return num_lib;
     }

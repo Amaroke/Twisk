@@ -42,6 +42,11 @@ public class FabriqueNumero {
         return cptEtape - 1;
     }
 
+    /**
+     * Getter d'un numéro de la lib pour le classloader.
+     *
+     * @return int
+     */
     public int getNumLib() {
         numlib++;
         return numlib - 1;

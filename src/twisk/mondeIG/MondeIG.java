@@ -1,10 +1,8 @@
 package twisk.mondeIG;
 
 import twisk.TailleComposants;
-import twisk.exceptions.TwiskException.AlreadyExistException;
-import twisk.exceptions.TwiskException.EcartTempsException;
-import twisk.exceptions.TwiskException.SamePointException;
-import twisk.exceptions.TwiskException.TempsIncorrectException;
+import twisk.exceptions.TwiskException.*;
+import twisk.monde.Etape;
 import twisk.outils.FabriqueIdentifiant;
 
 import java.util.ArrayList;
@@ -49,6 +47,29 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     }
 
     /**
+     * Fonction de simulation du mondeIG.
+     */
+    public void simuler(){
+        for(ArcIG a: arc){
+            EtapeIG src = a.getPoint(0).getEtape();
+            EtapeIG dest = a.getPoint(1).getEtape();
+            src.ajouterSuccesseur(dest);
+        }
+    }
+
+    /**
+     * Fonction de vérification de la validitée du monde.
+     *
+     * @throws MondeException Quand le monde n'est pas correct.
+     */
+    public void verifierMondeIG() throws MondeException {
+        if(etapeEntre.size() < 1 || etape.size() < 1){
+            throw new MondeException();
+        }
+    }
+
+
+    /**
      * Fonction ajouter PointDeControle.
      *
      * @param pt1 PointDeControleIG
@@ -62,10 +83,8 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         }
 
         for (ArcIG e : arc) {
-            if (e.getPoint(0).getPosX() == pt1.getPosX() && e.getPoint(0).getPosY() == pt1.getPosY() ||
-                    e.getPoint(1).getPosX() == pt2.getPosX() && e.getPoint(1).getPosY() == pt2.getPosY() ||
-                    (e.getPoint(1).getPosX() == pt1.getPosX() && e.getPoint(1).getPosY() == pt1.getPosY() ||
-                            e.getPoint(0).getPosX() == pt2.getPosX() && e.getPoint(0).getPosY() == pt2.getPosY())) {
+            if (e.getPoint(1).getPosX() == pt1.getPosX() && e.getPoint(1).getPosY() == pt1.getPosY() ||
+                            e.getPoint(0).getPosX() == pt2.getPosX() && e.getPoint(0).getPosY() == pt2.getPosY()) {
                 throw new AlreadyExistException();
             }
         }
@@ -82,6 +101,13 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         return this.etape.size();
     }
 
+    /**
+     * Fonction création des arc
+     *
+     * @param p un point de controle.
+     * @throws AlreadyExistException Si le point existe déjà
+     * @throws SamePointException Si l'arc se crée sur le même points
+     */
     public void creerArc(PointDeControleIG p) throws AlreadyExistException, SamePointException {
         if (pdcCrea[0] == null) {
             pdcCrea[0] = p;
@@ -350,6 +376,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         }
     }
 
+    /**
+     * Fonction de modifation du nombre de jetons dans les guichets
+     *
+     * @param nb int
+     * @param etape GuichetIG
+     */
     public void modifNbJetons(Integer nb, GuichetIG etape) {
         etape.setNbJetons(nb);
     }

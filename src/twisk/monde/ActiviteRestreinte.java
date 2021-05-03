@@ -29,6 +29,11 @@ public class ActiviteRestreinte extends Activite {
         super(nom, temps, ecartTemps);
     }
 
+    /**
+     * Fonction de mise en C pour l'executions du monde
+     *
+     * @return string
+     */
     @Override
     public String toC() {
         StringBuilder strC = new StringBuilder();

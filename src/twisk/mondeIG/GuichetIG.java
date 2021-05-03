@@ -24,14 +24,29 @@ public class GuichetIG extends EtapeIG {
         this.nbJetons = nbJetons;
     }
 
+    /**
+     * Getter nombre de jeton.
+     *
+     * @return int
+     */
     public int getNbJetons() {
         return nbJetons;
     }
 
+    /**
+     * Setter nombre de jeton
+     *
+     * @param nbJetons int
+     */
     public void setNbJetons(int nbJetons) {
         this.nbJetons = nbJetons;
     }
 
+    /**
+     * Fonction permettant de savoir si l'étpae est un guichet.
+     *
+     * @return
+     */
     @Override
     public boolean estUnGuichet() {
         return true;
