@@ -39,11 +39,11 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     public void ajouter(String type) {
         if (type.equals("Activite")) {
             String idf = fabriqueID.getIdentifiantEtape();
-            ActiviteIG a = new ActiviteIG(idf+"Activite", idf, composants.getVBoxLong(), composants.getVBoxLarg());
+            ActiviteIG a = new ActiviteIG("Activite_"+idf, idf, composants.getVBoxLong(), composants.getVBoxLarg());
             etape.put(idf, a);
         } else if (type.equals("Guichet")) {
             String idf = fabriqueID.getIdentifiantEtape();
-            GuichetIG a = new GuichetIG(idf+"Guichet", idf, composants.getVBoxLong(), composants.getVBoxLarg(), 5);
+            GuichetIG a = new GuichetIG("Guichet_"+idf, idf, composants.getVBoxLong(), composants.getVBoxLarg(), 5);
             etape.put(idf, a);
         }
         notifierObservateur();
@@ -56,12 +56,15 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         for(EtapeIG e: etape.values()){
             if(e.estUneActiviteRestreinte()){
                 Etape actres = new ActiviteRestreinte(e.getNom(), ((ActiviteIG) e).getTemps(), ((ActiviteIG) e).getEcartTemps());
+                m.ajouter(actres);
                 correspEtape.ajouter(e, actres);
             } else if (e.estUnGuichet()){
                 Etape guichet = new Guichet(e.getNom(), ((GuichetIG) e).getNbJetons());
+                m.ajouter(guichet);
                 correspEtape.ajouter(e, guichet);
             } else {
                 Etape act = new Activite(e.getNom(), ((ActiviteIG) e).getTemps(), ((ActiviteIG) e).getEcartTemps());
+                m.ajouter(act);
                 correspEtape.ajouter(e, act);
             }
         }
@@ -94,9 +97,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         }
         verifierMondeIG();
 
+        Monde m = creerMonde();
         Simulation s = new Simulation();
         s.setNbClients(5);
-        s.simuler(creerMonde());
+        s.simuler(m);
     }
 
     /**
