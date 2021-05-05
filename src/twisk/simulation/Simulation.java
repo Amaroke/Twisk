@@ -59,6 +59,7 @@ public class Simulation implements Iterable<Client> {
      */
     public void simuler(Monde monde) {
 
+        System.out.println(monde.toString());
         getEnvironnement().creerFichier(monde.toC().toString());
         getEnvironnement().compiler();
         getEnvironnement().construireLaLibrairie();

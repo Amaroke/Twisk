@@ -2,12 +2,14 @@ package twisk.mondeIG;
 
 import twisk.TailleComposants;
 import twisk.exceptions.TwiskException.*;
-import twisk.monde.Etape;
+import twisk.monde.*;
 import twisk.outils.FabriqueIdentifiant;
+import twisk.simulation.Simulation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Classe MondeIG.
@@ -27,6 +29,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     private final ArrayList<EtapeIG> etapeSortie = new ArrayList<>(5);
     private final FabriqueIdentifiant fabriqueID = FabriqueIdentifiant.getInstance();
     private final TailleComposants composants = TailleComposants.getInstance();
+    private CorrespondanceEtapes correspEtape;
 
     /**
      * Fonction ajout d'activité.
@@ -36,25 +39,64 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     public void ajouter(String type) {
         if (type.equals("Activite")) {
             String idf = fabriqueID.getIdentifiantEtape();
-            ActiviteIG a = new ActiviteIG(idf + " : Activite", idf, composants.getVBoxLong(), composants.getVBoxLarg());
+            ActiviteIG a = new ActiviteIG(idf+"Activite", idf, composants.getVBoxLong(), composants.getVBoxLarg());
             etape.put(idf, a);
         } else if (type.equals("Guichet")) {
             String idf = fabriqueID.getIdentifiantEtape();
-            GuichetIG a = new GuichetIG(idf + " : Guichet", idf, composants.getVBoxLong(), composants.getVBoxLarg(), 5);
+            GuichetIG a = new GuichetIG(idf+"Guichet", idf, composants.getVBoxLong(), composants.getVBoxLarg(), 5);
             etape.put(idf, a);
         }
         notifierObservateur();
     }
 
+
+    private Monde creerMonde(){
+        correspEtape = new CorrespondanceEtapes();
+        Monde m = new Monde();
+        for(EtapeIG e: etape.values()){
+            if(e.estUneActiviteRestreinte()){
+                Etape actres = new ActiviteRestreinte(e.getNom(), ((ActiviteIG) e).getTemps(), ((ActiviteIG) e).getEcartTemps());
+                correspEtape.ajouter(e, actres);
+            } else if (e.estUnGuichet()){
+                Etape guichet = new Guichet(e.getNom(), ((GuichetIG) e).getNbJetons());
+                correspEtape.ajouter(e, guichet);
+            } else {
+                Etape act = new Activite(e.getNom(), ((ActiviteIG) e).getTemps(), ((ActiviteIG) e).getEcartTemps());
+                correspEtape.ajouter(e, act);
+            }
+        }
+
+        for(EtapeIG eEntre : etapeEntre){
+            m.aCommeEntree(correspEtape.get(eEntre));
+        }
+        for(EtapeIG e: etape.values()){
+            for(EtapeIG suc : e.getSuccesseur()){
+                correspEtape.get(e).ajouterSuccesseur(correspEtape.get(suc));
+            }
+        }
+        for(EtapeIG eSortie : etapeSortie){
+            m.aCommeSortie(correspEtape.get(eSortie));
+        }
+
+        return m;
+    }
+
+
+
     /**
      * Fonction de simulation du mondeIG.
      */
-    public void simuler(){
+    public void simuler() throws MondeException {
         for(ArcIG a: arc){
             EtapeIG src = a.getPoint(0).getEtape();
             EtapeIG dest = a.getPoint(1).getEtape();
             src.ajouterSuccesseur(dest);
         }
+        verifierMondeIG();
+
+        Simulation s = new Simulation();
+        s.setNbClients(5);
+        s.simuler(creerMonde());
     }
 
     /**
@@ -62,9 +104,16 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      *
      * @throws MondeException Quand le monde n'est pas correct.
      */
-    public void verifierMondeIG() throws MondeException {
-        if(etapeEntre.size() < 1 || etape.size() < 1){
+    private void verifierMondeIG() throws MondeException {
+        if(etapeEntre.size() < 1 || etape.size() < 1 || etapeSortie.size() < 1){
             throw new MondeException();
+        }
+        for(EtapeIG e : etape.values()){
+            for(EtapeIG succ : e.getSuccesseur()){
+                if(succ.estUneActivite() || e.estUnGuichet()){
+                    ((ActiviteIG) succ).setEstUnActiviteRestrainte();
+                }
+            }
         }
     }
 

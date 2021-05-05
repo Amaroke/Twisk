@@ -254,9 +254,13 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     /**
      * Fonction permettant de savoir si l'étape est un guichet
      *
-     * @return
+     * @return boolean
      */
     public boolean estUnGuichet() {
         return false;
     }
+
+    public ArrayList<EtapeIG> getSuccesseur(){ return this.successeur; }
+
+    public boolean estUneActiviteRestreinte(){ return false;}
 }

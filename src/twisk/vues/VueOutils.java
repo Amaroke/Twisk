@@ -5,6 +5,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import twisk.exceptions.TwiskException.MondeException;
 import twisk.mondeIG.MondeIG;
 
 import java.util.Objects;
@@ -47,7 +48,20 @@ public class VueOutils extends TilePane implements Observateur {
         bguichet.setId("plusbutton");
         bguichet.setOnAction(actionEvent -> m.ajouter("Guichet"));
 
-        this.getChildren().addAll(b, bguichet);
+        Tooltip tooltipSim = new Tooltip("Permet de simuler le monde");
+        Button bsim = new Button("");
+        bsim.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
+        bsim.setTooltip(tooltipSim);
+        bsim.setId("plusbutton");
+        bsim.setOnAction(actionEvent -> {
+            try {
+                m.simuler();
+            } catch (MondeException e) {
+                e.printStackTrace();
+            }
+        });
+
+        this.getChildren().addAll(b, bguichet, bsim);
     }
 
     @Override

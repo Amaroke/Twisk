@@ -11,6 +11,7 @@ public class ActiviteIG extends EtapeIG {
 
     private int temps;
     private int ecartTemps;
+    private boolean restrainte;
 
     /**
      * Constructeur ActiviteIG.
@@ -22,6 +23,7 @@ public class ActiviteIG extends EtapeIG {
      */
     public ActiviteIG(String nom, String idf, int larg, int haut) {
         super(nom, idf, larg, haut);
+        restrainte = false;
     }
 
     @Override
@@ -63,5 +65,14 @@ public class ActiviteIG extends EtapeIG {
      */
     public void setEcartTemps(int ecartTemps) {
         this.ecartTemps = ecartTemps;
+    }
+
+    @Override
+    public boolean estUneActiviteRestreinte(){
+        return restrainte;
+    }
+
+    public void setEstUnActiviteRestrainte(){
+        restrainte = !restrainte;
     }
 }
