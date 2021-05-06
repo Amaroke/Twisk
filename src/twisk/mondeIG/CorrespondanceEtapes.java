@@ -12,11 +12,12 @@ public class CorrespondanceEtapes {
         corresp = new HashMap<>(10);
     }
 
-    public void ajouter(EtapeIG etig,Etape et){
+    public void ajouter(EtapeIG etig, Etape et) {
         corresp.put(etig, et);
     }
 
-    public Etape get(EtapeIG e){
+    public Etape get(EtapeIG e) {
         return corresp.get(e);
     }
+
 }

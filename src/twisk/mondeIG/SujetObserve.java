@@ -30,4 +30,5 @@ public class SujetObserve {
     public void notifierObservateur() {
         for (Observateur o : this.obs) o.reagir();
     }
+
 }

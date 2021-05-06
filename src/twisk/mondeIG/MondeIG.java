@@ -5,11 +5,11 @@ import twisk.exceptions.TwiskException.*;
 import twisk.monde.*;
 import twisk.outils.FabriqueIdentifiant;
 import twisk.simulation.Simulation;
+import twisk.vues.Observateur;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 /**
  * Classe MondeIG.
@@ -18,7 +18,7 @@ import java.util.Map;
  * @version 1.0
  */
 
-public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
+public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observateur {
 
     private final ArrayList<EtapeIG> selectedEtape = new ArrayList<>(10);
     private final ArrayList<ArcIG> selectedArc = new ArrayList<>(10);
@@ -30,6 +30,8 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     private final FabriqueIdentifiant fabriqueID = FabriqueIdentifiant.getInstance();
     private final TailleComposants composants = TailleComposants.getInstance();
     private CorrespondanceEtapes correspEtape;
+    private Simulation simulation;
+    public boolean test;
 
     /**
      * Fonction ajout d'activité.
@@ -90,6 +92,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
      * Fonction de simulation du mondeIG.
      */
     public void simuler() throws MondeException {
+        test = true;
         for(ArcIG a: arc){
             EtapeIG src = a.getPoint(0).getEtape();
             EtapeIG dest = a.getPoint(1).getEtape();
@@ -98,9 +101,9 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         verifierMondeIG();
 
         Monde m = creerMonde();
-        Simulation s = new Simulation();
-        s.setNbClients(5);
-        s.simuler(m);
+        simulation = new Simulation();
+        simulation.setNbClients(5);
+        simulation.simuler(m);
     }
 
     /**
@@ -372,6 +375,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
         return selectedEtape;
     }
 
+    public CorrespondanceEtapes getCorrespEtape() {
+        return correspEtape;
+    }
+
     /**
      * Getter ArrayList des arcs selectionné.
      *
@@ -438,4 +445,14 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG> {
     public void modifNbJetons(Integer nb, GuichetIG etape) {
         etape.setNbJetons(nb);
     }
+
+    public Simulation getSimulation() {
+        return simulation;
+    }
+
+    @Override
+    public void reagir() {
+        notifierObservateur();
+    }
+
 }

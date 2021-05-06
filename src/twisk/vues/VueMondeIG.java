@@ -1,10 +1,13 @@
 package twisk.vues;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import twisk.ecouteur.EcouteurDragDropped;
 import twisk.ecouteur.EcouteurDragOver;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
+import twisk.simulation.Client;
 
 /**
  * Classe VueMondeIG.
@@ -14,6 +17,7 @@ import twisk.mondeIG.MondeIG;
  */
 
 public class VueMondeIG extends Pane implements Observateur {
+
     private final MondeIG m;
 
     /**
@@ -46,9 +50,6 @@ public class VueMondeIG extends Pane implements Observateur {
             this.getChildren().add(a);
         }
         for (EtapeIG e : m) {
-
-            //PROBABLEMENT DEGEULASSE
-
             if (e.estUneActivite()) {
                 VueActiviteIG vue = new VueActiviteIG(m, e);
                 this.getChildren().add(vue);
@@ -56,11 +57,24 @@ public class VueMondeIG extends Pane implements Observateur {
                 VueGuichetIG vue = new VueGuichetIG(m, e);
                 this.getChildren().add(vue);
             }
-
             for (int j = 0; j < 4; j++) {
                 VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
                 this.getChildren().add(pdc);
             }
+        }
+        if (m.test) {
+            System.out.println("test");
+            for (Client c : m.getSimulation().getGestionnaireClients().getListeClient()) {
+                for (EtapeIG e : m.getEtape().values()) {
+                    System.out.println("test");
+                    if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
+                        Circle clientRond = new Circle(e.getPosX(), e.getPosY(), 100.0);
+                        clientRond.setFill(Color.GREEN);
+                        this.getChildren().add(clientRond);
+                    }
+                }
+            }
+
         }
     }
 }

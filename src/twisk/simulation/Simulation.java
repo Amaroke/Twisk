@@ -3,6 +3,7 @@ package twisk.simulation;
 import twisk.monde.Etape;
 import twisk.monde.Guichet;
 import twisk.monde.Monde;
+import twisk.mondeIG.SujetObserve;
 import twisk.outils.KitC;
 
 import java.util.Iterator;
@@ -14,7 +15,7 @@ import java.util.Iterator;
  * @version 1.0
  */
 @SuppressWarnings({"BusyWait", "unused"})
-public class Simulation implements Iterable<Client> {
+public class Simulation extends SujetObserve implements Iterable<Client> {
 
     private GestionnaireClients gestionnaireClients;
     private final KitC environnement;
@@ -85,6 +86,7 @@ public class Simulation implements Iterable<Client> {
 
         int[] clients;
         clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
+        this.notifierObservateur();
         // On regarde si tous les clients sont dans le sasSortie.
         while (clients[((getNbClients() + 1))] != getNbClients()) {
 
@@ -138,6 +140,10 @@ public class Simulation implements Iterable<Client> {
     public void setNbClients(int nbClients) {
         this.nbClients = nbClients;
         gestionnaireClients = new GestionnaireClients(this.nbClients);
+    }
+
+    public GestionnaireClients getGestionnaireClients() {
+        return gestionnaireClients;
     }
 
     /**

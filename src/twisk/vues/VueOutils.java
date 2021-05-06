@@ -67,4 +67,5 @@ public class VueOutils extends TilePane implements Observateur {
     @Override
     public void reagir() {
     }
+
 }

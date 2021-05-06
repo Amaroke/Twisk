@@ -13,6 +13,7 @@ import java.util.Iterator;
  */
 
 public class GestionnaireClients implements Iterable<Client> {
+
     private final ArrayList<Client> listeClient;
 
     /**

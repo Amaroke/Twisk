@@ -32,4 +32,5 @@ public class VuePointDeControleIG extends Circle implements Observateur {
     public void reagir() {
 
     }
+
 }
