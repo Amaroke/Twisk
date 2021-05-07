@@ -112,13 +112,23 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
      * @throws MondeException Quand le monde n'est pas correct.
      */
     private void verifierMondeIG() throws MondeException {
+        // Vérifie que le monde contient au moins une étape, une entré et une sortie.
         if(etapeEntre.size() < 1 || etape.size() < 1 || etapeSortie.size() < 1){
             throw new MondeException();
         }
         for(EtapeIG e : etape.values()){
             for(EtapeIG succ : e.getSuccesseur()){
-                if(succ.estUneActivite() || e.estUnGuichet()){
+                // Met l'activité suivant guichet en tant qu'activité restrainte.
+                if(succ.estUneActivite() && e.estUnGuichet()){
                     ((ActiviteIG) succ).setEstUnActiviteRestrainte();
+                }
+                // Vérification qu'un guichet n'est pas suivis d'un guichet
+                if(succ.estUnGuichet() && e.estUnGuichet()){
+                    throw new MondeException();
+                }
+                // Tout les activités ont au moins un successeurs !
+                if(e.getSuccesseur().size() < 1){
+                    throw new MondeException();
                 }
             }
         }
