@@ -31,7 +31,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     private final TailleComposants composants = TailleComposants.getInstance();
     private CorrespondanceEtapes correspEtape;
     private Simulation simulation;
-    public boolean test;
 
     /**
      * Fonction ajout d'activité.
@@ -92,7 +91,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
      * Fonction de simulation du mondeIG.
      */
     public void simuler() throws MondeException {
-        test = true;
         for(ArcIG a: arc){
             EtapeIG src = a.getPoint(0).getEtape();
             EtapeIG dest = a.getPoint(1).getEtape();

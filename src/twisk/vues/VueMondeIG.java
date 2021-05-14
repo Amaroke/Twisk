@@ -62,8 +62,7 @@ public class VueMondeIG extends Pane implements Observateur {
                 this.getChildren().add(pdc);
             }
         }
-        if (m.test) {
-            System.out.println("test");
+        if (m.getSimulation() != null) {
             for (Client c : m.getSimulation().getGestionnaireClients().getListeClient()) {
                 for (EtapeIG e : m.getEtape().values()) {
                     System.out.println("test");
@@ -74,7 +73,6 @@ public class VueMondeIG extends Pane implements Observateur {
                     }
                 }
             }
-
         }
     }
 }
