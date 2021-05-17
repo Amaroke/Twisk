@@ -45,7 +45,6 @@ public class GuichetIG extends EtapeIG {
     /**
      * Fonction permettant de savoir si l'étpae est un guichet.
      *
-     * @return
      */
     @Override
     public boolean estUnGuichet() {

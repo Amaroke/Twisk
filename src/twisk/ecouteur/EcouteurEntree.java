@@ -22,6 +22,7 @@ public class EcouteurEntree implements EventHandler<ActionEvent> {
      */
     public EcouteurEntree(MondeIG monde) {
         this.monde = monde;
+
     }
 
     /**

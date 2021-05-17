@@ -20,7 +20,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
     private int posY;
     private boolean entree;
     private boolean sortie;
-    private ArrayList<EtapeIG> successeur;
+    private final ArrayList<EtapeIG> successeur;
     private PointDeControleIG[] pdc = new PointDeControleIG[4];
 
     /**
@@ -51,7 +51,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
      * Setter Selectionné.
      */
     public void setSelectionne() {
-        selectionne = !selectionne;
+        selectionne = !getSelectionne();
     }
 
     /**

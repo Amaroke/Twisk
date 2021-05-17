@@ -308,6 +308,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
                 e.setEstEntre();
             }
         }
+        for (EtapeIG e : getSelectedEtape()) {
+            e.setSelectionne();
+        }
+        getSelectedEtape().clear();
         this.notifierObservateur();
     }
 
@@ -322,6 +326,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             while (i < getEtapeSortie().size() && !flag) {
                 if (e == getEtapeSortie().get(i)) {
                     flag = true;
+                    this.selectedArc.clear();
                 }
                 i++;
             }
@@ -334,6 +339,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
                 e.setEstSortie();
             }
         }
+        for (EtapeIG e : getSelectedEtape()) {
+            e.setSelectionne();
+        }
+        getSelectedEtape().clear();
         this.notifierObservateur();
     }
 

@@ -1,9 +1,11 @@
 package twisk.simulation;
 
+import javafx.concurrent.Task;
 import twisk.monde.Etape;
 import twisk.monde.Guichet;
 import twisk.monde.Monde;
 import twisk.mondeIG.SujetObserve;
+import twisk.outils.GestionnaireThreads;
 import twisk.outils.KitC;
 
 import java.util.Iterator;
@@ -60,58 +62,69 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
      */
     public void simuler(Monde monde) {
 
-        System.out.println(monde.toString());
-        getEnvironnement().creerFichier(monde.toC().toString());
-        getEnvironnement().compiler();
-        getEnvironnement().construireLaLibrairie();
-        System.load("/tmp/twisk/libTwisk"+ environnement.getNumLib() +".so");
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() {
+                try{
 
-        // On mets les jetons dans un tableau
-        int[] tabJetonsGuichet = new int[monde.nbGuichets()];
-        for (Etape etape : monde) {
-            if (etape.estUnGuichet()) {
-                Guichet guichet = (Guichet) etape;
-                tabJetonsGuichet[guichet.getSemaphore() - 1] = guichet.getNbJetons();
-            }
-        }
+                System.out.println(monde.toString());
+                getEnvironnement().creerFichier(monde.toC().toString());
+                getEnvironnement().compiler();
+                getEnvironnement().construireLaLibrairie();
+                System.load("/tmp/twisk/libTwisk" + environnement.getNumLib() + ".so");
 
-        // On lance la simulation.
-        int[] processus = start_simulation(monde.nbEtapes(), monde.nbGuichets(), getNbClients(), tabJetonsGuichet);
-
-        // On affiche les clients.
-        System.out.print("Les clients : ");
-        for (int i = 0; i < getNbClients(); ++i) {
-            System.out.print(processus[i] + " ");
-        }
-
-        int[] clients;
-        clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
-        this.notifierObservateur();
-        // On regarde si tous les clients sont dans le sasSortie.
-        while (clients[((getNbClients() + 1))] != getNbClients()) {
-
-            System.out.print("\n");
-            clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            // On parcourt les étapes.
-            for (int j = 0; j < monde.nbEtapes(); ++j) {
-                int decalage = clients[(j * (getNbClients() + 1))];
-                for(int l = 0; l < decalage; ++l){
-                    gestionnaireClients.allerA(clients[decalage+1+l], monde.getEtape(j),l);
+                // On mets les jetons dans un tableau
+                int[] tabJetonsGuichet = new int[monde.nbGuichets()];
+                for (Etape etape : monde) {
+                    if (etape.estUnGuichet()) {
+                        Guichet guichet = (Guichet) etape;
+                        tabJetonsGuichet[guichet.getSemaphore() - 1] = guichet.getNbJetons();
+                    }
                 }
-                System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
-                for (int i = 0; i < decalage; ++i) {
-                    System.out.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
+
+                // On lance la simulation.
+                int[] processus = start_simulation(monde.nbEtapes(), monde.nbGuichets(), getNbClients(), tabJetonsGuichet);
+
+                // On affiche les clients.
+                System.out.print("Les clients : ");
+                for (int i = 0; i < getNbClients(); ++i) {
+                    System.out.print(processus[i] + " ");
                 }
-                System.out.print("\n");
+
+                int[] clients;
+                clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
+                notifierObservateur();
+                // On regarde si tous les clients sont dans le sasSortie.
+                while (clients[((getNbClients() + 1))] != getNbClients()) {
+
+                    System.out.print("\n");
+                    clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
+
+                        Thread.sleep(1000);
+
+
+                    // On parcourt les étapes.
+                    for (int j = 0; j < monde.nbEtapes(); ++j) {
+                        int decalage = clients[(j * (getNbClients() + 1))];
+                        for (int l = 0; l < decalage; ++l) {
+                            gestionnaireClients.allerA(clients[decalage + 1 + l], monde.getEtape(j), l);
+                        }
+                        System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
+                        for (int i = 0; i < decalage; ++i) {
+                            System.out.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
+                        }
+                        System.out.print("\n");
+                    }
+                }
+                nettoyage();
+                } catch (InterruptedException e) {
+                    // Le thread se termine.
+                    e.printStackTrace();
+                }
+                return null;
             }
-        }
-        nettoyage();
+        };
+        GestionnaireThreads.getInstance().lancer(task);
     }
 
     /**
@@ -148,6 +161,7 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
 
     /**
      * Fonction iterator simulation.
+     *
      * @return Iterator<Client>
      */
     @Override

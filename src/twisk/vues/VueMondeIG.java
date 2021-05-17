@@ -1,5 +1,6 @@
 package twisk.vues;
 
+import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -62,17 +63,28 @@ public class VueMondeIG extends Pane implements Observateur {
                 this.getChildren().add(pdc);
             }
         }
-        if (m.getSimulation() != null) {
-            for (Client c : m.getSimulation().getGestionnaireClients().getListeClient()) {
-                for (EtapeIG e : m.getEtape().values()) {
-                    System.out.println("test");
-                    if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
-                        Circle clientRond = new Circle(e.getPosX(), e.getPosY(), 100.0);
-                        clientRond.setFill(Color.GREEN);
-                        this.getChildren().add(clientRond);
+        Pane pane = this;
+        Runnable command = () -> {
+            if (m.getSimulation() != null) {
+                for (Client c : m.getSimulation().getGestionnaireClients().getListeClient()) {
+                    Circle clientRond2 = new Circle(100, 100, 10.0);
+                    clientRond2.setFill(Color.GREEN);
+                    pane.getChildren().add(clientRond2);
+                    for (EtapeIG e : m.getEtape().values()) {
+                        if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
+                            Circle clientRond = new Circle(e.getPosX(), e.getPosY(), 100.0);
+                            clientRond.setFill(Color.GREEN);
+                            pane.getChildren().add(clientRond);
+                        }
                     }
                 }
             }
+        };
+        if(Platform.isFxApplicationThread()){
+            command.run();
+        } else {
+            Platform.runLater(command);
         }
+
     }
 }
