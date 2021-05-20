@@ -21,7 +21,7 @@ public class ClassLoaderPerso extends ClassLoader {
      */
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
-        if (name.equals("twisk.simulation.Simulation")) {
+        if (name.startsWith("twisk.simulation.Simulation")) {
             return getClass(name);
         }
         return super.loadClass(name);

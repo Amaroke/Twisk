@@ -9,7 +9,6 @@ import twisk.ecouteur.EcouteurDragOver;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 import twisk.simulation.Client;
-
 /**
  * Classe VueMondeIG.
  *
@@ -45,31 +44,31 @@ public class VueMondeIG extends Pane implements Observateur {
      */
     @Override
     public void reagir() {
-        this.getChildren().clear();
-        for (int i = 0; i < m.getArc().size(); i++) {
-            VueArcIG a = new VueArcIG(m.getArc().get(i), m);
-            this.getChildren().add(a);
-        }
-        for (EtapeIG e : m) {
-            if (e.estUneActivite()) {
-                VueActiviteIG vue = new VueActiviteIG(m, e);
-                this.getChildren().add(vue);
-            } else if (e.estUnGuichet()) {
-                VueGuichetIG vue = new VueGuichetIG(m, e);
-                this.getChildren().add(vue);
-            }
-            for (int j = 0; j < 4; j++) {
-                VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
-                this.getChildren().add(pdc);
-            }
-        }
-        Pane pane = this;
         Runnable command = () -> {
-            if (m.getSimulation() != null) {
-                for (Client c : m.getSimulation().getGestionnaireClients().getListeClient()) {
-                    Circle clientRond2 = new Circle(100, 100, 10.0);
-                    clientRond2.setFill(Color.GREEN);
-                    pane.getChildren().add(clientRond2);
+            this.getChildren().clear();
+            for (int i = 0; i < m.getArc().size(); i++) {
+                VueArcIG a = new VueArcIG(m.getArc().get(i), m);
+                this.getChildren().add(a);
+            }
+            for (EtapeIG e : m) {
+                if (e.estUneActivite()) {
+                    VueActiviteIG vue = new VueActiviteIG(m, e);
+                    this.getChildren().add(vue);
+                } else if (e.estUnGuichet()) {
+                    VueGuichetIG vue = new VueGuichetIG(m, e);
+                    this.getChildren().add(vue);
+                }
+                for (int j = 0; j < 4; j++) {
+                    VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
+                    this.getChildren().add(pdc);
+                }
+            }
+            Pane pane = this;
+            if (m.isSimulationStart()) {
+                Circle clientRond2 = new Circle(100, 100, 1000.0);
+                clientRond2.setFill(Color.GREEN);
+                pane.getChildren().add(clientRond2);
+                for (Client c : m.getClients()) {
                     for (EtapeIG e : m.getEtape().values()) {
                         if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
                             Circle clientRond = new Circle(e.getPosX(), e.getPosY(), 100.0);

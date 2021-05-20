@@ -92,8 +92,8 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                 }
 
                 int[] clients;
-                clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
                 notifierObservateur();
+                clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
                 // On regarde si tous les clients sont dans le sasSortie.
                 while (clients[((getNbClients() + 1))] != getNbClients()) {
 
@@ -158,6 +158,8 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
     public GestionnaireClients getGestionnaireClients() {
         return gestionnaireClients;
     }
+
+
 
     /**
      * Fonction iterator simulation.

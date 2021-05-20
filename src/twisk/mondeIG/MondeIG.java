@@ -1,12 +1,18 @@
 package twisk.mondeIG;
 
+import twisk.ClientTwisk;
 import twisk.TailleComposants;
 import twisk.exceptions.TwiskException.*;
 import twisk.monde.*;
+import twisk.outils.ClassLoaderPerso;
 import twisk.outils.FabriqueIdentifiant;
+import twisk.simulation.Client;
+import twisk.simulation.GestionnaireClients;
 import twisk.simulation.Simulation;
 import twisk.vues.Observateur;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,7 +23,7 @@ import java.util.Iterator;
  * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
-
+@SuppressWarnings("unused")
 public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observateur {
 
     private final ArrayList<EtapeIG> selectedEtape = new ArrayList<>(10);
@@ -30,7 +36,8 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     private final FabriqueIdentifiant fabriqueID = FabriqueIdentifiant.getInstance();
     private final TailleComposants composants = TailleComposants.getInstance();
     private CorrespondanceEtapes correspEtape;
-    private Simulation simulation;
+    private Object simulation;
+    private boolean simulationStart;
 
     /**
      * Fonction ajout d'activité.
@@ -40,7 +47,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     public void ajouter(String type) {
         if (type.equals("Activite")) {
             String idf = fabriqueID.getIdentifiantEtape();
-            ActiviteIG a = new ActiviteIG("Activite_"+idf, idf, composants.getVBoxLong(), composants.getVBoxLarg());
+            ActiviteIG a = new ActiviteIG("Activite_" + idf, idf, composants.getVBoxLong(), composants.getVBoxLarg());
             etape.put(idf, a);
         } else if (type.equals("Guichet")) {
             String idf = fabriqueID.getIdentifiantEtape();
@@ -91,7 +98,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
      * Fonction de simulation du mondeIG.
      */
     public void simuler() throws MondeException {
-        for(ArcIG a: arc){
+        for (ArcIG a : arc) {
             EtapeIG src = a.getPoint(0).getEtape();
             EtapeIG dest = a.getPoint(1).getEtape();
             src.ajouterSuccesseur(dest);
@@ -100,8 +107,19 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
 
         Monde m = creerMonde();
         simulation = new Simulation();
-        simulation.setNbClients(5);
-        simulation.simuler(m);
+        simulationStart = true;
+        try {
+            ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
+            Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
+            Class<?> classSim1 = ClassLoader.loadClass("twisk.simulation.Simulation$1");
+            simulation = classSim.getDeclaredConstructor().newInstance();
+            Method msetNbClients = classSim.getDeclaredMethod("setNbClients", int.class);
+            Method msimuler = classSim.getDeclaredMethod("simuler", twisk.monde.Monde.class);
+            msetNbClients.invoke(simulation, 5);
+            msimuler.invoke(simulation, m);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -456,15 +474,34 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     /**
      * Fonction de modifation du nombre de jetons dans les guichets
      *
-     * @param nb int
+     * @param nb    int
      * @param etape GuichetIG
      */
     public void modifNbJetons(Integer nb, GuichetIG etape) {
         etape.setNbJetons(nb);
     }
 
-    public Simulation getSimulation() {
-        return simulation;
+    public ArrayList<Client> getClients() {
+        GestionnaireClients gestionnaireClients = null;
+        try {
+            ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
+            Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
+            Class<?> classSim1 = ClassLoader.loadClass("twisk.simulation.Simulation$1");
+            simulation = classSim.getDeclaredConstructor().newInstance();
+            Method mgestionnaireclients = classSim.getDeclaredMethod("getGestionnaireClients");
+            gestionnaireClients = (GestionnaireClients) mgestionnaireclients.invoke(simulation);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        if (gestionnaireClients != null) {
+            return gestionnaireClients.getListeClient();
+        } else {
+            return new ArrayList<>(10);
+        }
+    }
+
+    public boolean isSimulationStart() {
+        return simulationStart;
     }
 
     @Override
