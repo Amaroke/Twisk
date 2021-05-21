@@ -65,13 +65,11 @@ public class VueMondeIG extends Pane implements Observateur {
             }
             Pane pane = this;
             if (m.isSimulationStart()) {
-                Circle clientRond2 = new Circle(100, 100, 1000.0);
-                clientRond2.setFill(Color.GREEN);
-                pane.getChildren().add(clientRond2);
+                System.out.println(m.getClients());
                 for (Client c : m.getClients()) {
                     for (EtapeIG e : m.getEtape().values()) {
                         if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
-                            Circle clientRond = new Circle(e.getPosX(), e.getPosY(), 100.0);
+                            Circle clientRond = new Circle(e.getPosX(), e.getPosY(), 10.0);
                             clientRond.setFill(Color.GREEN);
                             pane.getChildren().add(clientRond);
                         }

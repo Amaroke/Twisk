@@ -8,7 +8,6 @@ import twisk.outils.ClassLoaderPerso;
 import twisk.outils.FabriqueIdentifiant;
 import twisk.simulation.Client;
 import twisk.simulation.GestionnaireClients;
-import twisk.simulation.Simulation;
 import twisk.vues.Observateur;
 
 import java.lang.reflect.InvocationTargetException;
@@ -16,6 +15,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Classe MondeIG.
@@ -106,8 +106,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         verifierMondeIG();
 
         Monde m = creerMonde();
-        simulation = new Simulation();
-        simulationStart = true;
         try {
             ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
             Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
@@ -117,6 +115,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             Method msimuler = classSim.getDeclaredMethod("simuler", twisk.monde.Monde.class);
             msetNbClients.invoke(simulation, 5);
             msimuler.invoke(simulation, m);
+            simulationStart = true;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -484,20 +483,12 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     public ArrayList<Client> getClients() {
         GestionnaireClients gestionnaireClients = null;
         try {
-            ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
-            Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
-            Class<?> classSim1 = ClassLoader.loadClass("twisk.simulation.Simulation$1");
-            simulation = classSim.getDeclaredConstructor().newInstance();
-            Method mgestionnaireclients = classSim.getDeclaredMethod("getGestionnaireClients");
+            Method mgestionnaireclients = simulation.getClass().getDeclaredMethod("getGestionnaireClients");
             gestionnaireClients = (GestionnaireClients) mgestionnaireclients.invoke(simulation);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        if (gestionnaireClients != null) {
-            return gestionnaireClients.getListeClient();
-        } else {
-            return new ArrayList<>(10);
-        }
+        return Objects.requireNonNull(gestionnaireClients).getListeClient();
     }
 
     public boolean isSimulationStart() {

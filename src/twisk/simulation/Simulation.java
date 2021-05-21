@@ -87,12 +87,14 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
 
                 // On affiche les clients.
                 System.out.print("Les clients : ");
+                    int[] clientsPID = new int[getNbClients()];
                 for (int i = 0; i < getNbClients(); ++i) {
                     System.out.print(processus[i] + " ");
+                    clientsPID[i] = processus[i];
                 }
+                    gestionnaireClients.setClients(clientsPID);
 
                 int[] clients;
-                notifierObservateur();
                 clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
                 // On regarde si tous les clients sont dans le sasSortie.
                 while (clients[((getNbClients() + 1))] != getNbClients()) {
