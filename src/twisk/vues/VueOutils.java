@@ -72,7 +72,6 @@ public class VueOutils extends TilePane implements Observateur {
         bsim.setTooltip(tooltipSim);
         bsim.setId("plusbutton");
 
-
         this.getChildren().addAll(b, bguichet, bsim);
     }
 

@@ -4,9 +4,11 @@ import javafx.concurrent.Task;
 import twisk.monde.Etape;
 import twisk.monde.Guichet;
 import twisk.monde.Monde;
+import twisk.mondeIG.MondeIG;
 import twisk.mondeIG.SujetObserve;
 import twisk.outils.GestionnaireThreads;
 import twisk.outils.KitC;
+import twisk.vues.Observateur;
 
 import java.util.Iterator;
 
@@ -61,71 +63,66 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
      * @param monde Le monde dans lequel la simulation doit s'executer
      */
     public void simuler(Monde monde) {
-
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
-                try{
+                try {
+                    System.out.println(monde.toString());
+                    getEnvironnement().creerFichier(monde.toC().toString());
+                    getEnvironnement().compiler();
+                    getEnvironnement().construireLaLibrairie();
+                    System.load("/tmp/twisk/libTwisk" + environnement.getNumLib() + ".so");
 
-                System.out.println(monde.toString());
-                getEnvironnement().creerFichier(monde.toC().toString());
-                getEnvironnement().compiler();
-                getEnvironnement().construireLaLibrairie();
-                System.load("/tmp/twisk/libTwisk" + environnement.getNumLib() + ".so");
-
-                // On mets les jetons dans un tableau
-                int[] tabJetonsGuichet = new int[monde.nbGuichets()];
-                for (Etape etape : monde) {
-                    if (etape.estUnGuichet()) {
-                        Guichet guichet = (Guichet) etape;
-                        tabJetonsGuichet[guichet.getSemaphore() - 1] = guichet.getNbJetons();
+                    // On mets les jetons dans un tableau
+                    int[] tabJetonsGuichet = new int[monde.nbGuichets()];
+                    for (Etape etape : monde) {
+                        if (etape.estUnGuichet()) {
+                            Guichet guichet = (Guichet) etape;
+                            tabJetonsGuichet[guichet.getSemaphore() - 1] = guichet.getNbJetons();
+                        }
                     }
-                }
 
-                // On lance la simulation.
-                int[] processus = start_simulation(monde.nbEtapes(), monde.nbGuichets(), getNbClients(), tabJetonsGuichet);
+                    // On lance la simulation.
+                    int[] processus = start_simulation(monde.nbEtapes(), monde.nbGuichets(), getNbClients(), tabJetonsGuichet);
 
-                // On affiche les clients.
-                System.out.print("Les clients : ");
+                    // On affiche les clients.
+                    System.out.print("Les clients : ");
                     int[] clientsPID = new int[getNbClients()];
-                for (int i = 0; i < getNbClients(); ++i) {
-                    System.out.print(processus[i] + " ");
-                    clientsPID[i] = processus[i];
-                }
+                    for (int i = 0; i < getNbClients(); ++i) {
+                        System.out.print(processus[i] + " ");
+                        clientsPID[i] = processus[i];
+                    }
                     gestionnaireClients.setClients(clientsPID);
 
-                int[] clients;
-                clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
-                // On regarde si tous les clients sont dans le sasSortie.
-                while (clients[((getNbClients() + 1))] != getNbClients()) {
-
-                    System.out.print("\n");
+                    int[] clients;
                     clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
-
-                        Thread.sleep(1000);
-
-
-                    // On parcourt les étapes.
-                    for (int j = 0; j < monde.nbEtapes(); ++j) {
-                        int decalage = clients[(j * (getNbClients() + 1))];
-                        for (int l = 0; l < decalage; ++l) {
-                            gestionnaireClients.allerA(clients[decalage + 1 + l], monde.getEtape(j), l);
-                        }
-                        System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
-                        for (int i = 0; i < decalage; ++i) {
-                            System.out.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
-                        }
+                    // On regarde si tous les clients sont dans le sasSortie.
+                    while (clients[((getNbClients() + 1))] != getNbClients()) {
                         System.out.print("\n");
+                        clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
+                        notifierObservateur();
+                        Thread.sleep(1000);
+                        // On parcourt les étapes.
+                        for (int j = 0; j < monde.nbEtapes(); ++j) {
+                            int decalage = clients[(j * (getNbClients() + 1))];
+                            for (int l = 0; l < decalage; ++l) {
+                                gestionnaireClients.allerA(clients[decalage + 1 + l], monde.getEtape(j), l);
+                            }
+                            System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
+                            for (int i = 0; i < decalage; ++i) {
+                                System.out.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
+                            }
+                            System.out.print("\n");
+                        }
                     }
-                }
-                nettoyage();
+                    nettoyage();
                 } catch (InterruptedException e) {
                     // Le thread se termine.
-                    for(Client c : gestionnaireClients.getListeClient()) {
+                    for (Client c : gestionnaireClients.getListeClient()) {
                         environnement.killPid(c.getNumeroClient());
                     }
                     nettoyage();
-                    System.out.println("Destruction des threads terminé.");
+                    System.out.println("Destruction des threads et processus C terminé.");
                 }
                 return null;
             }
@@ -175,5 +172,10 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
     @Override
     public Iterator<Client> iterator() {
         return gestionnaireClients.iterator();
+    }
+
+    @Override
+    public void ajouterObservateur(Observateur o) {
+        super.ajouterObservateur(o);
     }
 }

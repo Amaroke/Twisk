@@ -65,7 +65,6 @@ public class VueMondeIG extends Pane implements Observateur {
             }
             Pane pane = this;
             if (m.isSimulationStart()) {
-                System.out.println(m.getClients());
                 for (Client c : m.getClients()) {
                     for (EtapeIG e : m.getEtape().values()) {
                         if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
@@ -82,6 +81,5 @@ public class VueMondeIG extends Pane implements Observateur {
         } else {
             Platform.runLater(command);
         }
-
     }
 }

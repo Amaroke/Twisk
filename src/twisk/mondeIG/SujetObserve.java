@@ -28,6 +28,7 @@ public class SujetObserve {
      * Fonction notification d'observateur.
      */
     public void notifierObservateur() {
+        System.out.println(this.obs);
         for (Observateur o : this.obs) o.reagir();
     }
 

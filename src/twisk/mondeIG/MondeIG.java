@@ -107,7 +107,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             src.ajouterSuccesseur(dest);
         }
         verifierMondeIG();
-
         Monde m = creerMonde();
         try {
             ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
@@ -116,7 +115,9 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             simulation = classSim.getDeclaredConstructor().newInstance();
             Method msetNbClients = classSim.getDeclaredMethod("setNbClients", int.class);
             Method msimuler = classSim.getDeclaredMethod("simuler", twisk.monde.Monde.class);
+            Method majouterobs = classSim.getDeclaredMethod("ajouterObservateur", twisk.vues.Observateur.class);
             msetNbClients.invoke(simulation, 5);
+            majouterobs.invoke(simulation,this);
             msimuler.invoke(simulation, m);
             simulationStart = true;
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
