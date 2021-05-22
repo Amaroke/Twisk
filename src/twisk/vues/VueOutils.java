@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import twisk.exceptions.TwiskException.MondeException;
 import twisk.mondeIG.MondeIG;
+import twisk.outils.GestionnaireThreads;
 
 import java.util.Objects;
 
@@ -28,6 +29,7 @@ public class VueOutils extends TilePane implements Observateur {
     public VueOutils(MondeIG monde) {
         m = monde;
         setButton();
+        m.ajouterObservateur(this);
     }
 
     /**
@@ -50,22 +52,34 @@ public class VueOutils extends TilePane implements Observateur {
 
         Tooltip tooltipSim = new Tooltip("Permet de simuler le monde");
         Button bsim = new Button("");
-        bsim.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
+        if(m.isSimulationStart()){
+            bsim.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/stop.png")), 50, 50, true, true)));
+            bsim.setOnAction(actionEvent -> {
+                GestionnaireThreads.getInstance().detruireTout();
+                m.setSimulationStart(false);
+                m.notifierObservateur();
+            });
+        } else {
+            bsim.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
+            bsim.setOnAction(actionEvent -> {
+                try {
+                    m.simuler();
+                } catch (MondeException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
         bsim.setTooltip(tooltipSim);
         bsim.setId("plusbutton");
-        bsim.setOnAction(actionEvent -> {
-            try {
-                m.simuler();
-            } catch (MondeException e) {
-                e.printStackTrace();
-            }
-        });
+
 
         this.getChildren().addAll(b, bguichet, bsim);
     }
 
     @Override
     public void reagir() {
+        this.getChildren().clear();
+        this.setButton();
     }
 
 }

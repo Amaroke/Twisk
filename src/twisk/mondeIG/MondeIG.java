@@ -57,7 +57,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         notifierObservateur();
     }
 
-
+    /**
+     * Fonction de création du monde
+     * @return Monde
+     */
     private Monde creerMonde(){
         correspEtape = new CorrespondanceEtapes();
         Monde m = new Monde();
@@ -119,6 +122,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
+        notifierObservateur();
     }
 
     /**
@@ -480,6 +484,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         etape.setNbJetons(nb);
     }
 
+    /**
+     * Getter des Clients
+     * @return ArrayList<Client>
+     */
     public ArrayList<Client> getClients() {
         GestionnaireClients gestionnaireClients = null;
         try {
@@ -491,10 +499,25 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         return Objects.requireNonNull(gestionnaireClients).getListeClient();
     }
 
+    /**
+     * Getter de l'état de la simulation
+     * @return boolean
+     */
     public boolean isSimulationStart() {
         return simulationStart;
     }
 
+    /**
+     * Setter de l'état de la simulation
+     * @param x boolean
+     */
+    public void setSimulationStart(boolean x){
+        simulationStart = x;
+    }
+
+    /**
+     * Fonction de réaction.
+     */
     @Override
     public void reagir() {
         notifierObservateur();

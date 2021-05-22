@@ -260,7 +260,15 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
         return false;
     }
 
+    /**
+     * Getter sucesseurs
+     * @return ArrayList<EtapeIG>
+     */
     public ArrayList<EtapeIG> getSuccesseur(){ return this.successeur; }
 
+    /**
+     * Savoir si une activtée est restrainte ou non.
+     * @return boolean
+     */
     public boolean estUneActiviteRestreinte(){ return false;}
 }

@@ -121,7 +121,11 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                 nettoyage();
                 } catch (InterruptedException e) {
                     // Le thread se termine.
-                    e.printStackTrace();
+                    for(Client c : gestionnaireClients.getListeClient()) {
+                        environnement.killPid(c.getNumeroClient());
+                    }
+                    nettoyage();
+                    System.out.println("Destruction des threads terminé.");
                 }
                 return null;
             }

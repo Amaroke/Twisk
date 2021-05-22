@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import twisk.mondeIG.MondeIG;
+import twisk.outils.GestionnaireThreads;
 import twisk.vues.VueMenu;
 import twisk.vues.VueMondeIG;
 import twisk.vues.VueOutils;
@@ -35,5 +36,6 @@ public class MainTwisk extends Application {
         primaryStage.getIcons().add(new Image("twisk/ressources/images/twiskimg.png"));
         primaryStage.setTitle("TwiskIG");
         primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> GestionnaireThreads.getInstance().detruireTout());
     }
 }

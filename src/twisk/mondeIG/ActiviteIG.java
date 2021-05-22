@@ -69,11 +69,18 @@ public class ActiviteIG extends EtapeIG {
         this.ecartTemps = ecartTemps;
     }
 
+    /**
+     * Getter pour savoir si l'activitée est restrainte
+     * @return boolean
+     */
     @Override
     public boolean estUneActiviteRestreinte(){
         return restrainte;
     }
 
+    /**
+     * Setter en activité restrainte.
+     */
     public void setEstUnActiviteRestrainte(){
         restrainte = !restrainte;
     }
