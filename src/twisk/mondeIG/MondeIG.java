@@ -141,6 +141,9 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
                 if(succ.estUneActivite() && e.estUnGuichet()){
                     ((ActiviteIG) succ).setEstUnActiviteRestrainte();
                 }
+                if((e.estUneActivite() || e.estUneActiviteRestreinte()) && succ.estUneActiviteRestreinte()) {
+                    throw new MondeException();
+                }
                 // Vérification qu'un guichet n'est pas suivis d'un guichet
                 if(succ.estUnGuichet() && e.estUnGuichet()){
                     throw new MondeException();
