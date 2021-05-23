@@ -1,5 +1,6 @@
 package twisk.vues;
 
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
@@ -58,24 +59,32 @@ public class VueOutils extends TilePane implements Observateur {
 
     @Override
     public void reagir() {
-        this.getChildren().clear();
-        if (m.isSimulationStart()) {
-            simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/stop.png")), 50, 50, true, true)));
-            simulation.setOnAction(actionEvent -> {
-                GestionnaireThreads.getInstance().detruireTout();
-                m.setSimulationStart(false);
-            });
+        Runnable command = () -> {
+            this.getChildren().clear();
+            if (m.isSimulationStart()) {
+                simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/stop.png")), 50, 50, true, true)));
+                simulation.setOnAction(actionEvent -> {
+                    GestionnaireThreads.getInstance().detruireTout();
+                    m.setSimulationStart(false);
+                    m.notifierObservateur();
+                });
+            } else {
+                simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
+                simulation.setOnAction(actionEvent -> {
+                    try {
+                        m.simuler();
+                    } catch (MondeException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+            this.getChildren().addAll(plus, plusGuichet, simulation);
+        };
+        if (Platform.isFxApplicationThread()) {
+            command.run();
         } else {
-            simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
-            simulation.setOnAction(actionEvent -> {
-                try {
-                    m.simuler();
-                } catch (MondeException e) {
-                    e.printStackTrace();
-                }
-            });
+            Platform.runLater(command);
         }
-        this.getChildren().addAll(plus, plusGuichet, simulation);
-    }
 
+    }
 }

@@ -114,6 +114,7 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                         }
                         notifierObservateur();
                     }
+
                     nettoyage();
                 } catch (InterruptedException e) {
                     // Le thread se termine.
