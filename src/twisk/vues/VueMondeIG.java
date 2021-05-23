@@ -1,6 +1,7 @@
 package twisk.vues;
 
 import javafx.application.Platform;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -9,6 +10,9 @@ import twisk.ecouteur.EcouteurDragOver;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 import twisk.simulation.Client;
+
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Classe VueMondeIG.
  *
@@ -39,6 +43,22 @@ public class VueMondeIG extends Pane implements Observateur {
     }
 
 
+    public void ajouterClient(HBox hbox){
+        if (m.isSimulationStart()) {
+            for (Client c : m.getClients()) {
+                for (EtapeIG e : m.getEtape().values()) {
+                    if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
+                        VueClientIG v = new VueClientIG();
+                        hbox.getChildren().add(v);
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
     /**
      * Fonction réaction/création des arc + pdc.
      */
@@ -53,6 +73,7 @@ public class VueMondeIG extends Pane implements Observateur {
             for (EtapeIG e : m) {
                 if (e.estUneActivite()) {
                     VueActiviteIG vue = new VueActiviteIG(m, e);
+                    ajouterClient(vue.getHbox());
                     this.getChildren().add(vue);
                 } else if (e.estUnGuichet()) {
                     VueGuichetIG vue = new VueGuichetIG(m, e);
@@ -61,18 +82,6 @@ public class VueMondeIG extends Pane implements Observateur {
                 for (int j = 0; j < 4; j++) {
                     VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
                     this.getChildren().add(pdc);
-                }
-            }
-            Pane pane = this;
-            if (m.isSimulationStart()) {
-                for (Client c : m.getClients()) {
-                    for (EtapeIG e : m.getEtape().values()) {
-                        if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
-                            Circle clientRond = new Circle(e.getPosX(), e.getPosY(), 10.0);
-                            clientRond.setFill(Color.GREEN);
-                            pane.getChildren().add(clientRond);
-                        }
-                    }
                 }
             }
         };

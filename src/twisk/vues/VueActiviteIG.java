@@ -15,6 +15,8 @@ import twisk.mondeIG.MondeIG;
 
 public class VueActiviteIG extends VueEtapeIG implements Observateur {
 
+    private HBox hbox;
+
     /**
      * Constructeur de la VueActiviteIG.
      *
@@ -30,12 +32,16 @@ public class VueActiviteIG extends VueEtapeIG implements Observateur {
      * Construction de la fenetre.
      */
     public void construireFenetre() {
-        HBox hbox = new HBox();
+        hbox = new HBox();
         hbox.setPrefSize(this.e.getLargeur(), this.e.getHauteur());
         hbox.setId("hbox");
         ActiviteIG activite = (ActiviteIG) getEtape();
         l = new Label(activite.getNom() + ", Temps : " + activite.getTemps() + "±" + activite.getEcartTemps());
         this.getChildren().addAll(this.l, hbox);
+    }
+
+    public HBox getHbox(){
+        return hbox;
     }
 
     @Override

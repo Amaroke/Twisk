@@ -13,9 +13,9 @@ import twisk.mondeIG.EtapeIG;
 
 public class VueClientIG extends Circle implements Observateur {
 
-    public VueClientIG(EtapeIG etape) {
-        Circle clientRond = new Circle(etape.getPosX(), etape.getPosY(), 10.0);
-        clientRond.setFill(Color.GREEN);
+    public VueClientIG() {
+        this.setRadius(4d);
+        this.setFill(Color.GREEN);
     }
 
     @Override
