@@ -43,7 +43,7 @@ public class ClassLoaderPerso extends ClassLoader {
 
             Class<?> c = defineClass(name, byteArr, 0, byteArr.length);
             resolveClass(c);
-            System.out.println("\nLa classe retournée : " + c + "\n\n");
+            System.out.println("\nLa classe retournée : " + c);
             return c;
         } catch (IOException e) {
             e.printStackTrace();

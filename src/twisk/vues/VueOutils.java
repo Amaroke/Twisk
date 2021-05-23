@@ -52,7 +52,7 @@ public class VueOutils extends TilePane implements Observateur {
 
         Tooltip tooltipSim = new Tooltip("Permet de simuler le monde");
         Button bsim = new Button("");
-        if(m.isSimulationStart()){
+        if (m.isSimulationStart()) {
             bsim.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/stop.png")), 50, 50, true, true)));
             bsim.setOnAction(actionEvent -> {
                 GestionnaireThreads.getInstance().detruireTout();
@@ -77,8 +77,7 @@ public class VueOutils extends TilePane implements Observateur {
 
     @Override
     public void reagir() {
-        this.getChildren().clear();
-        this.setButton();
+        // CA BOGUE ICI
     }
 
 }

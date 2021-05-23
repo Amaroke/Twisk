@@ -100,7 +100,6 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                     while (clients[((getNbClients() + 1))] != getNbClients()) {
                         System.out.print("\n");
                         clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
-                        notifierObservateur();
                         Thread.sleep(1000);
                         // On parcourt les étapes.
                         for (int j = 0; j < monde.nbEtapes(); ++j) {
@@ -114,6 +113,7 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                             }
                             System.out.print("\n");
                         }
+                        notifierObservateur();
                     }
                     nettoyage();
                 } catch (InterruptedException e) {
