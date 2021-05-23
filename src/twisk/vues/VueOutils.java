@@ -52,6 +52,14 @@ public class VueOutils extends TilePane implements Observateur {
         simulation = new Button("");
         simulation.setTooltip(tooltipSim);
         simulation.setId("plusbutton");
+        simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
+        simulation.setOnAction(actionEvent -> {
+            try {
+                m.simuler();
+            } catch (MondeException e) {
+                e.printStackTrace();
+            }
+        });
 
         m.ajouterObservateur(this);
         reagir();
@@ -61,6 +69,7 @@ public class VueOutils extends TilePane implements Observateur {
     public void reagir() {
         Runnable command = () -> {
             this.getChildren().clear();
+            if(m.getSimulation() != null) {
             if (m.isSimulationStart()) {
                 simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/stop.png")), 50, 50, true, true)));
                 simulation.setOnAction(actionEvent -> {
@@ -77,7 +86,7 @@ public class VueOutils extends TilePane implements Observateur {
                         e.printStackTrace();
                     }
                 });
-            }
+            }}
             this.getChildren().addAll(plus, plusGuichet, simulation);
         };
         if (Platform.isFxApplicationThread()) {

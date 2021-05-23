@@ -23,12 +23,14 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
     private GestionnaireClients gestionnaireClients;
     private final KitC environnement;
     private int nbClients;
+    private boolean simulationDebute;
 
     /**
      * Constructeur de Simulation.
      */
     public Simulation() {
         environnement = new KitC();
+        simulationDebute = false;
     }
 
     /**
@@ -62,10 +64,12 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
      * @param monde Le monde dans lequel la simulation doit s'executer
      */
     public void simuler(Monde monde) {
+
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {
                 try {
+                    simulationDebute = true;
                     System.out.println(monde.toString());
                     getEnvironnement().creerFichier(monde.toC().toString());
                     getEnvironnement().compiler();
@@ -103,18 +107,16 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                         // On parcourt les étapes.
                         for (int j = 0; j < monde.nbEtapes(); ++j) {
                             int decalage = clients[(j * (getNbClients() + 1))];
-                            for (int l = 0; l < decalage; ++l) {
-                                gestionnaireClients.allerA(clients[decalage + 1 + l], monde.getEtape(j), l);
-                            }
                             System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
                             for (int i = 0; i < decalage; ++i) {
+                                gestionnaireClients.allerA(clients[(j * (getNbClients() + 1)) + 1 + i], monde.getEtape(j), i);
                                 System.out.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
                             }
                             System.out.print("\n");
                         }
                         notifierObservateur();
                     }
-
+                    simulationDebute = false;
                     nettoyage();
                 } catch (InterruptedException e) {
                     // Le thread se termine.
@@ -177,5 +179,13 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
     @Override
     public void ajouterObservateur(Observateur o) {
         super.ajouterObservateur(o);
+    }
+
+    public boolean isSimulationDebute() {
+        return simulationDebute;
+    }
+
+    public void setSimulationDebute(boolean simulationDebute) {
+        this.simulationDebute = simulationDebute;
     }
 }

@@ -37,7 +37,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     private final TailleComposants composants = TailleComposants.getInstance();
     private CorrespondanceEtapes correspEtape;
     private Object simulation;
-    private boolean simulationStart;
 
     /**
      * Fonction ajout d'activité.
@@ -116,10 +115,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             Method msetNbClients = classSim.getDeclaredMethod("setNbClients", int.class);
             Method msimuler = classSim.getDeclaredMethod("simuler", twisk.monde.Monde.class);
             Method majouterobs = classSim.getDeclaredMethod("ajouterObservateur", twisk.vues.Observateur.class);
-            msetNbClients.invoke(simulation, 5);
-            majouterobs.invoke(simulation,this);
+            msetNbClients.invoke(simulation, 10);
+            majouterobs.invoke(simulation, this);
             msimuler.invoke(simulation, m);
-            simulationStart = true;
+            setSimulationStart(true);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -503,20 +502,33 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         return Objects.requireNonNull(gestionnaireClients).getListeClient();
     }
 
-    /**
-     * Getter de l'état de la simulation
-     * @return boolean
-     */
-    public boolean isSimulationStart() {
-        return simulationStart;
+    public void setSimulationStart(boolean bool) {
+        try {
+            Method fonction = simulation.getClass().getDeclaredMethod("setSimulationDebute", boolean.class);
+            fonction.invoke(simulation, bool);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
-     * Setter de l'état de la simulation
-     * @param x boolean
+     * Getter de l'état de la simulation
+     *
+     * @return boolean
      */
-    public void setSimulationStart(boolean x){
-        simulationStart = x;
+    public boolean isSimulationStart() {
+        boolean retour = false;
+        try {
+            Method fonction = simulation.getClass().getDeclaredMethod("isSimulationDebute");
+            retour = (boolean) fonction.invoke(simulation);
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return retour;
+    }
+
+    public Object getSimulation() {
+        return simulation;
     }
 
     /**

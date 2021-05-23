@@ -3,15 +3,11 @@ package twisk.vues;
 import javafx.application.Platform;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import twisk.ecouteur.EcouteurDragDropped;
 import twisk.ecouteur.EcouteurDragOver;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 import twisk.simulation.Client;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Classe VueMondeIG.
@@ -42,22 +38,18 @@ public class VueMondeIG extends Pane implements Observateur {
         reagir();
     }
 
-
-    public void ajouterClient(HBox hbox){
-        if (m.isSimulationStart()) {
-            for (Client c : m.getClients()) {
-                for (EtapeIG e : m.getEtape().values()) {
+    public void ajouterClient(HBox hbox, EtapeIG e) {
+        if (m.getSimulation() != null) {
+            if (m.isSimulationStart()) {
+                for (Client c : m.getClients()) {
                     if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
-                        VueClientIG v = new VueClientIG();
+                        VueClientIG v = new VueClientIG(c);
                         hbox.getChildren().add(v);
                     }
                 }
             }
         }
     }
-
-
-
 
     /**
      * Fonction réaction/création des arc + pdc.
@@ -73,7 +65,7 @@ public class VueMondeIG extends Pane implements Observateur {
             for (EtapeIG e : m) {
                 if (e.estUneActivite()) {
                     VueActiviteIG vue = new VueActiviteIG(m, e);
-                    ajouterClient(vue.getHbox());
+                    ajouterClient(vue.getHbox(), e);
                     this.getChildren().add(vue);
                 } else if (e.estUnGuichet()) {
                     VueGuichetIG vue = new VueGuichetIG(m, e);
