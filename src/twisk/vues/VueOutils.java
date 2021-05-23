@@ -19,7 +19,11 @@ import java.util.Objects;
  */
 
 public class VueOutils extends TilePane implements Observateur {
+
     private final MondeIG m;
+    private final Button plus;
+    private final Button plusGuichet;
+    private final Button simulation;
 
     /**
      * Constructeur VueOutils.
@@ -28,40 +32,42 @@ public class VueOutils extends TilePane implements Observateur {
      */
     public VueOutils(MondeIG monde) {
         m = monde;
-        setButton();
-        m.ajouterObservateur(this);
-    }
 
-    /**
-     * Setter boutons.
-     */
-    public void setButton() {
         Tooltip tooltip = new Tooltip("Permet d'ajouter une activitée");
-        Button b = new Button("");
-        b.setId("plusbutton");
-        b.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/plus.png")), 50, 50, true, true)));
-        b.setTooltip(tooltip);
-        b.setOnAction(actionEvent -> m.ajouter("Activite"));
+        plus = new Button("");
+        plus.setId("plusbutton");
+        plus.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/plus.png")), 50, 50, true, true)));
+        plus.setTooltip(tooltip);
+        plus.setOnAction(actionEvent -> m.ajouter("Activite"));
 
         Tooltip tooltipGuichet = new Tooltip("Permet d'ajouter un guichet dans le monde");
-        Button bguichet = new Button("");
-        bguichet.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/guichet.png")), 50, 50, true, true)));
-        bguichet.setTooltip(tooltipGuichet);
-        bguichet.setId("plusbutton");
-        bguichet.setOnAction(actionEvent -> m.ajouter("Guichet"));
+        plusGuichet = new Button("");
+        plusGuichet.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/guichet.png")), 50, 50, true, true)));
+        plusGuichet.setTooltip(tooltipGuichet);
+        plusGuichet.setId("plusbutton");
+        plusGuichet.setOnAction(actionEvent -> m.ajouter("Guichet"));
 
         Tooltip tooltipSim = new Tooltip("Permet de simuler le monde");
-        Button bsim = new Button("");
+        simulation = new Button("");
+        simulation.setTooltip(tooltipSim);
+        simulation.setId("plusbutton");
+
+        m.ajouterObservateur(this);
+        reagir();
+    }
+
+    @Override
+    public void reagir() {
+        this.getChildren().clear();
         if (m.isSimulationStart()) {
-            bsim.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/stop.png")), 50, 50, true, true)));
-            bsim.setOnAction(actionEvent -> {
+            simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/stop.png")), 50, 50, true, true)));
+            simulation.setOnAction(actionEvent -> {
                 GestionnaireThreads.getInstance().detruireTout();
                 m.setSimulationStart(false);
-                m.notifierObservateur();
             });
         } else {
-            bsim.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
-            bsim.setOnAction(actionEvent -> {
+            simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
+            simulation.setOnAction(actionEvent -> {
                 try {
                     m.simuler();
                 } catch (MondeException e) {
@@ -69,15 +75,7 @@ public class VueOutils extends TilePane implements Observateur {
                 }
             });
         }
-        bsim.setTooltip(tooltipSim);
-        bsim.setId("plusbutton");
-
-        this.getChildren().addAll(b, bguichet, bsim);
-    }
-
-    @Override
-    public void reagir() {
-        // CA BOGUE ICI
+        this.getChildren().addAll(plus, plusGuichet, simulation);
     }
 
 }
