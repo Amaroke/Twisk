@@ -1,6 +1,8 @@
 package twisk;
 
-public class TailleComposants {
+import java.io.Serializable;
+
+public class TailleComposants implements Serializable {
 
     private static final TailleComposants instance = new TailleComposants();
 

@@ -1,5 +1,7 @@
 package twisk.mondeIG;
 
+import java.io.Serializable;
+
 /**
  * Classe PointDeControleIG.
  *
@@ -7,7 +9,7 @@ package twisk.mondeIG;
  * @version 1.0
  */
 
-public class PointDeControleIG {
+public class PointDeControleIG implements Serializable {
 
     private final EtapeIG etape;
     private int posX;

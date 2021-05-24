@@ -10,6 +10,7 @@ import twisk.simulation.Client;
 import twisk.simulation.GestionnaireClients;
 import twisk.vues.Observateur;
 
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -24,7 +25,9 @@ import java.util.Objects;
  * @version 1.0
  */
 @SuppressWarnings("unused")
-public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observateur {
+public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observateur, Serializable {
+
+    private static final long serialVersionUID = 6529685098267757690L;
 
     private final ArrayList<EtapeIG> selectedEtape = new ArrayList<>(10);
     private final ArrayList<ArcIG> selectedArc = new ArrayList<>(10);
@@ -100,13 +103,9 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
      * Fonction de simulation du mondeIG.
      */
     public void simuler() throws MondeException {
-        for (ArcIG a : arc) {
-            EtapeIG src = a.getPoint(0).getEtape();
-            EtapeIG dest = a.getPoint(1).getEtape();
-            src.ajouterSuccesseur(dest);
-        }
         verifierMondeIG();
         Monde m = creerMonde();
+        //deserialization();
         try {
             ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
             Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
@@ -171,8 +170,9 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         }
 
         for (ArcIG e : arc) {
-            if (e.getPoint(1).getPosX() == pt1.getPosX() && e.getPoint(1).getPosY() == pt1.getPosY() ||
-                            e.getPoint(0).getPosX() == pt2.getPosX() && e.getPoint(0).getPosY() == pt2.getPosY()) {
+            if (((e.getPoint(1).getPosX() == pt1.getPosX() && e.getPoint(1).getPosY() == pt1.getPosY()) &&
+                    (e.getPoint(0).getPosX() == pt2.getPosX() && e.getPoint(0).getPosY() == pt2.getPosY())) || (((e.getPoint(0).getPosX() == pt1.getPosX() && e.getPoint(0).getPosY() == pt1.getPosY()) &&
+                    (e.getPoint(1).getPosX() == pt2.getPosX() && e.getPoint(1).getPosY() == pt2.getPosY())))) {
                 throw new AlreadyExistException();
             }
         }
@@ -201,10 +201,16 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             pdcCrea[0] = p;
         } else if (pdcCrea[1] == null) {
             pdcCrea[1] = p;
-            try {
-                this.ajouter(pdcCrea[0], pdcCrea[1]);
-            } finally {
-                this.notifierObservateur();
+            if(!pdcCrea[0].getEtape().estAccessibleDepuis(pdcCrea[1].getEtape())){
+                try {
+                    pdcCrea[0].getEtape().ajouterSuccesseur(pdcCrea[1].getEtape());
+                    this.ajouter(pdcCrea[0], pdcCrea[1]);
+                } finally {
+                    this.notifierObservateur();
+                    pdcCrea[0] = null;
+                    pdcCrea[1] = null;
+                }
+            } else {
                 pdcCrea[0] = null;
                 pdcCrea[1] = null;
             }
@@ -537,6 +543,34 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     @Override
     public void reagir() {
         notifierObservateur();
+    }
+
+    public void deserialization(){
+        File fichiersave = new File("save.ser");
+        try{
+            if(fichiersave.exists()) {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichiersave));
+                MondeIG deser = (MondeIG)ois.readObject();
+                System.out.println(deser.toString());
+                System.out.println("test");
+            }
+        } catch (ClassNotFoundException | IOException e) {
+             e.printStackTrace();
+        }
+    }
+
+
+    public void serialization(){
+        try {
+            File fichiersave = new File("save.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichiersave));
+            MondeIG copie = this;
+            oos.writeObject(copie);
+            oos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

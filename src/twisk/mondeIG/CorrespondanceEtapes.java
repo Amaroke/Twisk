@@ -2,6 +2,7 @@ package twisk.mondeIG;
 
 import twisk.monde.Etape;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /**
@@ -11,7 +12,7 @@ import java.util.HashMap;
  * @version 1.0
  */
 
-public class CorrespondanceEtapes {
+public class CorrespondanceEtapes implements Serializable {
 
     HashMap<EtapeIG, Etape> corresp;
 

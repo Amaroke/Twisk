@@ -1,5 +1,7 @@
 package twisk.outils;
 
+import java.io.Serializable;
+
 /**
  * Classe FabriqueIdentifiant.
  *
@@ -7,7 +9,7 @@ package twisk.outils;
  * @version 1.0
  */
 
-public class FabriqueIdentifiant {
+public class FabriqueIdentifiant implements Serializable {
 
     private static final FabriqueIdentifiant instance = new FabriqueIdentifiant();
     private int noEtape;

@@ -1,5 +1,7 @@
 package twisk.mondeIG;
 
+import java.io.Serializable;
+
 /**
  * Classe ArcIG.
  *
@@ -7,7 +9,7 @@ package twisk.mondeIG;
  * @version 1.0
  */
 
-public class ArcIG {
+public class ArcIG implements Serializable {
 
     private final PointDeControleIG[] pos = new PointDeControleIG[2];
     private boolean selectionne;

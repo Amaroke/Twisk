@@ -1,5 +1,7 @@
 package twisk.monde;
 
+import java.io.Serializable;
+
 /**
  * Classe Activite
  *
@@ -7,7 +9,7 @@ package twisk.monde;
  * @version 1.0
  */
 
-public class Activite extends Etape {
+public class Activite extends Etape implements Serializable {
 
     private final int temps;
     private final int ecartTemps;
@@ -24,7 +26,7 @@ public class Activite extends Etape {
     }
 
     /**
-     * Constructeur d'activite avec son nom temps et écart temps.
+     * Constructeur d'activite avec sodeserialization();n nom temps et écart temps.
      *
      * @param nom        Nom de l'activité
      * @param temps      Temps d'attente dans l'activité

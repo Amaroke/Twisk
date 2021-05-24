@@ -1,5 +1,8 @@
 package twisk.mondeIG;
 
+import twisk.monde.Etape;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -10,7 +13,7 @@ import java.util.Iterator;
  * @version 1.0
  */
 
-public abstract class EtapeIG implements Iterable<PointDeControleIG> {
+public abstract class EtapeIG implements Iterable<PointDeControleIG>, Serializable {
     private final String identifiant;
     private final int largeur;
     private final int hauteur;
@@ -271,4 +274,16 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG> {
      * @return boolean
      */
     public boolean estUneActiviteRestreinte(){ return false;}
+
+
+    public boolean estAccessibleDepuis(EtapeIG etape){
+        for(EtapeIG suivant : etape.getSuccesseur()){
+            if(suivant.equals(this)){
+                return true;
+            } else {
+                return estAccessibleDepuis(suivant);
+            }
+        }
+        return false;
+    }
 }
