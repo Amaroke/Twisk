@@ -26,15 +26,15 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
 
     private static final long serialVersionUID = 6529685098267757690L;
 
-    private final ArrayList<EtapeIG> selectedEtape = new ArrayList<>(10);
-    private final ArrayList<ArcIG> selectedArc = new ArrayList<>(10);
-    private final PointDeControleIG[] pdcCrea = new PointDeControleIG[2];
-    private final ArrayList<ArcIG> arc = new ArrayList<>(10);
-    private final HashMap<String, EtapeIG> etape = new HashMap<>();
-    private final ArrayList<EtapeIG> etapeEntre = new ArrayList<>(5);
-    private final ArrayList<EtapeIG> etapeSortie = new ArrayList<>(5);
-    private final FabriqueIdentifiant fabriqueID = FabriqueIdentifiant.getInstance();
-    private final TailleComposants composants = TailleComposants.getInstance();
+    private ArrayList<EtapeIG> selectedEtape = new ArrayList<>(10);
+    private ArrayList<ArcIG> selectedArc = new ArrayList<>(10);
+    private PointDeControleIG[] pdcCrea = new PointDeControleIG[2];
+    private ArrayList<ArcIG> arc = new ArrayList<>(10);
+    private HashMap<String, EtapeIG> etape = new HashMap<>();
+    private ArrayList<EtapeIG> etapeEntre = new ArrayList<>(5);
+    private ArrayList<EtapeIG> etapeSortie = new ArrayList<>(5);
+    private FabriqueIdentifiant fabriqueID = FabriqueIdentifiant.getInstance();
+    private TailleComposants composants = TailleComposants.getInstance();
     private CorrespondanceEtapes correspEtape;
     private Object simulation;
 
@@ -558,12 +558,35 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         notifierObservateur();
     }
 
+    public PointDeControleIG[] getPdcCrea() {
+        return pdcCrea;
+    }
+
+    public TailleComposants getComposants(){
+        return composants;
+    }
+
+    public FabriqueIdentifiant getFabriqueID(){
+        return fabriqueID;
+    }
+
     public void deserialization(){
         File fichiersave = new File("save.ser");
         try{
             if(fichiersave.exists()) {
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichiersave));
                 MondeIG deser = (MondeIG)ois.readObject();
+                selectedEtape = deser.getSelectedEtape();
+                selectedArc = deser.getSelectedArc();
+                pdcCrea = deser.getPdcCrea();
+                arc = deser.getArc();
+                etape = deser.getEtape();
+                etapeEntre = deser.getEtapeEntre();
+                etapeSortie = deser.getEtapeSortie();
+                composants = deser.getComposants();
+                fabriqueID = deser.getFabriqueID();
+                correspEtape = deser.getCorrespEtape();
+                this.notifierObservateur();
             }
         } catch (ClassNotFoundException | IOException e) {
              e.printStackTrace();
