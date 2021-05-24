@@ -1,5 +1,6 @@
 package twisk.monde;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -11,7 +12,7 @@ import java.util.Iterator;
  * @version 1.0
  */
 
-public class GestionnaireSuccesseurs implements Iterable<Etape> {
+public class GestionnaireSuccesseurs implements Iterable<Etape>, Serializable {
 
     private final ArrayList<Etape> etapes;
 

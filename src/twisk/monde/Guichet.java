@@ -2,6 +2,8 @@ package twisk.monde;
 
 import twisk.outils.FabriqueNumero;
 
+import java.io.Serializable;
+
 /**
  * Classe Guichet
  *
@@ -9,7 +11,7 @@ import twisk.outils.FabriqueNumero;
  * @version 1.0
  */
 
-public class Guichet extends Etape {
+public class Guichet extends Etape implements Serializable {
 
     private final int nbJetons;
     private final int semaphore;

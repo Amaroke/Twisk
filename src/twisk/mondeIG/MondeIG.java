@@ -13,10 +13,7 @@ import twisk.vues.Observateur;
 import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Classe MondeIG.
@@ -105,7 +102,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     public void simuler() throws MondeException {
         verifierMondeIG();
         Monde m = creerMonde();
-        //deserialization();
         try {
             ClassLoaderPerso ClassLoader = new ClassLoaderPerso(ClientTwisk.class.getClassLoader());
             Class<?> classSim = ClassLoader.loadClass("twisk.simulation.Simulation");
@@ -537,6 +533,23 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         return simulation;
     }
 
+    @Override
+    public String toString() {
+        return "MondeIG{" +
+                "selectedEtape=" + selectedEtape +
+                ", selectedArc=" + selectedArc +
+                ", pdcCrea=" + Arrays.toString(pdcCrea) +
+                ", arc=" + arc +
+                ", etape=" + etape +
+                ", etapeEntre=" + etapeEntre +
+                ", etapeSortie=" + etapeSortie +
+                ", fabriqueID=" + fabriqueID +
+                ", composants=" + composants +
+                ", correspEtape=" + correspEtape +
+                ", simulation=" + simulation +
+                '}';
+    }
+
     /**
      * Fonction de réaction.
      */
@@ -551,8 +564,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             if(fichiersave.exists()) {
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichiersave));
                 MondeIG deser = (MondeIG)ois.readObject();
-                System.out.println(deser.toString());
-                System.out.println("test");
             }
         } catch (ClassNotFoundException | IOException e) {
              e.printStackTrace();

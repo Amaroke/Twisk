@@ -2,6 +2,7 @@ package twisk.monde;
 
 import twisk.outils.FabriqueNumero;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Iterator;
  * @author Mathieu Steinbach Hugo & Lambert Calvin
  * @version 1.0
  */
-public abstract class Etape implements Iterable<Etape> {
+public abstract class Etape implements Iterable<Etape> , Serializable {
 
     private final String nom;
     private final GestionnaireSuccesseurs gestionnaireSuccesseurs;

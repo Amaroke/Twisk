@@ -60,8 +60,14 @@ public class VueMenu extends MenuBar implements Observateur {
         suprArc.setOnAction(new EcouteurSupprimerArc(monde));
         suprSelec.setOnAction(new EcouteurSupprimer(monde));
         editions.getItems().addAll(suprSelec, renameselec, suprArc, edtGuichetnom, deselect);
+        Menu save = new Menu("Sauvegarde");
+        MenuItem sauvegarder = new MenuItem("Sauvegarder");
+        MenuItem deserialization = new MenuItem("Charger");
+        sauvegarder.setOnAction(e -> m.serialization());
+        deserialization.setOnAction(e -> m.deserialization());
+        save.getItems().addAll(sauvegarder,deserialization);
 
-        this.getMenus().addAll(fichier, editions, mmonde, param);
+        this.getMenus().addAll(fichier, editions, mmonde, param, save);
     }
 
     /**

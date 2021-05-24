@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @version 1.0
  */
 
-public class Activite extends Etape implements Serializable {
+public class Activite extends Etape implements Serializable{
 
     private final int temps;
     private final int ecartTemps;
