@@ -594,9 +594,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     }
 
 
-    public void deserialisation(String s){
-        System.out.println(s);
-        File fichiersave = new File(String.valueOf(getClass().getResource(s)));
+    public void deserialisation(File fichiersave){
         try{
             if(fichiersave.exists()) {
                 ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichiersave));

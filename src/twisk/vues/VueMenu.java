@@ -1,11 +1,18 @@
 package twisk.vues;
 
 import javafx.application.Platform;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import twisk.ecouteur.*;
 import twisk.mondeIG.MondeIG;
+
+import java.io.File;
 
 
 /**
@@ -62,14 +69,41 @@ public class VueMenu extends MenuBar implements Observateur {
         editions.getItems().addAll(suprSelec, renameselec, suprArc, edtGuichetnom, deselect);
         Menu save = new Menu("Sauvegarde");
         MenuItem sauvegarder = new MenuItem("Sauvegarder");
-        MenuItem deserialization = new MenuItem("Charger");
+        MenuItem charger = new MenuItem("Charger");
         Menu mondepre = new Menu("Monde");
         MenuItem boulangerie = new MenuItem("Boulangerie");
-        boulangerie.setOnAction(e -> m.deserialisation("/mondePredef/boulangerie.ser"));
+        boulangerie.setOnAction(e -> {
+            ///// CA MARCHE PAS
+        });
         mondepre.getItems().add(boulangerie);
         sauvegarder.setOnAction(e -> m.serialization());
-        deserialization.setOnAction(e -> m.deserialization());
-        save.getItems().addAll(sauvegarder,deserialization,mondepre);
+        charger.setOnAction(e -> {
+            final Stage dialog = new Stage();
+            dialog.setTitle("Changement des dates");
+            Button valider = new Button("Valider");
+            Label label = new Label("Fichier :");
+            FileChooser choixfichier = new FileChooser();
+            choixfichier.setTitle("Quel fichier charger ?");
+            choixfichier.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("ser", "*.ser"),
+                    new FileChooser.ExtensionFilter("All Files", "*.*"));
+            File selectedFile = choixfichier.showOpenDialog(dialog);
+
+            dialog.initModality(Modality.NONE);
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.setAlignment(Pos.CENTER);
+
+            dialogVbox.getChildren().addAll(label, valider);
+            valider.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                    f -> {
+                        monde.deserialisation(selectedFile);
+                        dialog.close();
+                    });
+            Scene dialogScene = new Scene(dialogVbox, 500, 250);
+            dialog.setScene(dialogScene);
+            dialog.show();
+        });
+        save.getItems().addAll(sauvegarder, charger, mondepre);
 
         this.getMenus().addAll(fichier, editions, mmonde, param, save);
     }

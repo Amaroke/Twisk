@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class VueGuichetIG extends VueEtapeIG implements Observateur {
 
+    private final ArrayList<HBox> hbox = new ArrayList<>(10);
+
     /**
      * Constructeur de la VueActiviteIG.
      *
@@ -40,12 +42,17 @@ public class VueGuichetIG extends VueEtapeIG implements Observateur {
         ArrayList<HBox> list = new ArrayList<>(10);
         for(int i = 0; i < 10; i++){
             HBox square = new HBox();
+            this.hbox.add(square);
             square.setPrefSize((float) this.e.getLargeur()/guichet.getNbJetons(), (float) this.e.getHauteur()/ guichet.getNbJetons());
             square.setId("hboxguichet");
             list.add(square);
         }
         hbox.getChildren().addAll(list);
         this.getChildren().add(hbox);
+    }
+
+    public ArrayList<HBox> getHbox() {
+        return hbox;
     }
 
     @Override

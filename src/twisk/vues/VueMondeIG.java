@@ -9,6 +9,8 @@ import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 import twisk.simulation.Client;
 
+import java.util.ArrayList;
+
 /**
  * Classe VueMondeIG.
  *
@@ -51,6 +53,23 @@ public class VueMondeIG extends Pane implements Observateur {
         }
     }
 
+    public void ajouterClientGuichet(ArrayList<HBox> hbox, EtapeIG e) {
+        if (m.getSimulation() != null) {
+            if (m.isSimulationStart()) {
+                for (Client c : m.getClients()) {
+                    if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
+                        VueClientIG v = new VueClientIG(c);
+                        for (HBox hb : hbox) {
+                            if (hb.getChildren().isEmpty()) {
+                                hb.getChildren().add(v);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Fonction réaction/création des arc + pdc.
      */
@@ -69,6 +88,7 @@ public class VueMondeIG extends Pane implements Observateur {
                     this.getChildren().add(vue);
                 } else if (e.estUnGuichet()) {
                     VueGuichetIG vue = new VueGuichetIG(m, e);
+                    ajouterClientGuichet(vue.getHbox(), e);
                     this.getChildren().add(vue);
                 }
                 if(!e.estUnGuichet()){
