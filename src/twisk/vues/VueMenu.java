@@ -81,7 +81,23 @@ public class VueMenu extends MenuBar implements Observateur {
                 ioException.printStackTrace();
             }
         });
-        mondepre.getItems().add(boulangerie);
+        MenuItem zoo = new MenuItem("Zoo");
+        zoo.setOnAction( e-> {
+            try {
+                monde.deserialisation(new File(Objects.requireNonNull(getClass().getResource("/twisk/ressources/mondePredef/zoo.ser")).toURI()));
+            } catch (URISyntaxException ioException){
+                ioException.printStackTrace();
+            }
+        });
+        MenuItem bifurcator = new MenuItem("Bifurcator");
+        bifurcator.setOnAction(e-> {
+            try {
+                monde.deserialisation(new File(Objects.requireNonNull(getClass().getResource("/twisk/ressources/mondePredef/bifurcator.ser")).toURI()));
+            } catch (URISyntaxException ioexception) {
+                ioexception.printStackTrace();
+            }
+        });
+        mondepre.getItems().addAll(boulangerie,zoo, bifurcator);
         sauvegarder.setOnAction(e -> m.serialization());
         charger.setOnAction(e -> {
             final Stage dialog = new Stage();

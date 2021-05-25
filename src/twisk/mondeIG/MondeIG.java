@@ -36,7 +36,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     private FabriqueIdentifiant fabriqueID = FabriqueIdentifiant.getInstance();
     private TailleComposants composants = TailleComposants.getInstance();
     private CorrespondanceEtapes correspEtape;
-    private Object simulation;
+    private transient Object simulation;
 
     /**
      * Fonction ajout d'activité.
@@ -305,6 +305,9 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         while (iteArc.hasNext()) {
             ArcIG arc = iteArc.next();
             if (arc.getSelectionne()) {
+                EtapeIG successeur = arc.getPoint(1).getEtape();
+                EtapeIG etape = arc.getPoint(0).getEtape();
+                etape.getSuccesseur().remove(successeur);
                 iteArc.remove();
             }
         }
