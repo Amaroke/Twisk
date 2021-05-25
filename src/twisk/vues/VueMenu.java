@@ -72,9 +72,7 @@ public class VueMenu extends MenuBar implements Observateur {
         MenuItem charger = new MenuItem("Charger");
         Menu mondepre = new Menu("Monde");
         MenuItem boulangerie = new MenuItem("Boulangerie");
-        boulangerie.setOnAction(e -> {
-            ///// CA MARCHE PAS
-        });
+        // PROBLEME ICI boulangerie.setOnAction(new File("/ressources/mondePredef/boulangerie.ser");
         mondepre.getItems().add(boulangerie);
         sauvegarder.setOnAction(e -> m.serialization());
         charger.setOnAction(e -> {
