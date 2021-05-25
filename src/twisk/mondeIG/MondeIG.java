@@ -594,6 +594,30 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     }
 
 
+    public void deserialisation(String s){
+        System.out.println(s);
+        File fichiersave = new File(String.valueOf(getClass().getResource(s)));
+        try{
+            if(fichiersave.exists()) {
+                ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichiersave));
+                MondeIG deser = (MondeIG)ois.readObject();
+                selectedEtape = deser.getSelectedEtape();
+                selectedArc = deser.getSelectedArc();
+                pdcCrea = deser.getPdcCrea();
+                arc = deser.getArc();
+                etape = deser.getEtape();
+                etapeEntre = deser.getEtapeEntre();
+                etapeSortie = deser.getEtapeSortie();
+                composants = deser.getComposants();
+                fabriqueID = deser.getFabriqueID();
+                correspEtape = deser.getCorrespEtape();
+                this.notifierObservateur();
+            }
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void serialization(){
         try {
             File fichiersave = new File("save.ser");

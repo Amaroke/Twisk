@@ -63,9 +63,13 @@ public class VueMenu extends MenuBar implements Observateur {
         Menu save = new Menu("Sauvegarde");
         MenuItem sauvegarder = new MenuItem("Sauvegarder");
         MenuItem deserialization = new MenuItem("Charger");
+        Menu mondepre = new Menu("Monde");
+        MenuItem boulangerie = new MenuItem("Boulangerie");
+        boulangerie.setOnAction(e -> m.deserialisation("/mondePredef/boulangerie.ser"));
+        mondepre.getItems().add(boulangerie);
         sauvegarder.setOnAction(e -> m.serialization());
         deserialization.setOnAction(e -> m.deserialization());
-        save.getItems().addAll(sauvegarder,deserialization);
+        save.getItems().addAll(sauvegarder,deserialization,mondepre);
 
         this.getMenus().addAll(fichier, editions, mmonde, param, save);
     }

@@ -24,7 +24,7 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG>, Serializab
     private boolean entree;
     private boolean sortie;
     private final ArrayList<EtapeIG> successeur;
-    private PointDeControleIG[] pdc = new PointDeControleIG[4];
+    private PointDeControleIG[] pdc;
 
     /**
      * Constructeur EtapeIG.
@@ -43,10 +43,17 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG>, Serializab
         this.posX = (int) (Math.random() * (1000 - larg));
         this.posY = (int) (Math.random() * (700 - haut));
         this.successeur = new ArrayList<>(5);
-        pdc[0] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY(), this);
-        pdc[1] = new PointDeControleIG(getPosX(), getPosY() + (getHauteur() / 2), this);
-        pdc[2] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY() + getHauteur(), this);
-        pdc[3] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2), this);
+        if(this.estUneActiviteRestreinte() || this.estUneActivite()){
+            pdc = new PointDeControleIG[4];
+            pdc[0] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY(), this);
+            pdc[1] = new PointDeControleIG(getPosX(), getPosY() + (getHauteur() / 2), this);
+            pdc[2] = new PointDeControleIG(getPosX() + (getLargeur() / 2), getPosY() + getHauteur(), this);
+            pdc[3] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2), this);
+        } else {
+            pdc = new PointDeControleIG[2];
+            pdc[0] = new PointDeControleIG(getPosX(), getPosY() + (getHauteur() / 2), this);
+            pdc[1] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2), this);
+        }
     }
 
 
@@ -72,6 +79,14 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG>, Serializab
 
         pdc[3].setPosX(getPosX() + getLargeur());
         pdc[3].setPosY(getPosY() + (getHauteur() / 2));
+    }
+
+    public void setPDCGuichet(){
+        pdc[0].setPosX(getPosX());
+        pdc[0].setPosY(getPosY() + (getHauteur() / 2));
+
+        pdc[1].setPosX(getPosX() + getLargeur());
+        pdc[1].setPosY(getPosY() + (getHauteur() / 2));
     }
 
     /**

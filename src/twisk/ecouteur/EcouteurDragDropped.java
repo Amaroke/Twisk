@@ -45,7 +45,11 @@ public class EcouteurDragDropped implements EventHandler<DragEvent> {
             if (vueEtape != null) {
                 vueEtape.getEtape().setPosX((int) dragEvent.getX());
                 vueEtape.getEtape().setPosY((int) dragEvent.getY());
-                vueEtape.getEtape().setPDC();
+                if(!vueEtape.getEtape().estUnGuichet()) {
+                    vueEtape.getEtape().setPDC();
+                } else {
+                    vueEtape.getEtape().setPDCGuichet();
+                }
                 vueEtape.relocate((int) dragEvent.getX(), (int) dragEvent.getY());
                 success = true;
             }
