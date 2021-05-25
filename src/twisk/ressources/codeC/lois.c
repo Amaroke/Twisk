@@ -37,6 +37,6 @@ int main(int argc, char **argv)
     srand(time(NULL));
     for (int i = 0; i < 5000; ++i)
     {
-        delaiExponentiel(10.0);
+        delaiExponentiel(1.0/10.0);
     }
 }

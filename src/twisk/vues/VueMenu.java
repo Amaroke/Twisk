@@ -13,6 +13,8 @@ import twisk.ecouteur.*;
 import twisk.mondeIG.MondeIG;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.util.Objects;
 
 
 /**
@@ -72,7 +74,13 @@ public class VueMenu extends MenuBar implements Observateur {
         MenuItem charger = new MenuItem("Charger");
         Menu mondepre = new Menu("Monde");
         MenuItem boulangerie = new MenuItem("Boulangerie");
-        // PROBLEME ICI boulangerie.setOnAction(new File("/ressources/mondePredef/boulangerie.ser");
+        boulangerie.setOnAction(e->{
+            try {
+                monde.deserialisation(new File(Objects.requireNonNull(getClass().getResource("/twisk/ressources/mondePredef/boulangerie.ser")).toURI()));
+            } catch (URISyntaxException ioException) {
+                ioException.printStackTrace();
+            }
+        });
         mondepre.getItems().add(boulangerie);
         sauvegarder.setOnAction(e -> m.serialization());
         charger.setOnAction(e -> {
