@@ -61,14 +61,13 @@ public class VueMenu extends MenuBar implements Observateur {
         Menu editions = new Menu("Edition");
         renameselec.setOnAction(new EcouteurRenommer(monde));
         renameselec.setDisable(true);
-        MenuItem edtGuichetnom = new MenuItem("Modifier le nom du guichet");
         MenuItem suprSelec = new MenuItem("Supprimer la sélection");
         MenuItem suprArc = new MenuItem("Supprimer les arcs");
         MenuItem deselect = new MenuItem("Déselectionner");
         deselect.setOnAction(new EcouteurDeselection(monde));
         suprArc.setOnAction(new EcouteurSupprimerArc(monde));
         suprSelec.setOnAction(new EcouteurSupprimer(monde));
-        editions.getItems().addAll(suprSelec, renameselec, suprArc, edtGuichetnom, deselect);
+        editions.getItems().addAll(suprSelec, renameselec, suprArc, deselect);
         Menu save = new Menu("Sauvegarde");
         MenuItem sauvegarder = new MenuItem("Sauvegarder");
         MenuItem charger = new MenuItem("Charger");
@@ -102,28 +101,15 @@ public class VueMenu extends MenuBar implements Observateur {
         charger.setOnAction(e -> {
             final Stage dialog = new Stage();
             dialog.setTitle("Changement des dates");
-            Button valider = new Button("Valider");
-            Label label = new Label("Fichier :");
             FileChooser choixfichier = new FileChooser();
             choixfichier.setTitle("Quel fichier charger ?");
             choixfichier.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("ser", "*.ser"),
                     new FileChooser.ExtensionFilter("All Files", "*.*"));
             File selectedFile = choixfichier.showOpenDialog(dialog);
-
-            dialog.initModality(Modality.NONE);
-            VBox dialogVbox = new VBox(20);
-            dialogVbox.setAlignment(Pos.CENTER);
-
-            dialogVbox.getChildren().addAll(label, valider);
-            valider.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                    f -> {
-                        monde.deserialisation(selectedFile);
-                        dialog.close();
-                    });
-            Scene dialogScene = new Scene(dialogVbox, 500, 250);
-            dialog.setScene(dialogScene);
-            dialog.show();
+            if(selectedFile != null){
+                monde.deserialisation(selectedFile);
+            }
         });
         save.getItems().addAll(sauvegarder, charger, mondepre);
 
