@@ -5,18 +5,19 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import twisk.ecouteur.*;
+import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.Objects;
-
 
 /**
  * Classe VueMenu.
@@ -29,9 +30,13 @@ public class VueMenu extends MenuBar implements Observateur {
     private final MondeIG monde;
     private final MenuItem renameselec = new MenuItem("Renommer la sélection");
     private final Menu param = new Menu("Paramètres");
+    private final Menu menuMonde = new Menu("Monde");
+    private final Menu menuEdition = new Menu("Edition");
     private final MenuItem temps;
     private final MenuItem ecartTemps;
     private final MenuItem modifJeton;
+    private final MenuItem suprArc = new MenuItem("Supprimer les arcs");
+
     /**
      * Constructeur VueMenu.
      *
@@ -40,40 +45,55 @@ public class VueMenu extends MenuBar implements Observateur {
     public VueMenu(MondeIG m) {
         this.monde = m;
         m.ajouterObservateur(this);
-        Menu fichier = new Menu("Fichier");
-        Menu mmonde = new Menu("Monde");
-        MenuItem entre = new MenuItem("Entrée");
-        temps = new MenuItem("Temps");
-        ecartTemps = new MenuItem("Ecart temps");
-        ecartTemps.setOnAction(new EcouteurEcartTemps(monde));
-        temps.setOnAction(new EcouteurTemps(monde));
-        modifJeton = new MenuItem("Modifier le nombre de jeton");
-        modifJeton.setOnAction(new EcouteurModifJetons(monde));
-        param.setDisable(true);
-        param.getItems().addAll(temps, ecartTemps, modifJeton);
+
+        // Menu monde
+        MenuItem entre = new MenuItem("Définir comme entrée");
+        MenuItem sortie = new MenuItem("Définir comme sortie");
         entre.setOnAction(new EcouteurEntree(monde));
-        MenuItem sortie = new MenuItem("Sortie");
         sortie.setOnAction(new EcouteurSortie(monde));
-        MenuItem quitter = new MenuItem("Quitter");
-        mmonde.getItems().addAll(entre, sortie);
-        quitter.setOnAction(e -> Platform.exit());
-        fichier.getItems().add(quitter);
-        Menu editions = new Menu("Edition");
-        renameselec.setOnAction(new EcouteurRenommer(monde));
-        renameselec.setDisable(true);
+        menuMonde.setDisable(true);
+        menuMonde.getItems().addAll(entre, sortie);
+
+        // Menu édition
         MenuItem suprSelec = new MenuItem("Supprimer la sélection");
-        MenuItem suprArc = new MenuItem("Supprimer les arcs");
         MenuItem deselect = new MenuItem("Déselectionner");
+        renameselec.setOnAction(new EcouteurRenommer(monde));
         deselect.setOnAction(new EcouteurDeselection(monde));
         suprArc.setOnAction(new EcouteurSupprimerArc(monde));
         suprSelec.setOnAction(new EcouteurSupprimer(monde));
-        editions.getItems().addAll(suprSelec, renameselec, suprArc, deselect);
+        renameselec.setDisable(true);
+        menuEdition.setDisable(true);
+        menuEdition.getItems().addAll(suprSelec, renameselec, suprArc, deselect);
+
+        // Menu paramètres
+        temps = new MenuItem("Temps");
+        ecartTemps = new MenuItem("Ecart temps");
+        modifJeton = new MenuItem("Nombre de jeton");
+        temps.setOnAction(new EcouteurTemps(monde));
+        ecartTemps.setOnAction(new EcouteurEcartTemps(monde));
+        modifJeton.setOnAction(new EcouteurModifJetons(monde));
+        param.setDisable(true);
+        param.getItems().addAll(temps, ecartTemps, modifJeton);
+
+        // Menu simulation
+        Menu simulation = new Menu("Simulation");
+        MenuItem nbClient = new MenuItem("Choisir le nombre de client");
+        MenuItem loiClient = new MenuItem("Choisir la loi d'arrivée des clients");
+        nbClient.setDisable(true);
+        loiClient.setDisable(true);
+        /* À faire
+        nbClient.setOnAction();
+        loiClient.setOnAction();
+        */
+        simulation.getItems().addAll(nbClient, loiClient);
+
+        // Menu de sauvegarde/Chargement.
         Menu save = new Menu("Sauvegarde");
-        MenuItem sauvegarder = new MenuItem("Sauvegarder");
-        MenuItem charger = new MenuItem("Charger");
-        Menu mondepre = new Menu("Monde");
+        MenuItem sauvegarder = new MenuItem("Sauvegarder un monde");
+        MenuItem charger = new MenuItem("Charger un monde");
+        Menu mondepre = new Menu("Monde prédéfinis");
         MenuItem boulangerie = new MenuItem("Boulangerie");
-        boulangerie.setOnAction(e->{
+        boulangerie.setOnAction(e -> {
             try {
                 monde.deserialisation(new File(Objects.requireNonNull(getClass().getResource("/twisk/ressources/mondePredef/boulangerie.ser")).toURI()));
             } catch (URISyntaxException ioException) {
@@ -81,10 +101,10 @@ public class VueMenu extends MenuBar implements Observateur {
             }
         });
         MenuItem zoo = new MenuItem("Zoo");
-        zoo.setOnAction( e-> {
+        zoo.setOnAction(e -> {
             try {
                 monde.deserialisation(new File(Objects.requireNonNull(getClass().getResource("/twisk/ressources/mondePredef/zoo.ser")).toURI()));
-            } catch (URISyntaxException ioException){
+            } catch (URISyntaxException ioException) {
                 ioException.printStackTrace();
             }
         });
@@ -112,7 +132,6 @@ public class VueMenu extends MenuBar implements Observateur {
                 dialogVbox.setPadding(new Insets(20,20,20,20));
                 dialogVbox.setAlignment(Pos.CENTER);
                 dialogVbox.getChildren().addAll(label, saisie, valider);
-
                 valider.setOnAction(f -> {
                     m.serialization(pathtodir.getAbsolutePath() + "/" + saisie.getText() + ".ser");
                     dialog.close();
@@ -138,7 +157,14 @@ public class VueMenu extends MenuBar implements Observateur {
         });
         save.getItems().addAll(sauvegarder, charger, mondepre);
 
-        this.getMenus().addAll(fichier, editions, mmonde, param, save);
+        //Menu Quitter
+        Menu menuQuitter = new Menu("Quitter");
+        MenuItem quitter = new MenuItem("Fermer l'application");
+        quitter.setOnAction(e -> Platform.exit());
+        quitter.setAccelerator(KeyCombination.keyCombination("Ctrl+X"));
+        menuQuitter.getItems().add(quitter);
+
+        this.getMenus().addAll(menuMonde, menuEdition, param, simulation, save, menuQuitter);
     }
 
     /**
@@ -153,5 +179,11 @@ public class VueMenu extends MenuBar implements Observateur {
             ecartTemps.setDisable(monde.getSelectedEtape().get(0).estUnGuichet());
             modifJeton.setDisable(monde.getSelectedEtape().get(0).estUneActivite());
         }
+        menuMonde.setDisable(monde.getSelectedEtape().size() == 0);
+        for (EtapeIG e : monde.getSelectedEtape()) {
+            menuMonde.setDisable(e.estUnGuichet());
+        }
+        menuEdition.setDisable(monde.getSelectedEtape().size() == 0);
+        suprArc.setDisable(monde.getSelectedArc().size() == 0);
     }
 }
