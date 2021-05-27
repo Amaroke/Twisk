@@ -1,10 +1,10 @@
 package twisk.vues;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -97,12 +97,31 @@ public class VueMenu extends MenuBar implements Observateur {
                 ioexception.printStackTrace();
             }
         });
-        mondepre.getItems().addAll(boulangerie,zoo, bifurcator);
-        sauvegarder.setOnAction(e ->{
+        mondepre.getItems().addAll(boulangerie, zoo, bifurcator);
+        sauvegarder.setOnAction(e -> {
             DirectoryChooser dir = new DirectoryChooser();
             File pathtodir = dir.showDialog(this.getScene().getWindow());
-            if(pathtodir != null){
-                m.serialization(pathtodir.getAbsolutePath());
+            if (pathtodir != null) {
+                final Stage dialog = new Stage();
+                dialog.setTitle("Nom de la sauvegarde");
+                Button valider = new Button("Valider");
+                Label label = new Label("Nom du fichier : ");
+                TextField saisie = new TextField();
+
+                dialog.initModality(Modality.NONE);
+                VBox dialogVbox = new VBox(20);
+                dialogVbox.setPadding(new Insets(20,20,20,20));
+                dialogVbox.setAlignment(Pos.CENTER);
+                dialogVbox.getChildren().addAll(label, saisie, valider);
+
+                valider.setOnAction(f -> {
+                    m.serialization(pathtodir.getAbsolutePath() + "/" + saisie.getText() + ".ser");
+                    dialog.close();
+                });
+                Scene dialogScene = new Scene(dialogVbox, 300, 125);
+                dialog.setScene(dialogScene);
+                dialog.setResizable(false);
+                dialog.show();
             }
         });
         charger.setOnAction(e -> {
@@ -114,7 +133,7 @@ public class VueMenu extends MenuBar implements Observateur {
                     new FileChooser.ExtensionFilter("ser", "*.ser"),
                     new FileChooser.ExtensionFilter("All Files", "*.*"));
             File selectedFile = choixfichier.showOpenDialog(dialog);
-            if(selectedFile != null){
+            if (selectedFile != null) {
                 monde.deserialisation(selectedFile);
             }
         });

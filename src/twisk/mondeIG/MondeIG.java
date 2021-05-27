@@ -597,8 +597,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
 
     public void serialization(String path){
         try {
-            File fichiersave = new File(path+"/save.ser");
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichiersave));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
             MondeIG copie = this;
             oos.writeObject(copie);
             oos.close();
