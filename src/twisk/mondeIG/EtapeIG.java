@@ -1,7 +1,5 @@
 package twisk.mondeIG;
 
-import twisk.monde.Etape;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;

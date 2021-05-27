@@ -88,15 +88,8 @@ public class KitC {
             Runtime runtime = Runtime.getRuntime();
             Process p = runtime.exec("gcc -Wall -fPIC -c /tmp/twisk/client.c -o /tmp/twisk/client.o");
             // Récupération des messages sur la sortie standard.
-            BufferedReader output = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            String ligne;
-            while ((ligne = output.readLine()) != null) {
-                System.out.println(ligne);
-            }
-            while ((ligne = error.readLine()) != null) {
-                System.out.println(ligne);
-            }
+            new BufferedReader(new InputStreamReader(p.getInputStream()));
+            new BufferedReader(new InputStreamReader(p.getErrorStream()));
             p.waitFor();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -110,15 +103,8 @@ public class KitC {
         try {
             Runtime runtime = Runtime.getRuntime();
             Process p = runtime.exec("gcc -shared /tmp/twisk/programmeC.o /tmp/twisk/codeNatif.o /tmp/twisk/client.o -o /tmp/twisk/libTwisk" + num_lib + ".so");
-            BufferedReader output = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            String ligne;
-            while ((ligne = output.readLine()) != null) {
-                System.out.println(ligne);
-            }
-            while ((ligne = error.readLine()) != null) {
-                System.out.println(ligne);
-            }
+            new BufferedReader(new InputStreamReader(p.getInputStream()));
+            new BufferedReader(new InputStreamReader(p.getErrorStream()));
             p.waitFor();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

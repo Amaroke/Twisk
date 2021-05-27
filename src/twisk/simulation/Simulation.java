@@ -116,10 +116,15 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                         }
                         notifierObservateur();
                     }
+                    GestionnaireThreads.getInstance().detruireTout();
                     simulationDebute = false;
                     nettoyage();
+                    notifierObservateur();
                 } catch (InterruptedException e) {
                     // Le thread se termine.
+                    GestionnaireThreads.getInstance().detruireTout();
+                    simulationDebute = false;
+                    notifierObservateur();
                     for (Client c : gestionnaireClients.getListeClient()) {
                         environnement.killPid(c.getNumeroClient());
                     }
