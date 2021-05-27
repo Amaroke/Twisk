@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -97,7 +98,13 @@ public class VueMenu extends MenuBar implements Observateur {
             }
         });
         mondepre.getItems().addAll(boulangerie,zoo, bifurcator);
-        sauvegarder.setOnAction(e -> m.serialization());
+        sauvegarder.setOnAction(e ->{
+            DirectoryChooser dir = new DirectoryChooser();
+            File pathtodir = dir.showDialog(this.getScene().getWindow());
+            if(pathtodir != null){
+                m.serialization(pathtodir.getAbsolutePath());
+            }
+        });
         charger.setOnAction(e -> {
             final Stage dialog = new Stage();
             dialog.setTitle("Changement des dates");
