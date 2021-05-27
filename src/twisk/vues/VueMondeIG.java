@@ -91,20 +91,22 @@ public class VueMondeIG extends Pane implements Observateur {
                     ajouterClientGuichet(vue.getHbox(), e);
                     this.getChildren().add(vue);
                 }
-                if(!e.estUnGuichet()){
-                    for (int j = 0; j < 4; j++) {
-                        VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
-                        this.getChildren().add(pdc);
-                    }
-                } else {
-                    for (int j = 0; j < 2; j++) {
-                        VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
-                        this.getChildren().add(pdc);
+                if (m.getSimulation() == null || !m.isSimulationStart()) {
+                    if (!e.estUnGuichet()) {
+                        for (int j = 0; j < 4; j++) {
+                            VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
+                            this.getChildren().add(pdc);
+                        }
+                    } else {
+                        for (int j = 0; j < 2; j++) {
+                            VuePointDeControleIG pdc = new VuePointDeControleIG(m, e.getPdc(j));
+                            this.getChildren().add(pdc);
+                        }
                     }
                 }
             }
         };
-        if(Platform.isFxApplicationThread()){
+        if (Platform.isFxApplicationThread()) {
             command.run();
         } else {
             Platform.runLater(command);

@@ -1,11 +1,14 @@
 package twisk.vues;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import javafx.util.Duration;
 import twisk.exceptions.TwiskException.MondeException;
 import twisk.mondeIG.MondeIG;
 import twisk.outils.GestionnaireThreads;
@@ -57,7 +60,13 @@ public class VueOutils extends TilePane implements Observateur {
             try {
                 m.simuler();
             } catch (MondeException e) {
-                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Monde Incorrect");
+                alert.setContentText(e.getMessage());
+                alert.show();
+                PauseTransition p = new PauseTransition(Duration.seconds(4));
+                p.setOnFinished(event -> alert.close());
+                p.play();
             }
         });
 
@@ -71,6 +80,8 @@ public class VueOutils extends TilePane implements Observateur {
             this.getChildren().clear();
             if(m.getSimulation() != null) {
             if (m.isSimulationStart()) {
+                plus.setDisable(true);
+                plusGuichet.setDisable(true);
                 simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/stop.png")), 50, 50, true, true)));
                 simulation.setOnAction(actionEvent -> {
                     GestionnaireThreads.getInstance().detruireTout();
@@ -78,12 +89,20 @@ public class VueOutils extends TilePane implements Observateur {
                     m.notifierObservateur();
                 });
             } else {
+                plus.setDisable(false);
+                plusGuichet.setDisable(false);
                 simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
                 simulation.setOnAction(actionEvent -> {
                     try {
                         m.simuler();
                     } catch (MondeException e) {
-                        e.printStackTrace();
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Monde Incorrect");
+                        alert.setContentText(e.getMessage());
+                        alert.show();
+                        PauseTransition p = new PauseTransition(Duration.seconds(4));
+                        p.setOnFinished(event -> alert.close());
+                        p.play();
                     }
                 });
             }}

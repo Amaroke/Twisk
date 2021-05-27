@@ -30,6 +30,7 @@ public class VuePointDeControleIG extends Circle implements Observateur {
 
     @Override
     public void reagir() {
+
     }
 
 }

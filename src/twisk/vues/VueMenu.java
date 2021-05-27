@@ -15,6 +15,7 @@ import twisk.mondeIG.MondeIG;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 
@@ -32,7 +33,6 @@ public class VueMenu extends MenuBar implements Observateur {
     private final MenuItem temps;
     private final MenuItem ecartTemps;
     private final MenuItem modifJeton;
-
     /**
      * Constructeur VueMenu.
      *
