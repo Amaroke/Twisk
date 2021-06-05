@@ -21,7 +21,7 @@ public class ClientTwisk {
     public static void main(String[] args) {
 
         // Premier Monde
-        Monde monde = new Monde();
+        Monde monde = new Monde(1);
 
         Activite zoo = new Activite("balade au zoo");
         Activite zoo3 = new Activite("balade au zoo3");
@@ -47,7 +47,7 @@ public class ClientTwisk {
         }
 
         // Deuxième monde
-        Monde monde2 = new Monde();
+        Monde monde2 = new Monde(1);
 
         Activite zoo2 = new Activite("balade au zoo", 3, 1);
         Guichet guichet2 = new Guichet("acces au toboggan", 2);

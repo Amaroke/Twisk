@@ -1,9 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
+#include "lois.h"
 
-void delaiUniforme(int temps, int delta)
+double delaiUniforme(int temps, int delta)
 {
     int bi, bs;
     int n, nbSec;
@@ -14,22 +11,22 @@ void delaiUniforme(int temps, int delta)
     n = bs - bi;
     nbSec = (rand() / (float)RAND_MAX) * n;
     nbSec += bi;
-    printf("%d\n", nbSec);
+    return nbSec;
 }
 
-void delaiGauss(double moyenne, double ecartype)
+double delaiGauss(double moyenne, double ecartype)
 {
     double U1 = rand() / (RAND_MAX + 1.0);
     double U2 = rand() / (RAND_MAX + 1.0);
     double x = sqrt(-(2 * log(U1))) * cos(2 * M_PI * U2) * ecartype + moyenne;
-    printf("%f\n", x);
+    return x;
 }
 
-void delaiExponentiel(double lambda)
+double delaiExponentiel(double lambda)
 {
     double U = rand() / (RAND_MAX + 1.0);
     double x = -(log(U) / lambda);
-    printf("%f\n", x);
+    return x;
 }
 
 int main(int argc, char **argv)

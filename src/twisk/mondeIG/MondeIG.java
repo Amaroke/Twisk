@@ -21,12 +21,13 @@ import java.util.*;
  * @author Lambert Calvin & Mathieu Steinbach Hugo
  * @version 1.0
  */
-@SuppressWarnings("unused")
+@SuppressWarnings("all")
+
 public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observateur, Serializable {
 
     private static final long serialVersionUID = 6529685098267757690L;
 
-    private int loi;
+    private int loi = 1;
     private int nbClient = 5;
     private ArrayList<EtapeIG> selectedEtape = new ArrayList<>(10);
     private ArrayList<ArcIG> selectedArc = new ArrayList<>(10);
@@ -64,7 +65,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
      */
     private Monde creerMonde(){
         correspEtape = new CorrespondanceEtapes();
-        Monde m = new Monde();
+        Monde m = new Monde(this.loi);
         for(EtapeIG e: etape.values()){
             if(e.estUneActiviteRestreinte()){
                 Etape actres = new ActiviteRestreinte(e.getNom(), ((ActiviteIG) e).getTemps(), ((ActiviteIG) e).getEcartTemps());
@@ -628,9 +629,6 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             loi = 2;
         } else if (s.equals("Exponentielle")){
             loi = 3;
-        } else {
-            loi = 0;
         }
-        System.out.println(loi);
     }
 }

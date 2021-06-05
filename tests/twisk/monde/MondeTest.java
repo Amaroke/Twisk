@@ -14,13 +14,13 @@ class MondeTest {
 
     @BeforeEach
     void setUp() {
-        m = new Monde();
-        m1 = new Monde();
+        m = new Monde(1);
+        m1 = new Monde(1);
         m1.ajouter(new Activite("etape2"), new ActiviteRestreinte("etape3"), new Guichet("etape4"), new ActiviteRestreinte("etape5"));
-        m2 = new Monde();
+        m2 = new Monde(1);
         m2.ajouter(new Guichet("Guichet1"), new Guichet("Guichet2"));
 
-        m3 = new Monde();
+        m3 = new Monde(1);
         Activite a = new Activite("Activite");
         m3.ajouter(a);
         m3.aCommeEntree(a);

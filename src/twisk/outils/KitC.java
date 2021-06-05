@@ -33,7 +33,7 @@ public class KitC {
             // Création du répertoire twisk sous /tmp. Ne déclenche pas d’erreur si le répertoire existe déjà.
             Files.createDirectories(Paths.get("/tmp/twisk"));
             // Copie des deux fichiers programmeC.o et def.h depuis le projet sous /tmp/twisk.
-            String[] liste = {"programmeC.o", "def.h", "codeNatif.o"};
+            String[] liste = {"programmeC.o", "def.h", "codeNatif.o", "lois.h", "lois.c"};
             for (String nom : liste) {
                 InputStream source = Objects.requireNonNull(getClass().getResource("/codeC/" + nom)).openStream();
                 File destination = new File("/tmp/twisk/" + nom);
@@ -87,10 +87,9 @@ public class KitC {
         try {
             Runtime runtime = Runtime.getRuntime();
             Process p = runtime.exec("gcc -Wall -fPIC -c /tmp/twisk/client.c -o /tmp/twisk/client.o");
-            // Récupération des messages sur la sortie standard.
-            new BufferedReader(new InputStreamReader(p.getInputStream()));
-            new BufferedReader(new InputStreamReader(p.getErrorStream()));
             p.waitFor();
+            Process p2 = runtime.exec("gcc -Wall -fPIC -c /tmp/twisk/lois.c -o /tmp/twisk/lois.o -lm");
+            p2.waitFor();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -102,9 +101,7 @@ public class KitC {
     public void construireLaLibrairie() {
         try {
             Runtime runtime = Runtime.getRuntime();
-            Process p = runtime.exec("gcc -shared /tmp/twisk/programmeC.o /tmp/twisk/codeNatif.o /tmp/twisk/client.o -o /tmp/twisk/libTwisk" + num_lib + ".so");
-            new BufferedReader(new InputStreamReader(p.getInputStream()));
-            new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            Process p = runtime.exec("gcc -shared /tmp/twisk/programmeC.o /tmp/twisk/lois.o /tmp/twisk/codeNatif.o /tmp/twisk/client.o -o /tmp/twisk/libTwisk" + num_lib + ".so");
             p.waitFor();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

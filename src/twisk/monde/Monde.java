@@ -20,10 +20,10 @@ public class Monde implements Iterable<Etape> {
     /**
      * Constructeur du Monde.
      */
-    public Monde() {
+    public Monde(int loi) {
         FabriqueNumero singleton = FabriqueNumero.getInstance();
         singleton.reset();
-        sasEntree = new SasEntree();
+        sasEntree = new SasEntree(loi);
         sasSortie = new SasSortie();
         gestionnaireEtapes = new GestionnaireEtapes();
         this.ajouter(getSasEntree(), getSasSortie());
@@ -92,7 +92,8 @@ public class Monde implements Iterable<Etape> {
         s.append("#include <stdlib.h>\n" +
                 "#include <stdio.h>\n" +
                 "#include <time.h>\n" +
-                "#include \"def.h\" \n \n");
+                "#include \"def.h\" \n" +
+                "#include \"lois.h\"\n \n");
         for (Etape e : getGestionnaireEtapes()) {
             s.append("#define ").append(e.getNom().replaceAll("\\s+", "")).append(" ").append(e.getNum()).append("\n");
         }
@@ -166,6 +167,4 @@ public class Monde implements Iterable<Etape> {
     public SasSortie getSasSortie() {
         return sasSortie;
     }
-
-
 }

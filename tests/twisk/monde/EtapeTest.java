@@ -27,7 +27,7 @@ class EtapeTest {
         a2 = new Activite("a2", 5, 5);
         g1 = new Guichet("Guichet");
         g2 = new Guichet("Guichet", 5);
-        se = new SasEntree();
+        se = new SasEntree(1);
         ss = new SasSortie();
 
     }
