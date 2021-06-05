@@ -5,6 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Classe ClassLoaderPerso.
+ *
+ * @author Lambert Calvin & Mathieu Steinbach Hugo
+ * @version 1.0
+ */
+
 @SuppressWarnings("deprecation")
 public class ClassLoaderPerso extends ClassLoader {
 

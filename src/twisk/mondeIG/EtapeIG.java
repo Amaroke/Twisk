@@ -79,6 +79,9 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG>, Serializab
         pdc[3].setPosY(getPosY() + (getHauteur() / 2));
     }
 
+    /**
+     * Setter PointDeControle des Guichet.
+     */
     public void setPDCGuichet(){
         pdc[0].setPosX(getPosX());
         pdc[0].setPosY(getPosY() + (getHauteur() / 2));
@@ -288,7 +291,11 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG>, Serializab
      */
     public boolean estUneActiviteRestreinte(){ return false;}
 
-
+    /**
+     * Fonction de detection de circuit permet de savoir si une étape est accessible depuis une autre.
+     * @param etape EtapeIG
+     * @return boolean
+     */
     public boolean estAccessibleDepuis(EtapeIG etape){
         for(EtapeIG suivant : etape.getSuccesseur()){
             if(suivant.equals(this)){

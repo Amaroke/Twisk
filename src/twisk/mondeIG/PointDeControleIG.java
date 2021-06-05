@@ -90,6 +90,10 @@ public class PointDeControleIG implements Serializable {
         return etape;
     }
 
+    /**
+     * Getter identifiant.
+     * @return String
+     */
     public String getIdf() {
         return idf;
     }

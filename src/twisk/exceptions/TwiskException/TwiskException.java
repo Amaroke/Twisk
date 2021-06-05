@@ -9,6 +9,10 @@ package twisk.exceptions.TwiskException;
 
 public class TwiskException extends Exception {
 
+    /**
+     * Constructeur de la superclass TwiskException
+     * @param s String
+     */
     public TwiskException(String s) {
         super(s);
     }

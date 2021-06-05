@@ -40,6 +40,10 @@ public class VueActiviteIG extends VueEtapeIG implements Observateur {
         this.getChildren().addAll(this.l, hbox);
     }
 
+    /**
+     * Getter de la HBox
+     * @return Hbox
+     */
     public HBox getHbox(){
         return hbox;
     }

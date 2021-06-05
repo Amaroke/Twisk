@@ -13,6 +13,10 @@ import twisk.simulation.Client;
 
 public class VueClientIG extends Circle implements Observateur {
 
+    /**
+     * Constructeur de la VueClientIG.
+     * @param c Client
+     */
     public VueClientIG(Client c) {
         this.setRadius(4d);
         switch(c.getNumeroClient() % 10) {

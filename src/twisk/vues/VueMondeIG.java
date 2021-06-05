@@ -41,6 +41,11 @@ public class VueMondeIG extends Pane implements Observateur {
         reagir();
     }
 
+    /**
+     * Permet d'ajouter les client dans le VueDuMondeIG.
+     * @param hbox Hbox
+     * @param e EtapeIG
+     */
     public void ajouterClient(HBox hbox, EtapeIG e) {
         if (m.getSimulation() != null) {
             if (m.isSimulationStart()) {
@@ -54,6 +59,11 @@ public class VueMondeIG extends Pane implements Observateur {
         }
     }
 
+    /**
+     * Permet d'ajouter les clients au seins d'un guichet.
+     * @param hbox ArrayList<HBox>
+     * @param e EtapeIG
+     */
     public void ajouterClientGuichet(ArrayList<HBox> hbox, EtapeIG e) {
         if (m.getSimulation() != null) {
             if (m.isSimulationStart()) {

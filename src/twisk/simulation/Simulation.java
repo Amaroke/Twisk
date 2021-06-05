@@ -67,7 +67,6 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
      * @param monde Le monde dans lequel la simulation doit s'executer
      */
     public void simuler(Monde monde) {
-
         Task<Void> task = new Task<>() {
             @Override
             protected Void call() {

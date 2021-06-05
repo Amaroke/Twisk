@@ -552,6 +552,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         return retour;
     }
 
+    /**
+     * Getter de la simulation
+     * @return Object
+     */
     public Object getSimulation() {
         return simulation;
     }
@@ -581,18 +585,34 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         notifierObservateur();
     }
 
+    /**
+     * Getter du tableau de PointDeControle.
+     * @return PointDeControleIG[]
+     */
     public PointDeControleIG[] getPdcCrea() {
         return pdcCrea;
     }
 
+    /**
+     * Getter de TailleComposant.
+     * @return TailleComposant.
+     */
     public TailleComposants getComposants(){
         return composants;
     }
 
+    /**
+     * Getter de la Fabrique d'indentifiant.
+     * @return FabriqueIdentifiant
+     */
     public FabriqueIdentifiant getFabriqueID(){
         return fabriqueID;
     }
 
+    /**
+     * Fonction de désérialisation depuis une fichier .ser.
+     * @param fichiersave File
+     */
     public void deserialisation(File fichiersave){
         try{
             if(fichiersave.exists()) {
@@ -615,6 +635,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         }
     }
 
+    /**
+     * Fonction de sérialisation du monde.
+     * @param path String
+     */
     public void serialization(String path){
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path));
@@ -627,10 +651,19 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
 
     }
 
+    /**
+     * Getter du nombre de clients dans le monde.
+     * @return int
+     */
     public int getNbClient(){
         return this.nbClient;
     }
 
+    /**
+     * Setter du nombre de client dans le monde.
+     * @param nb int
+     * @throws InvalidNumberClient
+     */
     public void setNbClient(int nb) throws InvalidNumberClient {
         if(nb > 0 && nb <= 20){
             this.nbClient = nb;
@@ -639,6 +672,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         }
     }
 
+    /**
+     * Fonction de selection des loi en fonction du resultat de la combobox.
+     * @param s String
+     */
     public void selectionLoi(String s){
         if(s.equals("Uniforme")){
             loi = 1;

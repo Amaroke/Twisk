@@ -83,6 +83,10 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
         return e;
     }
 
+    /**
+     * Getter du monde.
+     * @return MondeIG
+     */
     public MondeIG getMonde(){
         return m;
     }

@@ -52,10 +52,18 @@ public class GuichetIG extends EtapeIG {
         return true;
     }
 
+    /**
+     * Setter du sens de sortie d'un guichet.
+     * @param sensSortie int
+     */
     public void setSensSortie(int sensSortie) {
         this.sensSortie = sensSortie;
     }
 
+    /**
+     * Getter du sens de sortie d'un guichet.
+     * @return int
+     */
     public int getSensSortie() {
         return sensSortie;
     }

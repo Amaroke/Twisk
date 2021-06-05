@@ -51,6 +51,10 @@ public class VueGuichetIG extends VueEtapeIG implements Observateur {
         this.getChildren().add(hbox);
     }
 
+    /**
+     * Getter de la HBox
+     * @return Hbox
+     */
     public ArrayList<HBox> getHbox() {
         return hbox;
     }
