@@ -109,18 +109,6 @@ public class KitC {
     }
 
     /**
-     * Fonction de destructions des processus C
-     * @param c int
-     */
-    public void killPid(int c) {
-        try {
-            Runtime runtime = Runtime.getRuntime();
-            runtime.exec("kill -9"+ c);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-    /**
      * Getter du numéro de la lib.
      * @return int
      */

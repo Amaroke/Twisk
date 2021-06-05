@@ -46,9 +46,12 @@ public class GestionnaireThreads {
      * Fonction de destruction des task dans le thread
      */
     public void detruireTout() {
+        System.out.println(threads);
         for(Thread thread : threads) {
             thread.interrupt();
         }
+        System.out.println(threads);
         threads.clear();
+        System.out.println(threads);
     }
 }

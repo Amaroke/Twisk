@@ -17,6 +17,7 @@ import twisk.ecouteur.*;
 import twisk.exceptions.TwiskException.InvalidNumberClient;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
+import twisk.outils.GestionnaireThreads;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -202,7 +203,10 @@ public class VueMenu extends MenuBar implements Observateur {
         //Menu Quitter
         Menu menuQuitter = new Menu("Quitter");
         MenuItem quitter = new MenuItem("Fermer l'application");
-        quitter.setOnAction(e -> Platform.exit());
+        quitter.setOnAction(e -> {
+            GestionnaireThreads.getInstance().detruireTout();
+            Platform.exit();
+        });
         quitter.setAccelerator(KeyCombination.keyCombination("Ctrl+X"));
         menuQuitter.getItems().add(quitter);
 

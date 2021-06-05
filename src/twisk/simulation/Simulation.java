@@ -9,7 +9,8 @@ import twisk.outils.GestionnaireThreads;
 import twisk.outils.KitC;
 import twisk.vues.Observateur;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
@@ -120,20 +121,28 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                         notifierObservateur();
                     }
                     ecriture.close();
-                    GestionnaireThreads.getInstance().detruireTout();
-                    simulationDebute = false;
-                    nettoyage();
-                    notifierObservateur();
-                } catch (InterruptedException e) {
-                    // Le thread se termine.
-                    GestionnaireThreads.getInstance().detruireTout();
-                    simulationDebute = false;
-                    notifierObservateur();
-                    for (Client c : gestionnaireClients.getListeClient()) {
-                        environnement.killPid(c.getNumeroClient());
+                    for (Client c : gestionnaireClients) {
+                        try {
+                            Runtime.getRuntime().exec("kill -TERM -" + c.getNumeroClient());
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
                     }
+                    simulationDebute = false;
+                    notifierObservateur();
                     nettoyage();
-                    System.out.println("Destruction des threads et processus C terminé.");
+                    GestionnaireThreads.getInstance().detruireTout();
+                } catch (InterruptedException e) {
+                    for (Client c : gestionnaireClients) {
+                        try {
+                            Runtime.getRuntime().exec("kill -TERM -" + c.getNumeroClient());
+                        } catch (IOException ioException) {
+                            ioException.printStackTrace();
+                        }
+                    }
+                    simulationDebute = false;
+                    notifierObservateur();
+                    nettoyage();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
