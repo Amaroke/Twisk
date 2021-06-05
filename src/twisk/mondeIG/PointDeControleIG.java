@@ -14,6 +14,7 @@ public class PointDeControleIG implements Serializable {
     private final EtapeIG etape;
     private int posX;
     private int posY;
+    private String idf;
 
     /**
      * Constructeur PointDeControleIG.
@@ -27,6 +28,22 @@ public class PointDeControleIG implements Serializable {
         this.posY = posY;
         etape = e;
     }
+
+    /**
+     * Constructeur PointDeControleIG.
+     *
+     * @param posX int
+     * @param posY int
+     * @param e    EtapeIG
+     * @param s    String
+     */
+    public PointDeControleIG(int posX, int posY, EtapeIG e, String s) {
+        this.posX = posX;
+        this.posY = posY;
+        etape = e;
+        this.idf = s;
+    }
+
 
     /**
      * Getter PosX.
@@ -71,5 +88,9 @@ public class PointDeControleIG implements Serializable {
      */
     public EtapeIG getEtape() {
         return etape;
+    }
+
+    public String getIdf() {
+        return idf;
     }
 }

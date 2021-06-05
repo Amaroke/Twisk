@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import twisk.ecouteur.EcouteurDragDropped;
 import twisk.ecouteur.EcouteurDragOver;
 import twisk.mondeIG.EtapeIG;
+import twisk.mondeIG.GuichetIG;
 import twisk.mondeIG.MondeIG;
 import twisk.simulation.Client;
 
@@ -59,9 +60,26 @@ public class VueMondeIG extends Pane implements Observateur {
                 for (Client c : m.getClients()) {
                     if (m.getCorrespEtape().get(e).equals(c.getEtape())) {
                         VueClientIG v = new VueClientIG(c);
-                        for (HBox hb : hbox) {
-                            if (hb.getChildren().isEmpty()) {
-                                hb.getChildren().add(v);
+                        if (!e.estUnGuichet()) {
+                            for (HBox hb : hbox) {
+                                if (hb.getChildren().isEmpty()) {
+                                    hb.getChildren().add(v);
+                                }
+                            }
+                        } else {
+                            if (((GuichetIG) e).getSensSortie() == 0) {
+                                for (HBox hBox : hbox) {
+                                    if (hBox.getChildren().isEmpty()) {
+                                        hBox.getChildren().add(v);
+                                    }
+                                }
+                            }
+                            else{
+                                for (int i = hbox.size()-1; i >= 0; --i) {
+                                    if (hbox.get(i).getChildren().isEmpty()) {
+                                        hbox.get(i).getChildren().add(v);
+                                    }
+                                }
                             }
                         }
                     }

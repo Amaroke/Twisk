@@ -49,8 +49,8 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG>, Serializab
             pdc[3] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2), this);
         } else {
             pdc = new PointDeControleIG[2];
-            pdc[0] = new PointDeControleIG(getPosX(), getPosY() + (getHauteur() / 2), this);
-            pdc[1] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2), this);
+            pdc[0] = new PointDeControleIG(getPosX(), getPosY() + (getHauteur() / 2), this, "g");
+            pdc[1] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2 ), this, "d");
         }
     }
 

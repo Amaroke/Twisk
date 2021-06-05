@@ -231,7 +231,7 @@ public class VueMenu extends MenuBar implements Observateur {
         for (EtapeIG e : monde.getSelectedEtape()) {
             menuMonde.setDisable(e.estUnGuichet());
         }
-        menuEdition.setDisable(monde.getSelectedEtape().size() == 0);
+        menuEdition.setDisable(monde.getSelectedEtape().size() == 0 && monde.getSelectedArc().size() == 0);
         suprArc.setDisable(monde.getSelectedArc().size() == 0);
     }
 }

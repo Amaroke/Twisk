@@ -81,7 +81,7 @@ public class ActiviteIG extends EtapeIG {
     /**
      * Setter en activité restrainte.
      */
-    public void setEstUnActiviteRestrainte(){
+    public void setEstUnActiviteRestreinte(){
         restrainte = !restrainte;
     }
 }

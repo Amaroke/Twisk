@@ -10,6 +10,7 @@ package twisk.mondeIG;
 public class GuichetIG extends EtapeIG {
 
     private int nbJetons;
+    private int sensSortie; // 0 = sortie à droite, 1 = sortie à gauche.
 
     /**
      * Constructeur ActiviteIG.
@@ -49,5 +50,13 @@ public class GuichetIG extends EtapeIG {
     @Override
     public boolean estUnGuichet() {
         return true;
+    }
+
+    public void setSensSortie(int sensSortie) {
+        this.sensSortie = sensSortie;
+    }
+
+    public int getSensSortie() {
+        return sensSortie;
     }
 }

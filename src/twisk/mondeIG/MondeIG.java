@@ -135,9 +135,9 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         }
         for(EtapeIG e : etape.values()){
             for(EtapeIG succ : e.getSuccesseur()){
-                // Met l'activité suivant guichet en tant qu'activité restrainte.
+                // Met l'activité suivant guichet en tant qu'activité restreinte.
                 if(succ.estUneActivite() && e.estUnGuichet()){
-                    ((ActiviteIG) succ).setEstUnActiviteRestrainte();
+                    ((ActiviteIG) succ).setEstUnActiviteRestreinte();
                 }
                 if((e.estUneActivite() || e.estUneActiviteRestreinte()) && succ.estUneActiviteRestreinte()) {
                     throw new MondeException();
@@ -151,7 +151,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
                     throw new MondeException();
                 }
 
-                if(e.estUnGuichet() && e.getSuccesseur().size() >= 2){
+                if (e.estUnGuichet() && e.getSuccesseur().size() > 1) {
                     throw new MondeException();
                 }
             }
@@ -207,6 +207,14 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             if(!pdcCrea[0].getEtape().estAccessibleDepuis(pdcCrea[1].getEtape())){
                 try {
                     pdcCrea[0].getEtape().ajouterSuccesseur(pdcCrea[1].getEtape());
+                    if (pdcCrea[0].getEtape().estUnGuichet()) {
+                        if (pdcCrea[0].getIdf().equals("g")) {
+                            ((GuichetIG) pdcCrea[0].getEtape()).setSensSortie(1);
+                        }
+                        if (pdcCrea[0].getIdf().equals("d")) {
+                            ((GuichetIG) pdcCrea[0].getEtape()).setSensSortie(0);
+                        }
+                    }
                     this.ajouter(pdcCrea[0], pdcCrea[1]);
                 } finally {
                     this.notifierObservateur();
@@ -290,6 +298,11 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         while (ite.hasNext()) {
             EtapeIG etape = ite.next();
             if (etape.getSelectionne()) {
+                for (EtapeIG e : getEtape().values()) {
+                    e.getSuccesseur().remove(etape);
+                }
+                getEtapeSortie().remove(etape);
+                getEtapeEntre().remove(etape);
                 etape.suprPDC();
                 ite.remove();
             }
@@ -619,7 +632,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     }
 
     public void setNbClient(int nb) throws InvalidNumberClient {
-        if(nb > 0 && nb <= 30){
+        if(nb > 0 && nb <= 20){
             this.nbClient = nb;
         } else {
             throw new InvalidNumberClient();
