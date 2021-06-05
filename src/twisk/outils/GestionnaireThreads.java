@@ -49,5 +49,6 @@ public class GestionnaireThreads {
         for(Thread thread : threads) {
             thread.interrupt();
         }
+        threads.clear();
     }
 }
