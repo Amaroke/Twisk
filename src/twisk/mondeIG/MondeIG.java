@@ -150,6 +150,10 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
                 if(e.getSuccesseur().size() < 1){
                     throw new MondeException();
                 }
+
+                if(e.estUnGuichet() && e.getSuccesseur().size() >= 2){
+                    throw new MondeException();
+                }
             }
         }
     }
