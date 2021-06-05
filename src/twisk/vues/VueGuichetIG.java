@@ -40,10 +40,10 @@ public class VueGuichetIG extends VueEtapeIG implements Observateur {
         HBox hbox = new HBox();
         hbox.setPrefSize(this.e.getLargeur(), this.e.getHauteur());
         ArrayList<HBox> list = new ArrayList<>(10);
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < getMonde().getNbClient(); i++){
             HBox square = new HBox();
             this.hbox.add(square);
-            square.setPrefSize((float) this.e.getLargeur()/guichet.getNbJetons(), (float) this.e.getHauteur()/ guichet.getNbJetons());
+            square.setPrefSize((float) this.e.getLargeur()/ getMonde().getNbClient(), (float) this.e.getHauteur()/getMonde().getNbClient());
             square.setId("hboxguichet");
             list.add(square);
         }

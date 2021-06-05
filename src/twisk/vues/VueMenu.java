@@ -1,5 +1,6 @@
 package twisk.vues;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,13 +12,16 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import twisk.ecouteur.*;
+import twisk.exceptions.TwiskException.InvalidNumberClient;
 import twisk.mondeIG.EtapeIG;
 import twisk.mondeIG.MondeIG;
 
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Classe VueMenu.
@@ -80,10 +84,30 @@ public class VueMenu extends MenuBar implements Observateur {
         // Menu simulation
         MenuItem nbClient = new MenuItem("Choisir le nombre de client");
         MenuItem loiClient = new MenuItem("Choisir la loi d'arrivée des clients");
-        nbClient.setDisable(true);
         loiClient.setDisable(true);
+        nbClient.setOnAction(e -> {
+            TextInputDialog dialog = new TextInputDialog("1");
+            dialog.setTitle("Réglage écart temps");
+            dialog.setHeaderText("Donnez l'écart temps de votre activité");
+            dialog.setContentText("Écart temps :");
+            Optional<String> result = dialog.showAndWait();
+
+            if(result.isPresent()){
+                try {
+                    monde.setNbClient(Integer.parseInt(result.get()));
+                    monde.notifierObservateur();
+                } catch (InvalidNumberClient error){
+                    Alert a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("Erreur");
+                    a.setContentText(error.getMessage());
+                    a.show();
+                    PauseTransition p = new PauseTransition(Duration.seconds(4));
+                    p.setOnFinished(event -> a.close());
+                    p.play();
+                }
+            }
+        });
         /* À faire
-        nbClient.setOnAction();
         loiClient.setOnAction();
         */
         simulation.getItems().addAll(nbClient, loiClient);

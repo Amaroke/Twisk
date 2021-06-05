@@ -26,6 +26,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
 
     private static final long serialVersionUID = 6529685098267757690L;
 
+    private int nbClient = 5;
     private ArrayList<EtapeIG> selectedEtape = new ArrayList<>(10);
     private ArrayList<ArcIG> selectedArc = new ArrayList<>(10);
     private PointDeControleIG[] pdcCrea = new PointDeControleIG[2];
@@ -110,7 +111,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
             Method msetNbClients = classSim.getDeclaredMethod("setNbClients", int.class);
             Method msimuler = classSim.getDeclaredMethod("simuler", twisk.monde.Monde.class);
             Method majouterobs = classSim.getDeclaredMethod("ajouterObservateur", twisk.vues.Observateur.class);
-            msetNbClients.invoke(simulation, 10);
+            msetNbClients.invoke(simulation, getNbClient());
             majouterobs.invoke(simulation, this);
             msimuler.invoke(simulation, m);
             setSimulationStart(true);
@@ -607,4 +608,15 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
 
     }
 
+    public int getNbClient(){
+        return this.nbClient;
+    }
+
+    public void setNbClient(int nb) throws InvalidNumberClient {
+        if(nb > 0 && nb <= 30){
+            this.nbClient = nb;
+        } else {
+            throw new InvalidNumberClient();
+        }
+    }
 }

@@ -118,7 +118,7 @@ public class KitC {
     public void killPid(int c) {
         try {
             Runtime runtime = Runtime.getRuntime();
-            runtime.exec("kill "+ c);
+            runtime.exec("kill -9"+ c);
         } catch (IOException e){
             e.printStackTrace();
         }
