@@ -32,6 +32,8 @@ public class VueMenu extends MenuBar implements Observateur {
     private final Menu param = new Menu("Paramètres");
     private final Menu menuMonde = new Menu("Monde");
     private final Menu menuEdition = new Menu("Edition");
+    private final Menu simulation = new Menu("Simulation");
+    private final Menu save = new Menu("Sauvegarde");
     private final MenuItem temps;
     private final MenuItem ecartTemps;
     private final MenuItem modifJeton;
@@ -76,7 +78,6 @@ public class VueMenu extends MenuBar implements Observateur {
         param.getItems().addAll(temps, ecartTemps, modifJeton);
 
         // Menu simulation
-        Menu simulation = new Menu("Simulation");
         MenuItem nbClient = new MenuItem("Choisir le nombre de client");
         MenuItem loiClient = new MenuItem("Choisir la loi d'arrivée des clients");
         nbClient.setDisable(true);
@@ -88,7 +89,6 @@ public class VueMenu extends MenuBar implements Observateur {
         simulation.getItems().addAll(nbClient, loiClient);
 
         // Menu de sauvegarde/Chargement.
-        Menu save = new Menu("Sauvegarde");
         MenuItem sauvegarder = new MenuItem("Sauvegarder un monde");
         MenuItem charger = new MenuItem("Charger un monde");
         Menu mondepre = new Menu("Monde prédéfinis");
@@ -172,6 +172,8 @@ public class VueMenu extends MenuBar implements Observateur {
      */
     @Override
     public void reagir() {
+        save.setDisable(monde.isSimulationStart());
+        simulation.setDisable(monde.isSimulationStart());
         renameselec.setDisable(monde.getSelectedEtape().size() != 1);
         param.setDisable(monde.getSelectedEtape().size() != 1);
         if (monde.getSelectedEtape().size() == 1) {

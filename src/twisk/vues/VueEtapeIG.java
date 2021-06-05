@@ -49,8 +49,8 @@ public abstract class VueEtapeIG extends VBox implements Observateur {
         }
         constructionLogo();
         this.relocate(etape.getPosX(), etape.getPosY());
-        this.setOnMouseClicked(new EcouteurEtape(e, m));
         if(m.getSimulation() == null || !m.isSimulationStart()) {
+            this.setOnMouseClicked(new EcouteurEtape(e, m));
             this.setOnDragDetected(new EcouteurDragDetected(this));
         }
     }
