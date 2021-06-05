@@ -172,8 +172,8 @@ public class VueMenu extends MenuBar implements Observateur {
      */
     @Override
     public void reagir() {
-        save.setDisable(monde.isSimulationStart());
-        simulation.setDisable(monde.isSimulationStart());
+        save.setDisable(monde.getSimulation() != null && monde.isSimulationStart() );
+        simulation.setDisable(monde.getSimulation() != null && monde.isSimulationStart());
         renameselec.setDisable(monde.getSelectedEtape().size() != 1);
         param.setDisable(monde.getSelectedEtape().size() != 1);
         if (monde.getSelectedEtape().size() == 1) {
