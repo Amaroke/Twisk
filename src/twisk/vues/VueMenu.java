@@ -84,7 +84,6 @@ public class VueMenu extends MenuBar implements Observateur {
         // Menu simulation
         MenuItem nbClient = new MenuItem("Choisir le nombre de client");
         MenuItem loiClient = new MenuItem("Choisir la loi d'arrivée des clients");
-        loiClient.setDisable(true);
         nbClient.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog("1");
             dialog.setTitle("Réglage écart temps");
@@ -107,9 +106,28 @@ public class VueMenu extends MenuBar implements Observateur {
                 }
             }
         });
-        /* À faire
-        loiClient.setOnAction();
-        */
+        loiClient.setOnAction(e -> {
+            final Stage dialog = new Stage();
+            dialog.setTitle("Loi de simulation");
+            Button valider = new Button("Valider");
+            ComboBox<String> combo = new ComboBox<>();
+            combo.getItems().addAll("Uniforme", "Gaussienne", "Exponentielle");
+
+            dialog.initModality(Modality.NONE);
+            VBox dialogVbox = new VBox(20);
+            dialogVbox.setPadding(new Insets(20,20,20,20));
+            dialogVbox.setAlignment(Pos.CENTER);
+            dialogVbox.getChildren().addAll(combo, valider);
+            valider.setOnAction(f -> {
+                monde.selectionLoi(combo.getSelectionModel().getSelectedItem());
+                dialog.close();
+            });
+            Scene dialogScene = new Scene(dialogVbox, 300, 125);
+            dialog.setScene(dialogScene);
+            dialog.setResizable(false);
+            dialog.show();
+
+        });
         simulation.getItems().addAll(nbClient, loiClient);
 
         // Menu de sauvegarde/Chargement.

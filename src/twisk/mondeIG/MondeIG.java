@@ -26,6 +26,7 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
 
     private static final long serialVersionUID = 6529685098267757690L;
 
+    private int loi;
     private int nbClient = 5;
     private ArrayList<EtapeIG> selectedEtape = new ArrayList<>(10);
     private ArrayList<ArcIG> selectedArc = new ArrayList<>(10);
@@ -618,5 +619,18 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
         } else {
             throw new InvalidNumberClient();
         }
+    }
+
+    public void selectionLoi(String s){
+        if(s.equals("Uniforme")){
+            loi = 1;
+        } else if (s.equals("Gaussienne")){
+            loi = 2;
+        } else if (s.equals("Exponentielle")){
+            loi = 3;
+        } else {
+            loi = 0;
+        }
+        System.out.println(loi);
     }
 }
