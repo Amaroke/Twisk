@@ -9,6 +9,8 @@ import twisk.outils.GestionnaireThreads;
 import twisk.outils.KitC;
 import twisk.vues.Observateur;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 /**
@@ -70,11 +72,12 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
             protected Void call() {
                 try {
                     simulationDebute = true;
-                    System.out.println(monde.toString());
                     getEnvironnement().creerFichier(monde.toC().toString());
                     getEnvironnement().compiler();
                     getEnvironnement().construireLaLibrairie();
                     System.load("/tmp/twisk/libTwisk" + environnement.getNumLib() + ".so");
+                    PrintWriter ecriture = new PrintWriter("/tmp/twisk/logs.txt", StandardCharsets.UTF_8);
+                    ecriture.println(monde);
 
                     // On mets les jetons dans un tableau
                     int[] tabJetonsGuichet = new int[monde.nbGuichets()];
@@ -89,10 +92,10 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                     int[] processus = start_simulation(monde.nbEtapes(), monde.nbGuichets(), getNbClients(), tabJetonsGuichet);
 
                     // On affiche les clients.
-                    System.out.print("Les clients : ");
+                    ecriture.print("Les clients : ");
                     int[] clientsPID = new int[getNbClients()];
                     for (int i = 0; i < getNbClients(); ++i) {
-                        System.out.print(processus[i] + " ");
+                        ecriture.print(processus[i] + " ");
                         clientsPID[i] = processus[i];
                     }
                     gestionnaireClients.setClients(clientsPID);
@@ -101,21 +104,22 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                     clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
                     // On regarde si tous les clients sont dans le sasSortie.
                     while (clients[((getNbClients() + 1))] != getNbClients()) {
-                        System.out.print("\n");
+                        ecriture.print("\n");
                         clients = ou_sont_les_clients(monde.nbEtapes(), getNbClients());
                         Thread.sleep(1000);
                         // On parcourt les étapes.
                         for (int j = 0; j < monde.nbEtapes(); ++j) {
                             int decalage = clients[(j * (getNbClients() + 1))];
-                            System.out.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
+                            ecriture.print("Etape : " + monde.getEtape(j).getNom() + " " + monde.getEtape(j).getNum() + " - " + decalage + " client(s) ➡ ");
                             for (int i = 0; i < decalage; ++i) {
                                 gestionnaireClients.allerA(clients[(j * (getNbClients() + 1)) + 1 + i], monde.getEtape(j), i);
-                                System.out.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
+                                ecriture.print(clients[(j * (getNbClients() + 1)) + 1 + i] + " ");
                             }
-                            System.out.print("\n");
+                            ecriture.print("\n");
                         }
                         notifierObservateur();
                     }
+                    ecriture.close();
                     GestionnaireThreads.getInstance().detruireTout();
                     simulationDebute = false;
                     nettoyage();
@@ -130,6 +134,8 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                     }
                     nettoyage();
                     System.out.println("Destruction des threads et processus C terminé.");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
                 return null;
             }
