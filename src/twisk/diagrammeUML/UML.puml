@@ -1,0 +1,525 @@
+@startuml
+class twisk.vues.VueClientIG {
++ void reagir()
+}
+class twisk.ecouteur.EcouteurModifJetons {
+- MondeIG monde
++ void handle(ActionEvent)
+}
+class twisk.exceptions.TwiskException.EcartTempsException {
+}
+class twisk.monde.Activite {
+- int temps
+- int ecartTemps
++ boolean estUneActivite()
++ String toC()
++ String toString()
++ int getTemps()
++ int getEcartTemps()
+}
+class twisk.ecouteur.EcouteurEtape {
+- MondeIG monde
+- EtapeIG etape
++ void handle(MouseEvent)
+}
+class twisk.ecouteur.EcouteurPointDeControle {
+- PointDeControleIG pointDeControle
+- MondeIG monde
++ void handle(MouseEvent)
+}
+class twisk.ecouteur.EcouteurSupprimer {
+- MondeIG monde
++ void handle(ActionEvent)
+}
+class twisk.vues.VueArcIG {
++ void reagir()
+}
+abstract class twisk.mondeIG.EtapeIG {
+- String identifiant
+- int largeur
+- int hauteur
+- String nom
+- boolean selectionne
+- int posX
+- int posY
+- boolean entree
+- boolean sortie
+- ArrayList<EtapeIG> successeur
+- PointDeControleIG[] pdc
++ void setSelectionne()
++ void setPDC()
++ void setPDCGuichet()
++ String getIdentifiant()
++ String getNom()
++ void setNom(String)
++ int getHauteur()
++ int getPosX()
++ void setPosX(int)
++ int getLargeur()
++ int getPosY()
++ void setPosY(int)
++ void setEstEntre()
++ void setEstSortie()
++ boolean getSelectionne()
++ PointDeControleIG getPdc(int)
++ boolean getEstUneEntre()
++ boolean getEstUneSortie()
++ void suprPDC()
++ Iterator<PointDeControleIG> iterator()
++ boolean estUneActivite()
++ void ajouterSuccesseur(EtapeIG)
++ boolean estUnGuichet()
++ ArrayList<EtapeIG> getSuccesseur()
++ boolean estUneActiviteRestreinte()
++ boolean estAccessibleDepuis(EtapeIG)
+}
+class twisk.monde.GestionnaireEtapes {
+- ArrayList<Etape> etapes
+~ void ajouter(Etape)
+~ int nbEtapes()
++ Iterator<Etape> iterator()
++ String toString()
++ ArrayList<Etape> getEtapes()
+}
+abstract class twisk.vues.VueEtapeIG {
+# MondeIG m
+# EtapeIG e
+# Label l
++ void constructionLogo()
++ EtapeIG getEtape()
++ MondeIG getMonde()
+}
+class twisk.monde.Monde {
+- GestionnaireEtapes gestionnaireEtapes
+- SasEntree sasEntree
+- SasSortie sasSortie
++ void aCommeEntree(Etape)
++ void aCommeSortie(Etape)
++ void ajouter(Etape)
++ int nbEtapes()
++ int nbGuichets()
++ StringBuilder toC()
++ Iterator<Etape> iterator()
++ Etape getEtape(int)
++ String toString()
++ GestionnaireEtapes getGestionnaireEtapes()
++ SasEntree getSasEntree()
++ SasSortie getSasSortie()
+}
+class twisk.mondeIG.ArcIG {
+- PointDeControleIG[] pos
+- boolean selectionne
++ PointDeControleIG getPoint(int)
++ void setSelectionne()
++ boolean getSelectionne()
+}
+class twisk.simulation.Simulation {
+- GestionnaireClients gestionnaireClients
+- KitC environnement
+- int nbClients
+- boolean simulationDebute
++ int[] start_simulation(int,int,int,int[])
++ int[] ou_sont_les_clients(int,int)
++ void nettoyage()
++ void simuler(Monde)
++ KitC getEnvironnement()
++ int getNbClients()
++ void setNbClients(int)
++ GestionnaireClients getGestionnaireClients()
++ Iterator<Client> iterator()
++ void ajouterObservateur(Observateur)
++ boolean isSimulationDebute()
++ void setSimulationDebute(boolean)
+}
+class twisk.ecouteur.EcouteurDragDetected {
+- VueEtapeIG Vetape
++ void handle(MouseEvent)
+}
+class twisk.ecouteur.EcouteurDragOver {
++ void handle(DragEvent)
+}
+class twisk.exceptions.TwiskException.SamePointException {
+}
+class twisk.ecouteur.EcouteurTemps {
+- MondeIG monde
++ void handle(ActionEvent)
+}
+class twisk.mondeIG.MondeIG {
+- {static} long serialVersionUID
+- int loi
+- int nbClient
+- ArrayList<EtapeIG> selectedEtape
+- ArrayList<ArcIG> selectedArc
+- PointDeControleIG[] pdcCrea
+- ArrayList<ArcIG> arc
+- HashMap<String,EtapeIG> etape
+- ArrayList<EtapeIG> etapeEntre
+- ArrayList<EtapeIG> etapeSortie
+- FabriqueIdentifiant fabriqueID
+- TailleComposants composants
+- CorrespondanceEtapes correspEtape
+- Object simulation
++ void ajouter(String)
+- Monde creerMonde()
++ void simuler()
+- void verifierMondeIG()
++ void ajouter(PointDeControleIG,PointDeControleIG)
++ int nbEtapes()
++ void creerArc(PointDeControleIG)
++ void gestionArc(ArcIG)
++ void gestionDeselection()
++ void gestionEtape(EtapeIG)
++ void gestionSuppresion()
++ void gestionSuppressionArc()
++ void gestionEntre()
++ void gestionSortie()
++ Iterator<EtapeIG> iterator()
++ Iterator<ArcIG> iterateurArc()
++ HashMap<String,EtapeIG> getEtape()
++ ArrayList<ArcIG> getArc()
++ ArrayList<EtapeIG> getSelectedEtape()
++ CorrespondanceEtapes getCorrespEtape()
++ ArrayList<ArcIG> getSelectedArc()
++ ArrayList<EtapeIG> getEtapeSortie()
++ ArrayList<EtapeIG> getEtapeEntre()
++ void modiftemps(Integer,ActiviteIG)
++ void modifecarttemps(Integer,ActiviteIG)
++ void modifNbJetons(Integer,GuichetIG)
++ ArrayList<Client> getClients()
++ void setSimulationStart(boolean)
++ boolean isSimulationStart()
++ Object getSimulation()
++ String toString()
++ void reagir()
++ PointDeControleIG[] getPdcCrea()
++ TailleComposants getComposants()
++ FabriqueIdentifiant getFabriqueID()
++ void deserialisation(File)
++ void deserialisation(InputStream)
++ void serialization(String)
++ int getNbClient()
++ void setNbClient(int)
++ void selectionLoi(String)
+}
+class twisk.TailleComposants {
+- {static} TailleComposants instance
++ {static} TailleComposants getInstance()
++ int getVBoxLong()
++ int getVBoxLarg()
+}
+class twisk.exceptions.TwiskException.TempsIncorrectException {
+}
+class twisk.ecouteur.EcouteurDeselection {
+- MondeIG monde
++ void handle(ActionEvent)
+}
+interface twisk.vues.Observateur {
+~ void reagir()
+}
+class twisk.outils.FabriqueIdentifiant {
+- {static} FabriqueIdentifiant instance
+- int noEtape
++ {static} FabriqueIdentifiant getInstance()
++ String getIdentifiantEtape()
+}
+class twisk.ecouteur.EcouteurSupprimerArc {
+- MondeIG monde
++ void handle(ActionEvent)
+}
+class twisk.monde.Guichet {
+- int nbJetons
+- int semaphore
++ boolean estUnGuichet()
++ String toString()
++ String toC()
++ int getSemaphore()
++ int getNbJetons()
++ ActiviteRestreinte getSuivant()
+}
+class twisk.outils.ClassLoaderPerso {
++ Class<?> loadClass(String)
+- Class<?> getClass(String)
+- byte[] loadClassData(String)
++ void finalize()
+}
+class twisk.vues.VueOutils {
+- MondeIG m
+- Button plus
+- Button plusGuichet
+- Button simulation
++ void reagir()
+}
+class twisk.vues.VueMenu {
+- MondeIG monde
+- MenuItem renameselec
+- Menu param
+- Menu menuMonde
+- Menu menuEdition
+- Menu simulation
+- Menu save
+- MenuItem temps
+- MenuItem ecartTemps
+- MenuItem modifJeton
+- MenuItem suprArc
++ void reagir()
+}
+class twisk.mondeIG.ActiviteIG {
+- int temps
+- int ecartTemps
+- boolean restrainte
++ boolean estUneActivite()
++ int getTemps()
++ void setTemps(int)
++ int getEcartTemps()
++ void setEcartTemps(int)
++ boolean estUneActiviteRestreinte()
++ void setEstUnActiviteRestreinte()
+}
+class twisk.ecouteur.EcouteurRenommer {
+- MondeIG monde
++ void handle(ActionEvent)
+}
+class twisk.vues.VuePointDeControleIG {
++ void reagir()
+}
+class twisk.MainTwisk {
++ {static} void main(String[])
++ void start(Stage)
+}
+class twisk.vues.VueGuichetIG {
+- ArrayList<HBox> hbox
++ void construireFenetre()
++ ArrayList<HBox> getHbox()
++ void reagir()
+}
+class twisk.vues.VueMondeIG {
+- MondeIG m
++ void ajouterClient(HBox,EtapeIG)
++ void ajouterClientGuichet(ArrayList<HBox>,EtapeIG)
++ void reagir()
+}
+class twisk.vues.VueActiviteIG {
+- HBox hbox
++ void construireFenetre()
++ HBox getHbox()
++ void reagir()
+}
+abstract class twisk.monde.Etape {
+- String nom
+- GestionnaireSuccesseurs gestionnaireSuccesseurs
+- int num
++ void ajouterSuccesseur(Etape)
++ boolean estUneActivite()
++ boolean estUnGuichet()
++ int nbSuccesseurs()
++ Iterator<Etape> iterator()
++ String toString()
++ String toC()
++ int getNum()
++ String getNom()
++ GestionnaireSuccesseurs getGestionnaireSuccesseurs()
++ String getSuccesseursString()
++ Etape getSuivant()
+}
+class twisk.exceptions.TwiskException.AlreadyExistException {
+}
+class twisk.monde.GestionnaireSuccesseurs {
+- ArrayList<Etape> etapes
++ void ajouter(Etape)
+~ int nbEtapes()
++ Iterator<Etape> iterator()
++ String toString()
++ ArrayList<Etape> getEtapes()
+}
+class twisk.monde.ActiviteRestreinte {
++ String toC()
+}
+class twisk.mondeIG.GuichetIG {
+- int nbJetons
+- int sensSortie
++ int getNbJetons()
++ void setNbJetons(int)
++ boolean estUnGuichet()
++ void setSensSortie(int)
++ int getSensSortie()
+}
+class twisk.ecouteur.EcouteurSortie {
+- MondeIG monde
++ void handle(ActionEvent)
+}
+class twisk.simulation.Client {
+- int numeroClient
+- int rang
+- Etape etape
++ void allerA(Etape,int)
++ int getNumeroClient()
++ int getRang()
++ Etape getEtape()
+}
+class twisk.mondeIG.SujetObserve {
+- ArrayList<Observateur> obs
++ void ajouterObservateur(Observateur)
++ void notifierObservateur()
+}
+class twisk.ecouteur.EcouteurEcartTemps {
+- MondeIG monde
++ void handle(ActionEvent)
+}
+class twisk.exceptions.TwiskException.InvalidNumberClient {
+}
+class twisk.ClientTwisk {
++ {static} void main(String[])
+}
+class twisk.exceptions.TwiskException.TwiskException {
+}
+class twisk.simulation.GestionnaireClients {
+- ArrayList<Client> listeClient
++ void setClients(int)
++ void allerA(int,Etape,int)
+~ void reset()
++ Iterator<Client> iterator()
++ ArrayList<Client> getListeClient()
+}
+class twisk.monde.SasEntree {
+- int loi
++ String toC()
+}
+class twisk.outils.GestionnaireThreads {
+- {static} GestionnaireThreads instance
+- ArrayList<Thread> threads
++ {static} GestionnaireThreads getInstance()
++ void lancer(Task)
++ void detruireTout()
+}
+class twisk.exceptions.TwiskException.MondeException {
+}
+class twisk.outils.FabriqueNumero {
+- {static} FabriqueNumero instance
+- int cptEtape
+- int cptSemaphore
+- int numlib
++ {static} FabriqueNumero getInstance()
++ int getNumeroEtape()
++ int getNumLib()
++ int getNumeroSemaphore()
++ void reset()
+}
+class twisk.ecouteur.EcouteurEntree {
+- MondeIG monde
++ void handle(ActionEvent)
+}
+class twisk.ecouteur.EcouteurDragDropped {
+- MondeIG monde
+- VueMondeIG vueMondeIG
++ void handle(DragEvent)
+}
+class twisk.mondeIG.CorrespondanceEtapes {
+- HashMap<EtapeIG,Etape> corresp
++ void ajouter(EtapeIG,Etape)
++ Etape get(EtapeIG)
+}
+class twisk.monde.SasSortie {
++ String toC()
+}
+class twisk.outils.KitC {
+- FabriqueNumero f
+- int num_lib
++ void creerEnvironnement()
+- void copier(InputStream,File)
++ void creerFichier(String)
++ void compiler()
++ void construireLaLibrairie()
++ int getNumLib()
+}
+class twisk.mondeIG.PointDeControleIG {
+- EtapeIG etape
+- int posX
+- int posY
+- String idf
++ int getPosX()
++ void setPosX(int)
++ int getPosY()
++ void setPosY(int)
++ EtapeIG getEtape()
++ String getIdf()
+}
+class twisk.ecouteur.EcouteurArc {
+- MondeIG monde
+- ArcIG arc
++ void handle(MouseEvent)
+}
+
+
+twisk.vues.Observateur <|.. twisk.vues.VueClientIG
+javafx.scene.shape.Circle <|-- twisk.vues.VueClientIG
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurModifJetons
+twisk.exceptions.TwiskException.TwiskException <|-- twisk.exceptions.TwiskException.EcartTempsException
+java.io.Serializable <|.. twisk.monde.Activite
+twisk.monde.Etape <|-- twisk.monde.Activite
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurEtape
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurPointDeControle
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurSupprimer
+twisk.vues.Observateur <|.. twisk.vues.VueArcIG
+javafx.scene.layout.Pane <|-- twisk.vues.VueArcIG
+twisk.mondeIG.Iterable <|.. twisk.mondeIG.EtapeIG
+java.io.Serializable <|.. twisk.mondeIG.EtapeIG
+twisk.monde.Iterable <|.. twisk.monde.GestionnaireEtapes
+twisk.vues.Observateur <|.. twisk.vues.VueEtapeIG
+javafx.scene.layout.VBox <|-- twisk.vues.VueEtapeIG
+twisk.monde.Iterable <|.. twisk.monde.Monde
+java.io.Serializable <|.. twisk.mondeIG.ArcIG
+twisk.simulation.Iterable <|.. twisk.simulation.Simulation
+twisk.mondeIG.SujetObserve <|-- twisk.simulation.Simulation
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurDragDetected
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurDragOver
+twisk.exceptions.TwiskException.TwiskException <|-- twisk.exceptions.TwiskException.SamePointException
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurTemps
+twisk.mondeIG.Iterable <|.. twisk.mondeIG.MondeIG
+twisk.vues.Observateur <|.. twisk.mondeIG.MondeIG
+twisk.mondeIG.Serializable <|.. twisk.mondeIG.MondeIG
+twisk.mondeIG.SujetObserve <|-- twisk.mondeIG.MondeIG
+java.io.Serializable <|.. twisk.TailleComposants
+twisk.exceptions.TwiskException.TwiskException <|-- twisk.exceptions.TwiskException.TempsIncorrectException
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurDeselection
+java.io.Serializable <|.. twisk.outils.FabriqueIdentifiant
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurSupprimerArc
+java.io.Serializable <|.. twisk.monde.Guichet
+twisk.monde.Etape <|-- twisk.monde.Guichet
+twisk.outils.ClassLoader <|-- twisk.outils.ClassLoaderPerso
+twisk.vues.Observateur <|.. twisk.vues.VueOutils
+javafx.scene.layout.TilePane <|-- twisk.vues.VueOutils
+twisk.vues.Observateur <|.. twisk.vues.VueMenu
+twisk.vues.MenuBar <|-- twisk.vues.VueMenu
+twisk.mondeIG.EtapeIG <|-- twisk.mondeIG.ActiviteIG
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurRenommer
+twisk.vues.Observateur <|.. twisk.vues.VuePointDeControleIG
+javafx.scene.shape.Circle <|-- twisk.vues.VuePointDeControleIG
+javafx.application.Application <|-- twisk.MainTwisk
+twisk.vues.Observateur <|.. twisk.vues.VueGuichetIG
+twisk.vues.VueEtapeIG <|-- twisk.vues.VueGuichetIG
+twisk.vues.Observateur <|.. twisk.vues.VueMondeIG
+javafx.scene.layout.Pane <|-- twisk.vues.VueMondeIG
+twisk.vues.Observateur <|.. twisk.vues.VueActiviteIG
+twisk.vues.VueEtapeIG <|-- twisk.vues.VueActiviteIG
+twisk.monde.Iterable <|.. twisk.monde.Etape
+java.io.Serializable <|.. twisk.monde.Etape
+twisk.exceptions.TwiskException.TwiskException <|-- twisk.exceptions.TwiskException.AlreadyExistException
+twisk.monde.Iterable <|.. twisk.monde.GestionnaireSuccesseurs
+java.io.Serializable <|.. twisk.monde.GestionnaireSuccesseurs
+twisk.monde.Activite <|-- twisk.monde.ActiviteRestreinte
+twisk.mondeIG.EtapeIG <|-- twisk.mondeIG.GuichetIG
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurSortie
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurEcartTemps
+twisk.exceptions.TwiskException.TwiskException <|-- twisk.exceptions.TwiskException.InvalidNumberClient
+twisk.exceptions.TwiskException.Exception <|-- twisk.exceptions.TwiskException.TwiskException
+twisk.simulation.Iterable <|.. twisk.simulation.GestionnaireClients
+twisk.monde.Activite <|-- twisk.monde.SasEntree
+twisk.exceptions.TwiskException.TwiskException <|-- twisk.exceptions.TwiskException.MondeException
+java.io.Serializable <|.. twisk.outils.FabriqueNumero
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurEntree
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurDragDropped
+java.io.Serializable <|.. twisk.mondeIG.CorrespondanceEtapes
+twisk.monde.Activite <|-- twisk.monde.SasSortie
+java.io.Serializable <|.. twisk.mondeIG.PointDeControleIG
+javafx.event.EventHandler <|.. twisk.ecouteur.EcouteurArc
+@enduml
