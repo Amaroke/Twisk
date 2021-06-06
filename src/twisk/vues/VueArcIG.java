@@ -78,7 +78,6 @@ public class VueArcIG extends Pane implements Observateur {
 
     @Override
     public void reagir() {
-
     }
 
 }

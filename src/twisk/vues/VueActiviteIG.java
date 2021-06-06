@@ -51,5 +51,4 @@ public class VueActiviteIG extends VueEtapeIG implements Observateur {
     @Override
     public void reagir() {
     }
-
 }

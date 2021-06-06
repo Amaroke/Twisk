@@ -44,7 +44,6 @@ public class EcouteurModifJetons implements EventHandler<ActionEvent> {
         dialog.setHeaderText("Donnez le nombre de jetons de votre guichet");
         dialog.setContentText("Nombre de jetons :");
         Optional<String> result = dialog.showAndWait();
-
         try {
             if (result.isPresent()) {
                 monde.modifNbJetons(Integer.valueOf(result.get()), (GuichetIG) monde.getSelectedEtape().get(0));

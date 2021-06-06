@@ -12,6 +12,7 @@ import java.util.Iterator;
  */
 
 public abstract class EtapeIG implements Iterable<PointDeControleIG>, Serializable {
+
     private final String identifiant;
     private final int largeur;
     private final int hauteur;
@@ -53,7 +54,6 @@ public abstract class EtapeIG implements Iterable<PointDeControleIG>, Serializab
             pdc[1] = new PointDeControleIG(getPosX() + getLargeur(), getPosY() + (getHauteur() / 2 ), this, "d");
         }
     }
-
 
     /**
      * Setter Selectionné.

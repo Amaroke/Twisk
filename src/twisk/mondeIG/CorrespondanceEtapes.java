@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 public class CorrespondanceEtapes implements Serializable {
 
-    private HashMap<EtapeIG, Etape> corresp;
+    private final HashMap<EtapeIG, Etape> corresp;
 
     /**
      * Constructeur correspondanceEtape

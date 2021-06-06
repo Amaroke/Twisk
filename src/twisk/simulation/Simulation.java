@@ -179,11 +179,12 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
         gestionnaireClients = new GestionnaireClients(this.nbClients);
     }
 
+    /**
+     * @return le GestionnaireClients
+     */
     public GestionnaireClients getGestionnaireClients() {
         return gestionnaireClients;
     }
-
-
 
     /**
      * Fonction iterator simulation.
@@ -195,15 +196,24 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
         return gestionnaireClients.iterator();
     }
 
+    /**
+     * @param o Observateur
+     */
     @Override
     public void ajouterObservateur(Observateur o) {
         super.ajouterObservateur(o);
     }
 
+    /**
+     * @return la simulation
+     */
     public boolean isSimulationDebute() {
         return simulationDebute;
     }
 
+    /**
+     *
+     */
     public void setSimulationDebute(boolean simulationDebute) {
         this.simulationDebute = simulationDebute;
     }

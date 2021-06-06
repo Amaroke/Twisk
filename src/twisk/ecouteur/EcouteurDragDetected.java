@@ -40,7 +40,6 @@ public class EcouteurDragDetected implements EventHandler<MouseEvent> {
         WritableImage snapshot = Vetape.snapshot(new SnapshotParameters(), null);
         db.setDragView(snapshot);
         ClipboardContent content = new ClipboardContent();
-
         content.putString(Vetape.getId());
         db.setContent(content);
         event.consume();

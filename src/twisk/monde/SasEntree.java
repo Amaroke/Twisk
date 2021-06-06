@@ -8,6 +8,7 @@ package twisk.monde;
  */
 
 public class SasEntree extends Activite {
+
     private final int loi;
 
     /**

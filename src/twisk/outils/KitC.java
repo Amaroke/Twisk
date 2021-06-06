@@ -17,7 +17,6 @@ public class KitC {
     private final FabriqueNumero f = FabriqueNumero.getInstance();
     private final int num_lib = f.getNumLib();
 
-
     /**
      * Constructeur du KitC.
      */

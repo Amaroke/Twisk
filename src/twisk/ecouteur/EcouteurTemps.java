@@ -45,7 +45,6 @@ public class EcouteurTemps implements EventHandler<ActionEvent> {
         dialog.setHeaderText("Donnez le temps de votre activité");
         dialog.setContentText("Temps :");
         Optional<String> result = dialog.showAndWait();
-
         try {
             if (result.isPresent()) {
                 monde.modiftemps(Integer.valueOf(result.get()), (ActiviteIG) monde.getSelectedEtape().get(0));

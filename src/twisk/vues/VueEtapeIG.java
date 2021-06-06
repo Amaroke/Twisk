@@ -22,6 +22,7 @@ import java.util.Objects;
  */
 
 public abstract class VueEtapeIG extends VBox implements Observateur {
+
     protected MondeIG m;
     protected EtapeIG e;
     protected Label l;

@@ -45,7 +45,6 @@ public class EcouteurEcartTemps implements EventHandler<ActionEvent> {
         dialog.setHeaderText("Donnez l'écart temps de votre activité");
         dialog.setContentText("Écart temps :");
         Optional<String> result = dialog.showAndWait();
-
         try {
             if (result.isPresent()) {
                 monde.modifecarttemps(Integer.valueOf(result.get()), (ActiviteIG) monde.getSelectedEtape().get(0));

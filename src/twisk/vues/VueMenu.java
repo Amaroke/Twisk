@@ -86,16 +86,16 @@ public class VueMenu extends MenuBar implements Observateur {
         MenuItem loiClient = new MenuItem("Choisir la loi d'arrivée des clients");
         nbClient.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog("1");
-            dialog.setTitle("Réglage écart temps");
-            dialog.setHeaderText("Donnez l'écart temps de votre activité");
-            dialog.setContentText("Écart temps :");
+            dialog.setTitle("Réglage nombre clients");
+            dialog.setHeaderText("Donnez le nombre de clients voulu");
+            dialog.setContentText("Nombre :");
             Optional<String> result = dialog.showAndWait();
 
-            if(result.isPresent()){
+            if (result.isPresent()) {
                 try {
                     monde.setNbClient(Integer.parseInt(result.get()));
                     monde.notifierObservateur();
-                } catch (InvalidNumberClient error){
+                } catch (InvalidNumberClient error) {
                     Alert a = new Alert(Alert.AlertType.ERROR);
                     a.setTitle("Erreur");
                     a.setContentText(error.getMessage());
@@ -177,7 +177,7 @@ public class VueMenu extends MenuBar implements Observateur {
         });
         charger.setOnAction(e -> {
             final Stage dialog = new Stage();
-            dialog.setTitle("Changement des dates");
+            dialog.setTitle("Quel fichier charger ?");
             FileChooser choixfichier = new FileChooser();
             choixfichier.setTitle("Quel fichier charger ?");
             choixfichier.getExtensionFilters().addAll(

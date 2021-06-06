@@ -44,7 +44,6 @@ public class PointDeControleIG implements Serializable {
         this.idf = s;
     }
 
-
     /**
      * Getter PosX.
      *
