@@ -636,6 +636,38 @@ public class MondeIG extends SujetObserve implements Iterable<EtapeIG>, Observat
     }
 
     /**
+     * Fonction de désérialisation depuis une fichier .ser.
+     * @param fichiersave InputStream
+     */
+    public void deserialisation(InputStream fichiersave){
+        ObjectInputStream ois = null;
+        try {
+            ois = new ObjectInputStream(fichiersave);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        MondeIG deser = null;
+        try {
+            deser = (MondeIG)ois.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        selectedEtape = deser.getSelectedEtape();
+            selectedArc = deser.getSelectedArc();
+            pdcCrea = deser.getPdcCrea();
+            arc = deser.getArc();
+            etape = deser.getEtape();
+            etapeEntre = deser.getEtapeEntre();
+            etapeSortie = deser.getEtapeSortie();
+            composants = deser.getComposants();
+            fabriqueID = deser.getFabriqueID();
+            correspEtape = deser.getCorrespEtape();
+            this.notifierObservateur();
+    }
+
+    /**
      * Fonction de sérialisation du monde.
      * @param path String
      */

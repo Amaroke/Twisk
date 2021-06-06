@@ -94,6 +94,8 @@ public class VueOutils extends TilePane implements Observateur {
                 simulation.setGraphic(new ImageView(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/twisk/ressources/images/simuler.png")), 50, 50, true, true)));
                 simulation.setOnAction(actionEvent -> {
                     try {
+                        GestionnaireThreads.getInstance().detruireTout();
+                        m.setSimulationStart(false);
                         m.simuler();
                     } catch (MondeException e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);

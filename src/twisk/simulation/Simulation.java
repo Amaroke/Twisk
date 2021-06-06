@@ -134,7 +134,7 @@ public class Simulation extends SujetObserve implements Iterable<Client> {
                 } catch (InterruptedException e) {
                     for (Client c : gestionnaireClients) {
                         try {
-                            Runtime.getRuntime().exec("kill -TERM -" + c.getNumeroClient());
+                            Runtime.getRuntime().exec("kill -9 " + c.getNumeroClient());
                         } catch (IOException ioException) {
                             ioException.printStackTrace();
                         }

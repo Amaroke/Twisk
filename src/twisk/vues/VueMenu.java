@@ -20,8 +20,7 @@ import twisk.mondeIG.MondeIG;
 import twisk.outils.GestionnaireThreads;
 
 import java.io.File;
-import java.net.URISyntaxException;
-import java.util.Objects;
+import java.io.InputStream;
 import java.util.Optional;
 
 /**
@@ -137,27 +136,18 @@ public class VueMenu extends MenuBar implements Observateur {
         Menu mondepre = new Menu("Monde prédéfinis");
         MenuItem boulangerie = new MenuItem("Boulangerie");
         boulangerie.setOnAction(e -> {
-            try {
-                monde.deserialisation(new File(Objects.requireNonNull(getClass().getResource("/twisk/ressources/mondePredef/boulangerie.ser")).toURI()));
-            } catch (URISyntaxException ioException) {
-                ioException.printStackTrace();
-            }
+            InputStream file = getClass().getResourceAsStream("/twisk/ressources/mondePredef/boulangerie.ser");
+            monde.deserialisation(file);
         });
         MenuItem zoo = new MenuItem("Zoo");
         zoo.setOnAction(e -> {
-            try {
-                monde.deserialisation(new File(Objects.requireNonNull(getClass().getResource("/twisk/ressources/mondePredef/zoo.ser")).toURI()));
-            } catch (URISyntaxException ioException) {
-                ioException.printStackTrace();
-            }
+            InputStream file = getClass().getResourceAsStream("/twisk/ressources/mondePredef/zoo.ser");
+            monde.deserialisation(file);
         });
         MenuItem bifurcator = new MenuItem("Bifurcator");
-        bifurcator.setOnAction(e-> {
-            try {
-                monde.deserialisation(new File(Objects.requireNonNull(getClass().getResource("/twisk/ressources/mondePredef/bifurcator.ser")).toURI()));
-            } catch (URISyntaxException ioexception) {
-                ioexception.printStackTrace();
-            }
+        bifurcator.setOnAction(e -> {
+            InputStream file = getClass().getResourceAsStream("/twisk/ressources/mondePredef/bifurcator.ser");
+            monde.deserialisation(file);
         });
         mondepre.getItems().addAll(boulangerie, zoo, bifurcator);
         sauvegarder.setOnAction(e -> {
